@@ -1,0 +1,85 @@
+# depslib dependency file v1.0
+1635186334 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\charmachine.c
+	"charmachine.h"
+	<stdio.h>
+
+1635258119 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\charmachine.h
+	"boolean.h"
+
+1635257729 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\boolean.h
+
+1635258301 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\wordmachine.c
+	<stdio.h>
+	<stdlib.h>
+	"wordmachine.h"
+	"charmachine.h"
+
+1635258303 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\wordmachine.h
+	"boolean.h"
+	"charmachine.h"
+
+1635274759 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\main.c
+	<stdio.h>
+	<stdlib.h>
+	"wordmachine.h"
+	"point.h"
+	"listdin.h"
+	"matrix.h"
+	"list_linked.h"
+
+1635272440 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\point.c
+	<stdio.h>
+	<math.h>
+	"point.h"
+
+1635272492 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\point.h
+	"boolean.h"
+
+1635259792 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\listdin.h
+	"boolean.h"
+	"point.h"
+
+1635262888 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\listdin.c
+	<stdio.h>
+	<stdlib.h>
+	"listdin.h"
+
+1635264976 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\matrix.h
+	"boolean.h"
+
+1635265134 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\matrix.c
+	<stdio.h>
+	<stdlib.h>
+	"matrix.h"
+
+1635269741 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\node.c
+	"node.h"
+	<stdlib.h>
+
+1635269834 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\node.h
+	<stdlib.h>
+
+1635275395 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list_linked.h
+	"boolean.h"
+	"node.h"
+
+1635272209 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list_linked.c
+	<stdio.h>
+	<stdlib.h>
+	"list_linked.h"
+
+1635274782 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\pcolor.c
+	<stdio.h>
+	"pcolor.h"
+
+1635274782 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\pcolor.h
+
+1635275198 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\start_game.c
+	<stdio.h>
+	<stdlib.h>
+	"wordmachine.h"
+	"point.h"
+	"listdin.h"
+	"matrix.h"
+	"list_linked.h"
+
