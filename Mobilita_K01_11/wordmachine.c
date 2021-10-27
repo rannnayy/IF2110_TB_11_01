@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wordmachine.h"
-#include "charmachine.h"
 
 boolean endWord;
 Word currentWord;
@@ -20,7 +19,7 @@ void ignoreBlank()
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar ≠ NEWLINE atau currentChar = MARK */
 {
-    while((currentChar == BLANK || currentChar == NEWLINE) && currentChar != MARK_EOF)
+    while((currentChar == BLANK || currentChar == NEWLINE || currentChar == NULLCHAR) && currentChar != MARK_EOF)
         adv();
 }
 void startWord(char filename[FILE_NAME_CAP])
@@ -50,6 +49,7 @@ void advWord()
     if(currentChar == MARK_EOF)
         endWord = true;
     else{
+        ignoreBlank();
         copyWord();
         ignoreBlank();
     }
@@ -65,7 +65,7 @@ void copyWord()
     int i;
 
     i = 0;
-    while(currentChar != MARK_EOF && currentChar != NEWLINE && currentChar != BLANK && i < CAPACITY_WORD){
+    while(currentChar != MARK_EOF && currentChar != NEWLINE && currentChar != BLANK && currentChar != NULLCHAR && i < CAPACITY_WORD){
         currentWord.contents[i] = currentChar;
         adv();
         i += 1;

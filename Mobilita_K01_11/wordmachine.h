@@ -11,6 +11,7 @@
 #define CAPACITY_WORD 50
 #define BLANK ' '
 #define NEWLINE '\n'
+#define NULLCHAR '\0'
 
 typedef struct {
    char contents[CAPACITY_WORD]; /* container penyimpan kata, indeks yang dipakai [0..CAPACITY-1] */

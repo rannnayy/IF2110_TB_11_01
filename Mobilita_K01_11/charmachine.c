@@ -4,6 +4,7 @@
 
 #include "charmachine.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 char currentChar;
 boolean eot;
@@ -23,11 +24,19 @@ void start(char filename[FILE_NAME_CAP]) {
 	// tape = stdin;
 	tape = fopen(filename, "r");
 	if (tape == NULL){
-        printf("File %s tidak tersedia\n", filename);
-        
+        while(tape == NULL){
+            printf("File %s tidak tersedia\n", filename);
+
+            char file_name[255];
+
+            printf("Masukkan nama file: ");
+            scanf("%s", file_name);
+            tape = fopen(file_name, "r");
+        }
     }
-    else
+    else{
         adv();
+    }
 }
 
 void adv() {
@@ -40,7 +49,7 @@ void adv() {
 	/* Algoritma */
 	// retval = fscanf(tape,"%c",&currentChar);
 	currentChar = getc(tape);
-	eot = (currentChar == EOF);
+	eot = (currentChar == MARK_EOF);
 	if (eot) {
        fclose(tape);
  	}

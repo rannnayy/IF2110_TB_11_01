@@ -14,7 +14,6 @@
 #include "matrix.h"
 #include "list_linked.h"
 #include "pcolor.h"
-#include "start_game.c"
 
 // FUNCTIONS AND PROCEDURES
 void DigitsToInt(Word digits, int* var);

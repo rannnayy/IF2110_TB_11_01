@@ -15,16 +15,6 @@
 #include "matrix.h"
 #include "list_linked.h"
 #include "pcolor.h"
-#include "charmachine.h"
-#include "node.h"
-#include "wordmachine.c"
-#include "point.c"
-#include "listdin.c"
-#include "matrix.c"
-#include "list_linked.c"
-#include "pcolor.c"
-#include "charmachine.c"
-#include "node.c"
 
 void DigitsToInt(Word digits, int* var)
 /*  Mengkonversi nilai pada pita kata yang berupa angka menjadi angka, bukan lagi char[]  */
@@ -34,8 +24,10 @@ void DigitsToInt(Word digits, int* var)
     int i;
 
     for(i = 0; i < digits.length; i++){
-        *var *= 10;
-        *var += (int)(digits.contents[i] - 48);
+        if((int)digits.contents[i] != 0){ // KALAU BUKAN NULL
+            *var *= 10;
+            *var += (int)(digits.contents[i] - 48);
+        }
     }
 }
 
@@ -56,7 +48,9 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
 
     // Start file reading
     startWord(filename);
+    ignoreBlank();
 
+    printf("\n");
     *N = 0;
     *M = 0;
     // Assign N (number of rows)
