@@ -15,6 +15,7 @@
 #include "matrix.h"
 #include "list_linked.h"
 #include "pcolor.h"
+#include "map.h"
 
 void DigitsToInt(Word digits, int* var)
 /*  Mengkonversi nilai pada pita kata yang berupa angka menjadi angka, bukan lagi char[]  */
@@ -60,7 +61,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     // Assign M (number of columns)
     DigitsToInt(currentWord, &(*M));
 
-    //printf("%d %d\n", *N, *M);
+    // printf("%d %d\n", *N, *M);
 
     int x, y;
     x = 0;
@@ -77,15 +78,15 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     // Make POINT headQuarter
     *headQuarter = MakePOINT(x, y);
 
-    //TulisPOINT(*headQuarter);
-    //printf("\n");
+    // TulisPOINT(*headQuarter);
+    // printf("\n");
 
     *nLoc = 0;
     advWord();
     // Assign nLoc (number of locations)
     DigitsToInt(currentWord, &(*nLoc));
 
-    //printf("%d\n", *nLoc);
+    // printf("%d\n", *nLoc);
 
     int i;
     CreateListDin(&(*building), *nLoc);
@@ -106,8 +107,8 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
         ELMT_POINT(*building, i) = MakePOINT(x, y);
 
     }
-    //displayList(*building);
-    //printf("\n");
+    // displayList(*building);
+    // printf("\n");
 
     int j;
     // Store Adjacency Matrix
@@ -118,15 +119,15 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
             ELMT_MATRIX(*adjMatrix, i, j) = (int)(currentWord.contents[0] - 48);
         }
     }
-    //displayMatrix(*adjMatrix);
-    //printf("\n");
+    // displayMatrix(*adjMatrix);
+    // printf("\n");
 
     *nOrder = 0;
     advWord();
     // Assign nOrder (number of Orders)
     DigitsToInt(currentWord, &(*nOrder));
 
-    //printf("%d\n", *nOrder);
+    // printf("%d\n", *nOrder);
 
     CreateList(&(*orders));
     Elements ordEl;
@@ -156,5 +157,41 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
         // Store Elements in Linked List
         insertLinkedListLast(&(*orders), ordEl);
     }
-    //displayLinkedList(*orders);
+    // displayLinkedList(*orders);
+    // printf("\n");
+}
+
+MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix)
+/*  Membuat konfigurasi Map setelah dibaca dari fungsi StartGame, N dan M (ukuran NxM dari peta), 
+    headQuarter (koordinat HQ), building (koordinat tiap bangunan), dan adjMatrix (Matrix adjacency antar bangunan)*/
+/* I.S. Semua variabel terdefinisi */
+/* F.S. Output Map */ 
+{
+    MAP Map;
+    int i, j, Row, Col;
+    Row = *N+2;
+    Col = *M+2;
+    CreateMap(Row, Col, &Map);
+
+    // Initialize every element with *
+    for (i=0; i<Row; i++){
+        for (j=0; j<Col; j++){
+            if ((i == 0 || i == Row-1) ||(j == 0 || j == Col-1)){
+                ELMT_MAP(Map, i, j) = '*';
+            } else {
+                ELMT_MAP(Map, i, j) = ' ';
+            }
+        }
+    }
+
+    // Set Headquarter
+    ELMT_MAP(Map, Absis(*headQuarter), Ordinat(*headQuarter)) = '8';
+
+    // Set Other building
+    for (i=0; i<length(*building); i++){
+        ELMT_MAP(Map, Absis(ELMT_POINT(*building, i)), Ordinat(ELMT_POINT(*building, i))) = ELMT_CHAR(*building, i);
+    }
+
+    // displayMap(Map);
+    return Map;
 }

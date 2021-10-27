@@ -14,10 +14,24 @@
 #include "matrix.h"
 #include "list_linked.h"
 #include "pcolor.h"
+#include "node.h"
+#include "charmachine.h"
+#include "map.h"
+// #include "wordmachine.c"
+// #include "point.c"
+// #include "listdin.c"
+// #include "matrix.c"
+// #include "list_linked.c"
+// #include "pcolor.c"
+// #include "node.c"
+// #include "charmachine.c"
+// #include "start_game.c"
+// #include "map.c"
 
 // FUNCTIONS AND PROCEDURES
 void DigitsToInt(Word digits, int* var);
 void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders);
+MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix);
 
 // MAIN FUNCTION
 int main()
@@ -27,8 +41,10 @@ int main()
     ListDin building;
     Matrix adjMatrix;
     List orders;
+    MAP Map;
 
     StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders);
+    Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
     return 0;
 }
