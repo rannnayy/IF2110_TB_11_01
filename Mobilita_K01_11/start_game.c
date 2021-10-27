@@ -50,7 +50,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     startWord(filename);
     ignoreBlank();
 
-    printf("\n");
+    //printf("\n");
     *N = 0;
     *M = 0;
     // Assign N (number of rows)
@@ -60,7 +60,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     // Assign M (number of columns)
     DigitsToInt(currentWord, &(*M));
 
-    printf("%d %d\n", *N, *M);
+    //printf("%d %d\n", *N, *M);
 
     int x, y;
     x = 0;
@@ -77,15 +77,15 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     // Make POINT headQuarter
     *headQuarter = MakePOINT(x, y);
 
-    TulisPOINT(*headQuarter);
-    printf("\n");
+    //TulisPOINT(*headQuarter);
+    //printf("\n");
 
     *nLoc = 0;
     advWord();
     // Assign nLoc (number of locations)
     DigitsToInt(currentWord, &(*nLoc));
 
-    printf("%d\n", *nLoc);
+    //printf("%d\n", *nLoc);
 
     int i;
     CreateListDin(&(*building), *nLoc);
@@ -102,13 +102,12 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
         DigitsToInt(currentWord, &x);
         advWord();
         DigitsToInt(currentWord, &y);
-        printf("%d %d\n", x, y);
 
         ELMT_POINT(*building, i) = MakePOINT(x, y);
 
     }
-    displayList(*building);
-    printf("\n");
+    //displayList(*building);
+    //printf("\n");
 
     int j;
     // Store Adjacency Matrix
@@ -119,15 +118,15 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
             ELMT_MATRIX(*adjMatrix, i, j) = (int)(currentWord.contents[0] - 48);
         }
     }
-    displayMatrix(*adjMatrix);
-    printf("\n");
+    //displayMatrix(*adjMatrix);
+    //printf("\n");
 
     *nOrder = 0;
     advWord();
     // Assign nOrder (number of Orders)
     DigitsToInt(currentWord, &(*nOrder));
 
-    printf("%d\n", *nOrder);
+    //printf("%d\n", *nOrder);
 
     CreateList(&(*orders));
     Elements ordEl;
@@ -157,5 +156,5 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
         // Store Elements in Linked List
         insertLinkedListLast(&(*orders), ordEl);
     }
-    displayLinkedList(*orders);
+    //displayLinkedList(*orders);
 }
