@@ -24,7 +24,7 @@ void start(char filename[FILE_NAME_CAP]) {
 	tape = fopen(filename, "r");
 	if (tape == NULL){
         printf("File %s tidak tersedia\n", filename);
-        return 0;
+        
     }
     else
         adv();

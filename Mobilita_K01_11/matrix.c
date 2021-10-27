@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "matrix.h"
+#include <math.h>
 
 /* rowEff >= 1 dan colEff >= 1 */
 /* Indeks matriks yang digunakan: [0..ROW_CAP-1][0..COL_CAP-1] */
@@ -161,7 +162,7 @@ Matrix addMatrix(Matrix m1, Matrix m2)
 }
 Matrix subtractMatrix(Matrix m1, Matrix m2)
 /* Prekondisi : m1 berukuran sama dengan m2 */
-/* Mengirim hasil pengurangan matriks: salinan m1 – m2 */
+/* Mengirim hasil pengurangan matriks: salinan m1 ï¿½ m2 */
 {
     // KAMUS
     // i, j : integer (Index) variabel pencacah looping
@@ -367,7 +368,7 @@ boolean isIdentity(Matrix m)
     return id;
 }
 boolean isSparse(Matrix m)
-/* Mengirimkan true jika m adalah matriks sparse: matriks “jarang” dengan definisi:
+/* Mengirimkan true jika m adalah matriks sparse: matriks ï¿½jarangï¿½ dengan definisi:
    hanya maksimal 5% dari memori matriks yang efektif bukan bernilai 0 */
 {
     // KAMUS

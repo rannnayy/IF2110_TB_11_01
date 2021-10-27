@@ -248,7 +248,7 @@ void displayLinkedList(List l)
 int lengthLinkedList(List l)
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 {
-    if(isEmpty(l))
+    if(isLinkedListEmpty(l))
         return 0;
     else{
         int i;
@@ -283,7 +283,7 @@ List concatLinkedList(List l1, List l2)
     }
     p = FIRST(l2);
     while(p != NULL){
-        insertLast(&l3, INFO(p));
+        insertLinkedListLast(&l3, INFO(p));
         p = NEXT(p);
     }
 
