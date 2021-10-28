@@ -8,6 +8,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "pcolor.h"
+#include "boolean.h"
+#include "listdin.h"
+#include "matrix.h"
 #include "map.h"
 
 /* rowEff >= 1 dan colEff >= 1 */
@@ -111,3 +115,94 @@ void displayMap(MAP m)
     }
 }
 
+int getLocationCode(char locationChar, ListDin building) {
+    /* KAMUS LOKAL */
+    int i, code;
+    boolean found;
+    /* Code merupakan indeks Matrix */
+
+    /* ALGORITMA */
+    if (locationChar == '8') {
+        code = 0;
+    }
+    else {
+        i = 0;
+        found = false;
+        while (i < length(building) && !found) {
+            if (locationChar == ELMT_CHAR(building, i)) {
+                code = i+1;
+                found = true;
+            }
+            else {
+                i++;
+            }
+        }
+    }
+    return code;
+}
+
+boolean isAccessible(char buildingChar1, char buildingChar2, Matrix adjMatrix, ListDin building) {
+    /* KAMUS LOKAL */
+    int buildingCode1, buildingCode2;
+
+    /* ALGORITMA */
+    buildingCode1 = getLocationCode(buildingChar1, building);
+    buildingCode2 = getLocationCode(buildingChar2, building);
+    if (ELMT_MATRIX(adjMatrix, buildingCode1, buildingCode2) == 1) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin building, int i, int j) {
+    /* KAMUS LOKAL */
+
+    /* ALGORITMA */
+    /* posisi Mobita */
+    if(ELMT_MAP(Map, i, j) == current_loc) {
+        print_yellow(ELMT_MAP(Map, i, j));
+    }
+    /* lokasi drop off
+    else if () {
+
+    } */
+    /* lokasi pick up
+    else if () {
+
+    } */
+    /* lokasi destinasi */
+    else {
+        /* location to headQuarter */
+        if ((isAccessible('8', current_loc, adjMatrix, building)) && (ELMT_MAP(Map, i, j) != current_loc)) {
+            print_green(ELMT_MAP(Map, i, j));
+        }
+
+        /* location to building */
+        if ((isAccessible(ELMT_MAP(Map, i, j), current_loc, adjMatrix, building)) && (ELMT_MAP(Map, i, j) != current_loc)) {
+            print_green(ELMT_MAP(Map, i, j));
+        }
+        else {
+            printf("%c", ELMT_MAP(Map, i, j));
+        }
+    }
+}
+
+void displayColoredMap(MAP Map, char current_loc, Matrix adjMatrix, ListDin building) {
+    /* KAMUS LOKAL */
+    Index i, j;
+
+    // ALGORITMA
+    for(i=0; i<ROWS_MAP(Map); i++){
+        for(j=0; j<COLS_MAP(Map); j++){
+            displayColoredLoc(Map, current_loc, adjMatrix, building, i, j);
+            if(j < COLS_MAP(Map)){
+                printf(" ");
+            }
+        }
+        if(i < ROWS_MAP(Map)){
+            printf("\n");
+        }
+    }
+}

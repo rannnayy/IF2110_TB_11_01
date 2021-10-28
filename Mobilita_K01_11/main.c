@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+/*
 #include "wordmachine.h"
 #include "point.h"
 #include "listdin.h"
@@ -17,16 +18,18 @@
 #include "node.h"
 #include "charmachine.h"
 #include "map.h"
-// #include "wordmachine.c"
-// #include "point.c"
-// #include "listdin.c"
-// #include "matrix.c"
-// #include "list_linked.c"
-// #include "pcolor.c"
-// #include "node.c"
-// #include "charmachine.c"
-// #include "start_game.c"
-// #include "map.c"
+*/
+
+#include "wordmachine.c"
+#include "point.c"
+#include "listdin.c"
+#include "matrix.c"
+#include "list_linked.c"
+#include "pcolor.c"
+#include "node.c"
+#include "charmachine.c"
+#include "start_game.c"
+#include "map.c"
 
 // FUNCTIONS AND PROCEDURES
 void DigitsToInt(Word digits, int* var);
@@ -42,9 +45,16 @@ int main()
     Matrix adjMatrix;
     List orders;
     MAP Map;
+    char current_loc;
 
     StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders);
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
+
+    current_loc = '8'; /* always start at headQuarter */
+    /* use char instead of POINT to ease referencing */
+
+    displayMap(Map);
+    displayColoredMap(Map, current_loc, adjMatrix, building);
 
     return 0;
 }
