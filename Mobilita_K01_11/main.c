@@ -30,6 +30,7 @@
 #include "charmachine.c"
 #include "start_game.c"
 #include "map.c"
+#include "move.c"
 
 // FUNCTIONS AND PROCEDURES
 void DigitsToInt(Word digits, int* var);
@@ -55,6 +56,9 @@ int main()
 
     displayMap(Map);
     displayColoredMap(Map, current_loc, adjMatrix, building);
+
+    /* test move */
+    move(Map, &current_loc, adjMatrix, building, headQuarter);
 
     return 0;
 }
