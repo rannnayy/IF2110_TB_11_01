@@ -47,7 +47,7 @@ int main()
     POINT headQuarter;
     ListDin building;
     Matrix adjMatrix;
-    List orders;
+    List orders, toDoList, inProgress;
     MAP Map;
     char current_loc;
     PrioQueue orderedOrders;
