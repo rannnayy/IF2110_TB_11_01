@@ -31,10 +31,13 @@
 #include "start_game.c"
 #include "map.c"
 #include "move.c"
+#include "prioqueue.c"
+#include "orderItems.c"
 
 // FUNCTIONS AND PROCEDURES
 void DigitsToInt(Word digits, int* var);
-void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders);
+// void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders);
+void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders, PrioQueue *orderedOrders);
 MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix);
 
 // MAIN FUNCTION
@@ -47,8 +50,10 @@ int main()
     List orders;
     MAP Map;
     char current_loc;
+    PrioQueue orderedOrders;
+    
 
-    StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders);
+    StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
     current_loc = '8'; /* always start at headQuarter */

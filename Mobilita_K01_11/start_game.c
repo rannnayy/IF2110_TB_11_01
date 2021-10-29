@@ -16,6 +16,7 @@
 #include "list_linked.h"
 #include "pcolor.h"
 #include "map.h"
+#include "orderItems.h"
 
 void DigitsToInt(Word digits, int* var)
 /*  Mengkonversi nilai pada pita kata yang berupa angka menjadi angka, bukan lagi char[]  */
@@ -32,7 +33,7 @@ void DigitsToInt(Word digits, int* var)
     }
 }
 
-void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders)
+void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders, PrioQueue *orderedOrders)
 /*  Memulai permainan dengan membaca nama file berisi konfigurasi permainan, lalu membaca N (jumlah baris), M (jumlah kolom),
     POINT headQuarter (koordinat dalam Map NxM), nLoc (jumlah lokasi), nLoc baris lokasi ListDin building(terdiri atas karakter
     bangunan dan POINT koordinat bangunan), nLoc+1 baris dan nLoc+1 kolom adjMatrix (Matrix Adjacency), nOrder (jumlah pesanan),
@@ -159,6 +160,18 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     }
     // displayLinkedList(*orders);
     // printf("\n");
+
+    // sorts the orders
+    CreatePrioQueue(orderedOrders);
+    queueOrder(orderedOrders, &(*orders));
+
+    // buat ngecek bentar udh aman blm queuenya
+    // printf("trying to print\n");
+    // while(!pqIsEmpty(*orderedOrders)){
+    //     pqEls temp;
+    //     dequeue(orderedOrders, &temp);
+    //     printf("%c %c %c\n", temp.pickUp, temp.dropOff, temp.itemType);
+    // }
 }
 
 MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix)
