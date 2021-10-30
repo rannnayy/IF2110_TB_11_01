@@ -10,7 +10,7 @@
 
 /* Konstanta */
 #define IDX_UNDEF -1
-#define CAPACITY 50
+#define CAPACITY 100
 
 /* Deklarasi ElType */
 typedef struct {

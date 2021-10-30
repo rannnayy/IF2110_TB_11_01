@@ -11,11 +11,11 @@ void CreateStack(Stack *s){
 /* Proses : Melakukan alokasi, membuat sebuah s kosong */
 
 /* ************ Prototype ************ */
-boolean isEmpty(Stack s){
+boolean isStackEmpty(Stack s){
     return IDX_TOP(s) == IDX_UNDEF;
 };
 /* Mengirim true jika s kosong: lihat definisi di atas */
-boolean isFull(Stack s){
+boolean isStackFull(Stack s){
     return IDX_TOP(s) == (CAPACITY - 1);
 };
 /* Mengirim true jika tabel penampung nilai s stack penuh */
@@ -43,13 +43,13 @@ void popEl(Stack *s, ElType val){
     CreateStack(&temp);
     ElType popped;
 
-    while(!isEmpty(*s)){
+    while(!isStackEmpty(*s)){
         pop(s, &popped);
         if (popped.itemType != val.itemType && popped.dropOff != val.dropOff && popped.pickUp != val.pickUp){
             push(&temp, popped);
         }
     }
-    while(!isEmpty(temp)){
+    while(!isStackEmpty(temp)){
         pop(&temp, &popped);
         push(s, popped);
     }

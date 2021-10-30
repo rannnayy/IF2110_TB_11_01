@@ -92,5 +92,3 @@ void dequeue(PrioQueue * pq, pqEls *val){
 /* F.S. val = nilai elemen HEAD pd
 I.S., HEAD dan IDX_HEAD "mundur"; 
         pq mungkin kosong */
-
-

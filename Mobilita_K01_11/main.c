@@ -33,6 +33,7 @@
 #include "move.c"
 #include "prioqueue.c"
 #include "orderItems.c"
+#include "stack.c"
 
 // FUNCTIONS AND PROCEDURES
 void DigitsToInt(Word digits, int* var);
@@ -48,6 +49,7 @@ int main()
     ListDin building;
     Matrix adjMatrix;
     List orders, toDoList, inProgress;
+    CreateList(&toDoList); CreateList(&inProgress);
     MAP Map;
     char current_loc;
     PrioQueue orderedOrders;
