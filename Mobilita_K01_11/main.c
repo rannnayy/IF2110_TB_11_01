@@ -45,6 +45,7 @@ MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building,
 int main()
 {
     int N, M, nLoc, nOrder;
+    int  bagCapacity = 3; // bagCapacity buat kapasitas tasnya
     POINT headQuarter;
     ListDin building;
     Matrix adjMatrix;

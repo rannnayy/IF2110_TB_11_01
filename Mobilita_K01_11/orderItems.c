@@ -62,24 +62,29 @@ void printToDoList(List *li)
     }
 }
 
-void updateToDoList(List *toDoList, PrioQueue *orderedOrders, int time)
+void updateToDoList(List *toDoList, PrioQueue *orderedOrders, int time, boolean *efekVIP)
 // updates to do list based on the current time;
 {
-    while(HEAD(*orderedOrders).nTime <= time){
+    while(HEAD(*orderedOrders).nTime <= time){      // kalo waktunya dibawah atau sama dengan waktu yg ditetapkan
         Elements temp;
         temp.nTime = HEAD(*orderedOrders).nTime;
         temp.dropOff = HEAD(*orderedOrders).dropOff;
         temp.itemType = HEAD(*orderedOrders).itemType;
         temp.pickUp = HEAD(*orderedOrders).pickUp;
         temp.perish = HEAD(*orderedOrders).perish;
+
+        // tambahin ke toDoList
         insertLinkedListLast(toDoList, temp);
+
+        // set efek VIP ke true klo slh satu yg ditambahin VIP
+        if (temp.itemType == 'V') *efekVIP = true;
 
         pqEls popped;       //buang elemennya
         dequeue(orderedOrders, &popped);
     }
 }
 
-void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc)
+void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean efekVIP)
 // picks up a specific item if that item exists in the toDoList and moves it into the inProgress
 // I.S. bebas
 // F.S. item might be added to the inProgress list and to the bag stack
@@ -88,70 +93,122 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc)
     Elements popped;
     int i = 0;
     boolean itemExists = false;
-    while (p != NULL && (!itemExists)){
-        if (INFO(p).pickUp == *currentLoc){
-            deleteLinkedListAt(toDoList, i, &popped);
-            insertLinkedListFirst(inProgress, popped);
-            ElType temp;
-            temp.dropOff = popped.dropOff;
-            temp.itemType = popped.itemType;
-            temp.nTime = popped.nTime;
-            temp.perish = popped.perish;
-            temp.pickUp = popped.pickUp;
-            push(bag, temp);
-            itemExists = true;
+    if (lengthLinkedList(*inProgress) < *bagCapacity){      // kalo kapasitas tas cukup
+        if (!efekVIP){                                               // Bila tidak ada efek VIP
+            while (p != NULL && (!itemExists)){
+                if (INFO(p).pickUp == *currentLoc){
+                    deleteLinkedListAt(toDoList, i, &popped);
+                    insertLinkedListFirst(inProgress, popped);
+                    ElType temp;
+                    temp.dropOff = popped.dropOff;
+                    temp.itemType = popped.itemType;
+                    temp.nTime = popped.nTime;
+                    temp.perish = popped.perish;
+                    temp.pickUp = popped.pickUp;
+                    push(bag, temp);
+                    itemExists = true;
+                    *bagCapacity++;
+                }
+                else {
+                    i++;
+                }
+            }
+        }
+        else {                                                                  // bila ada efek VIP
+            while (p != NULL && (!itemExists)){
+                if (INFO(p).pickUp == *currentLoc && INFO(p).itemType == 'V'){
+                    deleteLinkedListAt(toDoList, i, &popped);
+                    insertLinkedListFirst(inProgress, popped);
+                    ElType temp;
+                    temp.dropOff = popped.dropOff;
+                    temp.itemType = popped.itemType;
+                    temp.nTime = popped.nTime;
+                    temp.perish = popped.perish;
+                    temp.pickUp = popped.pickUp;
+                    push(bag, temp);
+                    itemExists = true;
+                    *bagCapacity++;
+                }
+                else {
+                    i++;
+                }
+            }            
+        }   
+
+
+        if (!itemExists){
+            printf("Pesanan tidak ditemukan!\n");
         }
         else {
-            i++;
+            printf("Pesanan berupa ");
+            switch(TOP(*bag).itemType){
+                case 'N' :
+                    printf("Normal Item ");
+                    break;
+                case 'H' :
+                    printf("Heavy Item ");
+                    break;
+                case 'P' :
+                    printf("Perishable Item ");
+                    break;
+                case 'V' :
+                    printf("VIP Item ");
+                    break;
+                default :
+                    printf("Unkonwn Type ");
+            }
+            printf("berhasil diambil!\n");
         }
-    }
-
-    if (!itemExists){
-        printf("Pesanan tidak ditemukan!\n");
     }
     else {
-        printf("Pesanan berupa ");
-        switch(TOP(*bag).itemType){
-            case 'N' :
-                printf("Normal Item ");
-                break;
-            case 'H' :
-                printf("Heavy Item ");
-                break;
-            case 'P' :
-                printf("Perishable Item ");
-                break;
-            case 'V' :
-                printf("VIP Item ");
-                break;
-            default :
-                printf("Unkonwn Type ");
-        }
-        printf("berhasil diambil!\n");
+        printf("Kapasitas tas sudah penuh!\n");
     }
 }
 
-void dropOff(List *inProgress, Stack *bag ,char *currentLoc)
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean *efekVIP)
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
 {
     if(TOP(*bag).dropOff == *currentLoc){
+        // pop dari inProgress sm bag
         ElType popped;
         Elements temp;
         pop(bag, &popped);
         deleteLinkedListFirst(inProgress, &temp);
-        // trus tambahin poin yg blm diimplementasi poinnya
+
+        // cek kalo yg dianter perishable (?)
+        if (popped.itemType == 'P') increaseBagCapacity(bagCapacity, 'i');
+        
+        // set efek VIP ke false klo gk ada item VIP lagi di toDoList sama inProgress
+        if (!hasVIP(toDoList) && !hasVIP(inProgress)) *efekVIP = false;
+
+        // trus tambahin poin (blm diimplementasi poinnya)
     }
 }
 
-boolean hasVIP(List *toDoList)
-// checks if the to do list has a VIP item, returns true if true
+boolean hasVIP(List *li)
+// checks if the list has a VIP item, returns true if true
 {
-    Address p = *toDoList;
+    Address p = *li;
     boolean does = false;
     while(p != NULL && (!does)){
         if(INFO(p).itemType = 'V') does = true;
     }
     return does;
+}
+
+void increaseBagCapacity(int *bagCapacity, char type)
+// increases bag capacity (?)
+// type 'd' for double; type 'i' for increment 
+{
+    if (type == 'd'){
+        *bagCapacity *= 2;
+    }
+    else if (type == 'i'){
+        *bagCapacity++;
+    }
+
+    if (*bagCapacity > 100) *bagCapacity = 100;
+    if (*bagCapacity == 100) printf("Kapasitas tas sudah maksimum!\n");
 }

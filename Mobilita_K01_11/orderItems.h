@@ -24,22 +24,26 @@ void printInProgress(List *li);
 // I.S. bebas
 // F.S. In Progress gets printed
 
-void updateToDoList(List *toDoList, PrioQueue *orderedOrders, int time);
+void updateToDoList(List *toDoList, PrioQueue *orderedOrders, int time, boolean *hasVIP);
 // updates to do list based on the current time;
 // I.S. to do list bebas
 // F.S. to do list gets added with certain amount of tasks based on the queue and given time.
 
-void pickUp(List *toDoList, List *inProgress, Stack *bag,char *currentLoc);
+void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean efekVIP);
 // picks up a specific item if that item exists in the toDoList and moves it into the inProgress
 // I.S. bebas
 // F.S. item might be added to the inProgress list and to the bag stack
 
-void dropOff(List *inProgress, Stack *bag ,char *currentLoc);
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean *efekVIP);
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
 
-boolean hasVIP(List *toDoList);
-// checks if the to do list has a VIP item, returns true if true
+boolean hasVIP(List *li);
+// checks if the list has a VIP item, returns true if true
+
+void increaseBagCapacity(int *bagCapacity, char type);
+// increases bag capacity (?)
+// type 'd' for double; type 'i' for increment 
 
 #endif
