@@ -9,14 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "wordmachine.h"
-#include "point.h"
-#include "listdin.h"
-#include "matrix.h"
-#include "list_linked.h"
-#include "pcolor.h"
-#include "map.h"
-#include "orderItems.h"
+#include "start_game.h"
 
 void DigitsToInt(Word digits, int* var)
 /*  Mengkonversi nilai pada pita kata yang berupa angka menjadi angka, bukan lagi char[]  */
@@ -44,13 +37,17 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
 /*  F.S. Seluruh variabel terinisialisasi nilai konfigurasi awal yang dibaca dari file. */
 {
     // Load File
-    char filename[255];
     printf("Masukkan nama file: ");
-    scanf("%s", filename);
+    //scanf("%s", filename);
+    startWordConsole();
+
+    char filename[currentWord.length];
+    for(int i = 0; i < currentWord.length; i++)
+        filename[i] = currentWord.contents[i];
 
     // Start file reading
-    startWord(filename);
-    ignoreBlank();
+    startWordFile(filename);
+    ignoreBlankFile();
 
     //printf("\n");
     *N = 0;
@@ -58,7 +55,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     // Assign N (number of rows)
     DigitsToInt(currentWord, &(*N));
 
-    advWord();
+    advWordFile();
     // Assign M (number of columns)
     DigitsToInt(currentWord, &(*M));
 
@@ -68,11 +65,11 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     x = 0;
     y = 0;
     // Assign POINT headQuarter
-    advWord();
+    advWordFile();
     // Assign x of POINT headQuarter
     DigitsToInt(currentWord, &x);
 
-    advWord();
+    advWordFile();
     // Assign y of POINT headQuarter
     DigitsToInt(currentWord, &y);
 
@@ -83,7 +80,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     // printf("\n");
 
     *nLoc = 0;
-    advWord();
+    advWordFile();
     // Assign nLoc (number of locations)
     DigitsToInt(currentWord, &(*nLoc));
 
@@ -96,13 +93,13 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
         x = 0;
         y = 0;
         // Store Building Character (Assumption: number of buildings max 26)
-        advWord();
+        advWordFile();
         ELMT_CHAR(*building, i) = currentWord.contents[0];
 
         // Store Building Point, each for x and y
-        advWord();
+        advWordFile();
         DigitsToInt(currentWord, &x);
-        advWord();
+        advWordFile();
         DigitsToInt(currentWord, &y);
 
         ELMT_POINT(*building, i) = MakePOINT(x, y);
@@ -116,7 +113,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     CreateMatrix((*nLoc)+1, (*nLoc)+1, &(*adjMatrix));
     for(i = 0; i < (*nLoc)+1; i++){
         for(j = 0; j < (*nLoc)+1; j++){
-            advWord();
+            advWordFile();
             ELMT_MATRIX(*adjMatrix, i, j) = (int)(currentWord.contents[0] - 48);
         }
     }
@@ -124,7 +121,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     // printf("\n");
 
     *nOrder = 0;
-    advWord();
+    advWordFile();
     // Assign nOrder (number of Orders)
     DigitsToInt(currentWord, &(*nOrder));
 
@@ -134,21 +131,21 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     Elements ordEl;
     for(i = 0; i < (*nOrder); i++){
         // Store ordEl.nTime
-        advWord();
+        advWordFile();
         NTIME(ordEl) = 0;
         DigitsToInt(currentWord, &NTIME(ordEl));
         // Store ordEl.pickUp
-        advWord();
+        advWordFile();
         PICKUP(ordEl) = (char)currentWord.contents[0];
         // Store ordEl.dropOff
-        advWord();
+        advWordFile();
         DROPOFF(ordEl) = (char)currentWord.contents[0];
         // Store ordEl.itemType
-        advWord();
+        advWordFile();
         ITEMTYPE(ordEl) = (char)currentWord.contents[0];
         // Store ordEl.perish
         if (ITEMTYPE(ordEl) == 'P'){
-            advWord();
+            advWordFile();
             PERISH(ordEl) = 0;
             DigitsToInt(currentWord, &PERISH(ordEl));
         }
@@ -175,10 +172,10 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
 }
 
 MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix)
-/*  Membuat konfigurasi Map setelah dibaca dari fungsi StartGame, N dan M (ukuran NxM dari peta), 
+/*  Membuat konfigurasi Map setelah dibaca dari fungsi StartGame, N dan M (ukuran NxM dari peta),
     headQuarter (koordinat HQ), building (koordinat tiap bangunan), dan adjMatrix (Matrix adjacency antar bangunan)*/
 /* I.S. Semua variabel terdefinisi */
-/* F.S. Output Map */ 
+/* F.S. Output Map */
 {
     MAP Map;
     int i, j, Row, Col;

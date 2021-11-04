@@ -22,29 +22,55 @@ typedef struct {
 extern boolean endWord;
 extern Word currentWord;
 
-void ignoreBlank();
+void ignoreBlankFile();
 /* Mengabaikan satu atau beberapa BLANK atau NEWLINE
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar ≠ NEWLINE atau currentChar = MARK */
 
-void startWord(char filename[FILE_NAME_CAP]);
+void startWordFile(char filename[FILE_NAME_CAP]);
 /* I.S. : currentChar sembarang
    F.S. : endWord = true, dan currentChar = MARK;
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 
-void advWord();
+void advWordFile();
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
    F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
           currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
           Jika currentChar = MARK, endWord = true.
    Proses : Akuisisi kata menggunakan procedure copyWord */
 
-void copyWord();
+void copyWordFile();
 /* Mengakuisisi kata, menyimpan dalam currentWord
    I.S. : currentChar adalah karakter pertama dari kata
    F.S. : currentWord berisi kata yang sudah diakuisisi;
           currentChar = BLANK atau currentChar = NEWLINE atau currentChar = MARK;
+          currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
+          Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
+
+void ignoreBlankConsole();
+/* Mengabaikan satu atau beberapa BLANK
+   I.S. : currentChar sembarang
+   F.S. : currentChar ≠ BLANK atau currentChar = MARK */
+
+void startWordConsole();
+/* I.S. : currentChar sembarang
+   F.S. : endWord = true, dan currentChar = MARK;
+          atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
+
+void advWordConsole();
+/* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
+   F.S. : currentWord adalah kata terakhir yang sudah diakuisisi,
+          currentChar adalah karakter pertama dari kata berikutnya, mungkin MARK
+          Jika currentChar = MARK, endWord = true.
+   Proses : Akuisisi kata menggunakan procedure copyWord */
+
+void copyWordConsole();
+/* Mengakuisisi kata, menyimpan dalam currentWord
+   I.S. : currentChar adalah karakter pertama dari kata
+   F.S. : currentWord berisi kata yang sudah diakuisisi;
+          currentChar = BLANK atau currentChar = MARK;
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
 

@@ -8,11 +8,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "pcolor.h"
-#include "boolean.h"
-#include "listdin.h"
-#include "matrix.h"
-#include "map.h"
+
+#include "move.h"
 
 void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter) {
     /* KAMUS LOKAL */
@@ -42,7 +39,7 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
         }
         i++;
     }
-    
+
     i = 0;
     while (i < NEFF(accessibleBuilding)) {
         printf("%d. %c ", i+1, ELMT_CHAR(accessibleBuilding, i));

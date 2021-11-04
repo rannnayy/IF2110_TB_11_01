@@ -1,4 +1,4 @@
-/********* MAIN PROGRAMME *********/
+/********* MAIN PROGRAM *********/
 /*
     File Name   : main.c
     Author      : K01_11
@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-/*
+
 #include "wordmachine.h"
 #include "point.h"
 #include "listdin.h"
@@ -18,8 +18,13 @@
 #include "node.h"
 #include "charmachine.h"
 #include "map.h"
-*/
+#include "prioqueue.h"
+#include "orderItems.h"
+#include "stack.h"
+#include "start_game.h"
+#include "move.h"
 
+/*
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -34,12 +39,12 @@
 #include "prioqueue.c"
 #include "orderItems.c"
 #include "stack.c"
+*/
 
 // FUNCTIONS AND PROCEDURES
-void DigitsToInt(Word digits, int* var);
-// void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders);
-void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders, PrioQueue *orderedOrders);
-MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix);
+//void DigitsToInt(Word digits, int* var);
+//void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders, PrioQueue *orderedOrders);
+//MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix);
 
 // MAIN FUNCTION
 int main()
@@ -54,7 +59,7 @@ int main()
     MAP Map;
     char current_loc;
     PrioQueue orderedOrders;
-    
+
 
     StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
