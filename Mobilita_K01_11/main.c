@@ -23,6 +23,7 @@
 #include "stack.h"
 #include "start_game.h"
 #include "move.h"
+#include "listpos.h"
 
 /*
 #include "wordmachine.c"
@@ -39,6 +40,7 @@
 #include "prioqueue.c"
 #include "orderItems.c"
 #include "stack.c"
+#include "listpos.c"
 */
 
 // FUNCTIONS AND PROCEDURES
@@ -59,6 +61,8 @@ int main()
     MAP Map;
     char current_loc;
     PrioQueue orderedOrders;
+    ListPos inventory;
+    CreateListPos(&inventory);
 
 
     StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
