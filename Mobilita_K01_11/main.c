@@ -64,7 +64,6 @@ int main()
     ListPos inventory;
     CreateListPos(&inventory);
 
-
     StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
