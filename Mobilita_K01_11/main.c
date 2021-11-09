@@ -9,23 +9,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "wordmachine.h"
-#include "point.h"
-#include "listdin.h"
-#include "matrix.h"
-#include "list_linked.h"
-#include "pcolor.h"
-#include "node.h"
-#include "charmachine.h"
-#include "map.h"
-#include "prioqueue.h"
-#include "orderItems.h"
-#include "stack.h"
-#include "start_game.h"
-#include "move.h"
-#include "listpos.h"
-
-/*
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -41,7 +24,6 @@
 #include "orderItems.c"
 #include "stack.c"
 #include "listpos.c"
-*/
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
@@ -52,7 +34,7 @@
 int main()
 {
     int N, M, nLoc, nOrder;
-    int  bagCapacity = 3; // bagCapacity buat kapasitas tasnya
+    /* int  bagCapacity = 3; ganti jadi current_bagcapacity */
     POINT headQuarter;
     ListDin building;
     Matrix adjMatrix;
@@ -60,21 +42,50 @@ int main()
     CreateList(&toDoList); CreateList(&inProgress);
     MAP Map;
     char current_loc;
+    int current_money, current_time, current_bagcapacity;
+    int time_inc;
     PrioQueue orderedOrders;
     ListPos inventory;
     CreateListPos(&inventory);
+    char command[20];
 
     StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
+    /* start config */
+    current_time = 0;
+    current_money = 0;
+    current_bagcapacity = 3;
+    time_inc = 1;
     current_loc = '8'; /* always start at headQuarter */
     /* use char instead of POINT to ease referencing */
 
-    displayMap(Map);
-    displayColoredMap(Map, current_loc, adjMatrix, building);
+    /* cek identitas Mobita */
+    printf("\nWaktu: %d\n", current_time);
 
-    /* test move */
-    move(Map, &current_loc, adjMatrix, building, headQuarter);
+    /* attempt of making insert command, use strcmp for now */
+    printf("\nENTER COMMAND: ");
+    scanf("%s", &command);
+    while (strcmp(command, "EXIT") != 0) {
+        if (strcmp(command, "MOVE") == 0) {
+            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, &time_inc);
+        }
+        else if (strcmp(command, "MAP") == 0) {
+            displayColoredMap(Map, current_loc, adjMatrix, building);
+        }
+        else if (strcmp(command, "TO_DO") == 0) {
+            printToDoList(&orders);
+        }
+        else if (strcmp(command, "IN_PROGRESS") == 0) {
+            printInProgress(&inProgress);
+        }
+
+        /* cek identitas Mobita */
+        printf("\nWaktu: %d\n", current_time);
+
+        printf("\nENTER COMMAND: ");
+        scanf("%s", &command);
+    }
 
     return 0;
 }

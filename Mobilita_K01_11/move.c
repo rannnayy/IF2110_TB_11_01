@@ -11,7 +11,7 @@
 
 #include "move.h"
 
-void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter) {
+void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, int* time_inc) {
     /* KAMUS LOKAL */
     int countAccessible, i, newLoc;
     ListDin accessibleBuilding;
@@ -48,13 +48,18 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
         i++;
     }
 
-    printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n");
-    printf("\nENTER COMMAND: \n");
+    printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n\n");
 
+    printf("ENTER COMMAND (integer): ");
     scanf("%d", &newLoc);
 
-    *current_loc = ELMT_CHAR(accessibleBuilding, newLoc-1);
-    printf("Mobita sekarang berada di titik %c ", *current_loc);
-    TulisPOINT(ELMT_POINT(accessibleBuilding, newLoc-1));
-    printf("\n");
+    if (newLoc != 0) {
+        *current_loc = ELMT_CHAR(accessibleBuilding, newLoc-1);
+        printf("\nMobita sekarang berada di titik %c ", *current_loc);
+        TulisPOINT(ELMT_POINT(accessibleBuilding, newLoc-1));
+        printf("!\n\n");
+        
+        /* tambahkan waktu dengan 1 */
+        *current_time = *current_time + *time_inc;
+    }
 }

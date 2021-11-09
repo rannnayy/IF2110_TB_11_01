@@ -34,7 +34,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
 // I.S. bebas
 // F.S. item might be added to the inProgress list and to the bag stack
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean *efekVIP);
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, int* current_money, int* current_bagcapacity, int* time_inc);
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.

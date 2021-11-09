@@ -15,4 +15,4 @@
 #include "matrix.h"
 #include "map.h"
 
-void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter);
+void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, int* time_inc);

@@ -165,7 +165,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
     }
 }
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean *efekVIP)
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, int* current_money, int* current_bagcapacity, int* time_inc)
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
@@ -176,14 +176,28 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int
         Elements temp;
         pop(bag, &popped);
         deleteLinkedListFirst(inProgress, &temp);
-
-        // cek kalo yg dianter perishable (?)
-        if (popped.itemType == 'P') increaseBagCapacity(bagCapacity, 'i');
         
         // set efek VIP ke false klo gk ada item VIP lagi di toDoList sama inProgress
         if (!hasVIP(toDoList) && !hasVIP(inProgress)) *efekVIP = false;
 
         // trus tambahin poin (blm diimplementasi poinnya)
+
+        /* apply efek item */
+        if (popped.itemType == 'N') {
+            *current_money = *current_money + 200;
+        }
+        else if (popped.itemType == 'H') {
+            *current_money = *current_money + 400;
+            /* apply speed boost */
+        }
+        else if (popped.itemType == 'P') {
+            *current_money = *current_money + 400;
+            increaseBagCapacity(current_bagcapacity, 'i');
+        }
+        else { /* popped.itemType == 'V' */
+            *current_money = *current_money + 600;
+            /* apply return to sender */
+        }
     }
 }
 
