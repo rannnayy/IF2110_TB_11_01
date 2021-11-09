@@ -55,8 +55,6 @@ void startConsole() {
 
 	/* Algoritma */
 	tape = stdin;
-	if(currentChar == '\n')
-        advConsole();
 	advConsole();
 }
 

@@ -43,6 +43,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="listdin.h" />
+		<Unit filename="listpos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="listpos.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

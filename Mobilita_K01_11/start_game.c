@@ -38,18 +38,13 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
 {
     // Load File
     printf("Masukkan nama file: ");
-    // char filename[FILENAME_MAX];
-    // scanf("%s", filename);
+    char filename[FILENAME_MAX];
+    scanf("%s", filename);
+    //startWordConsole();
 
-    startWordConsole();
-
-    char filename[currentWord.length];
-    /*
-    for(int i = 0; i < currentWord.length; i++)
-        filename[i] = currentWord.contents[i];
-    */
-    memcpy(filename, currentWord.contents, currentWord.length);
-    filename[currentWord.length] = '\0';
+    //char filename[currentWord.length];
+    //memcpy(filename, currentWord.contents, currentWord.length);
+    //filename[currentWord.length] = '\0';
 
     // Start file reading
     boolean started;
@@ -59,14 +54,16 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
 
         printf("Masukkan nama file: ");
 
-        startWordConsole();
-
         char filename[currentWord.length];
-        memcpy(filename, currentWord.contents, currentWord.length);
-        filename[currentWord.length] = '\0';
+        scanf("%s", &filename);
+        //startWordConsole();
+
+        //char filename[currentWord.length];
+        //memcpy(filename, currentWord.contents, currentWord.length);
+        //filename[currentWord.length] = '\0';
 
         startWordFile(filename, &started);
-        printf("currChar %c", currentChar);
+        //printf("currChar %c", currentChar);
     }
     processFileRead();
     ignoreBlankFile();

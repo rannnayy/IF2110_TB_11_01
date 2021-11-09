@@ -94,7 +94,6 @@ void startWordConsole()
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
           currentChar karakter pertama sesudah karakter terakhir kata */
 {
-    //printf("Masuk 1");
     startConsole();
     //printf("Masuk 2");
     ignoreBlankConsole();
