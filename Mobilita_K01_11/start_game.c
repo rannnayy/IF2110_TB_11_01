@@ -38,26 +38,48 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
 {
     // Load File
     printf("Masukkan nama file: ");
-    //scanf("%s", filename);
+    // char filename[FILENAME_MAX];
+    // scanf("%s", filename);
+
     startWordConsole();
 
     char filename[currentWord.length];
+    /*
     for(int i = 0; i < currentWord.length; i++)
         filename[i] = currentWord.contents[i];
+    */
+    memcpy(filename, currentWord.contents, currentWord.length);
+    filename[currentWord.length] = '\0';
 
     // Start file reading
-    startWordFile(filename);
+    boolean started;
+    startWordFile(filename, &started);
+    while(!started){
+        printf("File %s tidak tersedia\n", filename);
+
+        printf("Masukkan nama file: ");
+
+        startWordConsole();
+
+        char filename[currentWord.length];
+        memcpy(filename, currentWord.contents, currentWord.length);
+        filename[currentWord.length] = '\0';
+
+        startWordFile(filename, &started);
+        printf("currChar %c", currentChar);
+    }
+    processFileRead();
     ignoreBlankFile();
 
     //printf("\n");
     *N = 0;
     *M = 0;
     // Assign N (number of rows)
-    DigitsToInt(currentWord, &(*N));
+    DigitsToInt(currentWordFile, &(*N));
 
     advWordFile();
     // Assign M (number of columns)
-    DigitsToInt(currentWord, &(*M));
+    DigitsToInt(currentWordFile, &(*M));
 
     // printf("%d %d\n", *N, *M);
 
@@ -67,11 +89,11 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     // Assign POINT headQuarter
     advWordFile();
     // Assign x of POINT headQuarter
-    DigitsToInt(currentWord, &x);
+    DigitsToInt(currentWordFile, &x);
 
     advWordFile();
     // Assign y of POINT headQuarter
-    DigitsToInt(currentWord, &y);
+    DigitsToInt(currentWordFile, &y);
 
     // Make POINT headQuarter
     *headQuarter = MakePOINT(x, y);
@@ -82,7 +104,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     *nLoc = 0;
     advWordFile();
     // Assign nLoc (number of locations)
-    DigitsToInt(currentWord, &(*nLoc));
+    DigitsToInt(currentWordFile, &(*nLoc));
 
     // printf("%d\n", *nLoc);
 
@@ -94,13 +116,13 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
         y = 0;
         // Store Building Character (Assumption: number of buildings max 26)
         advWordFile();
-        ELMT_CHAR(*building, i) = currentWord.contents[0];
+        ELMT_CHAR(*building, i) = currentWordFile.contents[0];
 
         // Store Building Point, each for x and y
         advWordFile();
-        DigitsToInt(currentWord, &x);
+        DigitsToInt(currentWordFile, &x);
         advWordFile();
-        DigitsToInt(currentWord, &y);
+        DigitsToInt(currentWordFile, &y);
 
         ELMT_POINT(*building, i) = MakePOINT(x, y);
 
@@ -114,7 +136,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     for(i = 0; i < (*nLoc)+1; i++){
         for(j = 0; j < (*nLoc)+1; j++){
             advWordFile();
-            ELMT_MATRIX(*adjMatrix, i, j) = (int)(currentWord.contents[0] - 48);
+            ELMT_MATRIX(*adjMatrix, i, j) = (int)(currentWordFile.contents[0] - 48);
         }
     }
     // displayMatrix(*adjMatrix);
@@ -123,7 +145,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     *nOrder = 0;
     advWordFile();
     // Assign nOrder (number of Orders)
-    DigitsToInt(currentWord, &(*nOrder));
+    DigitsToInt(currentWordFile, &(*nOrder));
 
     // printf("%d\n", *nOrder);
 
@@ -133,21 +155,21 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
         // Store ordEl.nTime
         advWordFile();
         NTIME(ordEl) = 0;
-        DigitsToInt(currentWord, &NTIME(ordEl));
+        DigitsToInt(currentWordFile, &NTIME(ordEl));
         // Store ordEl.pickUp
         advWordFile();
-        PICKUP(ordEl) = (char)currentWord.contents[0];
+        PICKUP(ordEl) = (char)currentWordFile.contents[0];
         // Store ordEl.dropOff
         advWordFile();
-        DROPOFF(ordEl) = (char)currentWord.contents[0];
+        DROPOFF(ordEl) = (char)currentWordFile.contents[0];
         // Store ordEl.itemType
         advWordFile();
-        ITEMTYPE(ordEl) = (char)currentWord.contents[0];
+        ITEMTYPE(ordEl) = (char)currentWordFile.contents[0];
         // Store ordEl.perish
         if (ITEMTYPE(ordEl) == 'P'){
             advWordFile();
             PERISH(ordEl) = 0;
-            DigitsToInt(currentWord, &PERISH(ordEl));
+            DigitsToInt(currentWordFile, &PERISH(ordEl));
         }
         else
             PERISH(ordEl) = -1;

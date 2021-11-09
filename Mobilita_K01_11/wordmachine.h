@@ -20,14 +20,18 @@ typedef struct {
 
 /* Word Engine State */
 extern boolean endWord;
+extern boolean endWordFile;
 extern Word currentWord;
+extern Word currentWordFile;
 
 void ignoreBlankFile();
 /* Mengabaikan satu atau beberapa BLANK atau NEWLINE
    I.S. : currentChar sembarang
    F.S. : currentChar ≠ BLANK atau currentChar ≠ NEWLINE atau currentChar = MARK */
 
-void startWordFile(char filename[FILE_NAME_CAP]);
+void processFileRead();
+
+void startWordFile(char filename[FILE_NAME_CAP], boolean *started);
 /* I.S. : currentChar sembarang
    F.S. : endWord = true, dan currentChar = MARK;
           atau endWord = false, currentWord adalah kata yang sudah diakuisisi,

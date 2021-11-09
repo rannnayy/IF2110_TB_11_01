@@ -46,14 +46,26 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="map.h" />
 		<Unit filename="matrix.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="matrix.h" />
+		<Unit filename="move.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="move.h" />
 		<Unit filename="node.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="node.h" />
+		<Unit filename="orderItems.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="orderItems.h" />
 		<Unit filename="pcolor.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -62,9 +74,18 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="point.h" />
+		<Unit filename="prioqueue.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="prioqueue.h" />
+		<Unit filename="stack.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="stack.h" />
 		<Unit filename="start_game.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="start_game.h" />
 		<Unit filename="wordmachine.c">
 			<Option compilerVar="CC" />
 		</Unit>

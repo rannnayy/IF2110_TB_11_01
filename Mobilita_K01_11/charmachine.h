@@ -11,9 +11,11 @@
 #define FILE_NAME_CAP 255
 /* Char Engine State */
 extern char currentChar;
+extern char currentCharFile;
 extern boolean eot;
+extern boolean eotFile;
 
-void startFile(char filename[FILE_NAME_CAP]);
+void startFile(char filename[FILE_NAME_CAP], boolean *started);
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang

@@ -7,12 +7,15 @@
 #include <stdlib.h>
 
 char currentChar;
+char currentCharFile;
 boolean eot;
+boolean eotFile;
 
 static FILE * tape;
+static FILE * tapeFile;
 static int retval;
 
-void startFile(char filename[FILE_NAME_CAP]) {
+void startFile(char filename[FILE_NAME_CAP], boolean *started) {
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
@@ -21,21 +24,11 @@ void startFile(char filename[FILE_NAME_CAP]) {
           Jika currentChar = MARK maka EOP akan menyala (true) */
 
 	/* Algoritma */
-	tape = fopen(filename, "r");
-	if (tape == NULL){
-        while(tape == NULL){
-            printf("File %s tidak tersedia\n", filename);
-
-            char file_name[255];
-
-            printf("Masukkan nama file: ");
-            scanf("%s", file_name);
-            tape = fopen(file_name, "r");
-        }
-    }
-    else{
-        advFile();
-    }
+	tapeFile = fopen(filename, "r");
+	if (tapeFile == NULL)
+        *started = false;
+    else
+        *started = true;
 }
 
 void advFile() {
@@ -46,12 +39,10 @@ void advFile() {
 		      Jika  currentChar = MARK maka EOP akan menyala (true) */
 
 	/* Algoritma */
-	// retval = fscanf(tape,"%c",&currentChar);
-	currentChar = getc(tape);
-	eot = (currentChar == MARK_EOF);
-	if (eot) {
-       fclose(tape);
- 	}
+	currentCharFile = getc(tapeFile);
+	eotFile = (currentCharFile == MARK_EOF);
+	if (eotFile)
+        fclose(tapeFile);
 }
 
 void startConsole() {
@@ -64,6 +55,8 @@ void startConsole() {
 
 	/* Algoritma */
 	tape = stdin;
+	if(currentChar == '\n')
+        advConsole();
 	advConsole();
 }
 
@@ -75,9 +68,10 @@ void advConsole() {
 		      Jika  currentChar = MARK maka EOP akan menyala (true) */
 
 	/* Algoritma */
-	retval = fscanf(tape,"%c",&currentChar);
+	retval = fscanf(tape, "%c", &currentChar);
 	eot = (currentChar == '\n');
-	if (eot) {
-       fclose(tape);
- 	}
+	if (eot){
+        fclose(tape);
+        printf("tape console closed\n");
+	}
 }
