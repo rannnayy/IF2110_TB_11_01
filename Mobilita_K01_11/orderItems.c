@@ -40,6 +40,7 @@ void printInProgress(List *li)
         else if (INFO(p).itemType == 'P') printf("Perishable  Item (Tujuan: %c)\n", INFO(p).dropOff);
         else if (INFO(p).itemType == 'V') printf("VIP  Item (Tujuan: %c)\n", INFO(p).dropOff);
         p = NEXT(p);
+        i++;
     }
 }
 
@@ -53,12 +54,13 @@ void printToDoList(List *li)
     printf("Pesanan pada To Do List:\n");
     while (p != NULL){
         printf("%d. ", i);
-        printf("%c -> %c ", INFO(p).pickUp, INFO(p).pickUp);
+        printf("%c -> %c ", INFO(p).pickUp, INFO(p).dropOff);
         if (INFO(p).itemType == 'N') printf("(Normal Item)\n");
         else if (INFO(p).itemType == 'H') printf("(Heavy Item)\n");
         else if (INFO(p).itemType == 'P') printf("(Perishable Item, siswa waktu %d)\n", INFO(p).perish);
         else if (INFO(p).itemType == 'V') printf("(VIP Item)\n");
         p = NEXT(p);
+        i++;
     }
 }
 
@@ -240,7 +242,7 @@ void removePerishable(Stack *bag, List *inProgress, int time)
     int i = 0;
     Elements popped;
     while(p != NULL){
-        if(INFO(p).itemType = 'P' && INFO(p).perish <= time){
+        if(INFO(p).itemType = 'P' && INFO(p).perish + INFO(p).nTime <= time){
             deleteLinkedListAt(inProgress, i, &popped);
             boolean found = false;
             ElType popThis;
