@@ -156,7 +156,45 @@ boolean isAccessible(char buildingChar1, char buildingChar2, Matrix adjMatrix, L
     }
 }
 
-void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin building, int i, int j) {
+boolean isPickUp(List toDoList, char buildingChar) {
+    /* KAMUS LOKAL */
+    Address p;
+    boolean exist;
+
+    /* ALGORITMA */
+    p = toDoList;
+    exist = false;
+    while (p != NULL && !exist) {
+        if (INFO(p).pickUp == buildingChar) {
+            exist = true;
+        }
+        else {
+            p = NEXT(p);
+        }
+    }
+    return exist;
+}
+
+boolean isDropOff(List inProgress, char buildingChar) {
+    /* KAMUS LOKAL */
+    Address p;
+    boolean exist;
+
+    /* ALGORITMA */
+    p = inProgress;
+    exist = false;
+    while (p != NULL && !exist) {
+        if (INFO(p).dropOff == buildingChar) {
+            exist = true;
+        }
+        else {
+            p = NEXT(p);
+        }
+    }
+    return exist;
+}
+
+void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin building, int i, int j, List inProgress, List toDoList) {
     /* KAMUS LOKAL */
 
     /* ALGORITMA */
@@ -164,23 +202,25 @@ void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin buil
     if(ELMT_MAP(Map, i, j) == current_loc) {
         print_yellow(ELMT_MAP(Map, i, j));
     }
-    /* lokasi drop off
-    else if () {
-
-    } */
-    /* lokasi pick up
-    else if () {
-
-    } */
+    /* lokasi drop off */
+    else if (isDropOff(inProgress, ELMT_MAP(Map, i, j))) {
+        print_blue(ELMT_MAP(Map, i, j));
+    }
+    /* lokasi pick up */
+    else if (isPickUp(toDoList, ELMT_MAP(Map, i, j))) {
+        print_red(ELMT_MAP(Map, i, j));
+    }
     /* lokasi destinasi */
     else {
-        /* location to headQuarter */
+        /*
+        location to headQuarter
         if ((isAccessible('8', current_loc, adjMatrix, building)) && (ELMT_MAP(Map, i, j) != current_loc)) {
             print_green(ELMT_MAP(Map, i, j));
         }
+        */
 
         /* location to building */
-        if ((isAccessible(ELMT_MAP(Map, i, j), current_loc, adjMatrix, building)) && (ELMT_MAP(Map, i, j) != current_loc)) {
+        if ((isAccessible(ELMT_MAP(Map, i, j), current_loc, adjMatrix, building)) && (ELMT_MAP(Map, i, j) != current_loc) && (ELMT_MAP(Map, i, j) != '*')) {
             print_green(ELMT_MAP(Map, i, j));
         }
         else {
@@ -189,14 +229,14 @@ void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin buil
     }
 }
 
-void displayColoredMap(MAP Map, char current_loc, Matrix adjMatrix, ListDin building) {
+void displayColoredMap(MAP Map, char current_loc, Matrix adjMatrix, ListDin building, List inProgress, List toDoList) {
     /* KAMUS LOKAL */
     Index i, j;
 
     // ALGORITMA
     for(i=0; i<ROWS_MAP(Map); i++){
         for(j=0; j<COLS_MAP(Map); j++){
-            displayColoredLoc(Map, current_loc, adjMatrix, building, i, j);
+            displayColoredLoc(Map, current_loc, adjMatrix, building, i, j, inProgress, toDoList);
             if(j < COLS_MAP(Map)){
                 printf(" ");
             }

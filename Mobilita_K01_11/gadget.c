@@ -102,11 +102,13 @@ void displayInventory(ListPos *inventory) {
         }
 }
 
-void buyGadget(ListPos *inventory){
+void buyGadget(ListPos *inventory, int *current_money){
 // membeli gadget dan memasukkannya ke dalam tas
 // I.S. inventory dan gadget terdefinisi
 // F.S. lsit gadget diperlihatkan dan gadget dibeli atau tidak jadi dibeli
     int option, gadget;
+    boolean succeed = false;
+    printf("Uang Anda sekarang: %d\n", *current_money);
     printf("Gadget yang tersedia:\n");
     printf("1. Kain Pembungkus Waktu (800 Yen)\n");
     printf("2. Senter Pembesar (1200 Yen)\n");
@@ -123,30 +125,54 @@ void buyGadget(ListPos *inventory){
     if (option!=0) {
         gadget=option;
         if (isFull_ListPos(*inventory)) {
-            printf("Kapasitas inventory anda penuh!\n");
+            printf("Kapasitas inventory Anda penuh!\n");
         }
         else { // inventory tidak full
-            addGadget(inventory, gadget);
             switch(gadget){
                 case 1 :
-                    printf("Kain Pembungkus Waktu ");
+                    if (*current_money >= 800) {
+                        printf("Kain Pembungkus Waktu berhasil dibeli.\n");
+                        *current_money = *current_money - 800;
+                        succeed = true;
+                    }
                     break;
                 case 2 :
-                    printf("Senter Pembesar ");
+                    if (*current_money >= 1200) {
+                        printf("Senter Pembesar berhasil dibeli.\n");
+                        *current_money = *current_money - 1200;
+                        succeed = true;
+                    }
                     break;
                 case 3 :
-                    printf("Pintu Kemana Saja ");
+                    if (*current_money >= 1500) {
+                        printf("Pintu Kemana Saja berhasil dibeli.\n");
+                        *current_money = *current_money - 1500;
+                        succeed = true;
+                    }
                     break;
                 case 4 :
-                    printf("Mesin Waktu ");
+                    if (*current_money >= 3000) {
+                        printf("Mesin Waktu berhasil dibeli.\n");
+                        *current_money = *current_money - 3000;
+                        succeed = true;
+                    }
                     break;
                 case 5 :
-                    printf("Senter Pengecil ");
+                    if (*current_money >= 800) {
+                        printf("Senter Pengecil berhasil dibeli.\n");
+                        *current_money = *current_money - 800;
+                        succeed = true;
+                    }
                     break;
-                default :
-                    printf("Unkonwn Gadget ");
+                default : /* unreachable state */
+                    printf("Unknown Gadget berhasil dibeli.\n");
             }
-            printf("berhasil dibeli!\n");
+            if (succeed == false) {
+                printf("Uang tidak cukup untuk membeli gadget. Nguli lagi yuk :')\n");
+            }
+            else {
+                addGadget(inventory, gadget);
+            }
         }
     }
 }

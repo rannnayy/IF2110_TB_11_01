@@ -45,6 +45,8 @@ int main()
     char current_loc;
     int current_money, current_time, current_bagcapacity;
     int time_inc;
+    boolean efekVIP;
+    Stack bag;
     PrioQueue orderedOrders;
     ListPos inventory;
     CreateListPos(&inventory);
@@ -58,6 +60,7 @@ int main()
     current_money = 0;
     current_bagcapacity = 3;
     time_inc = 1;
+    efekVIP = false;
     current_loc = '8'; /* always start at headQuarter */
     /* use char instead of POINT to ease referencing */
 
@@ -68,23 +71,33 @@ int main()
     printf("\nENTER COMMAND: ");
     scanf("%s", &command);
     while (strcmp(command, "EXIT") != 0) {
+        updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
         if (strcmp(command, "MOVE") == 0) {
             move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, &time_inc);
         }
         else if (strcmp(command, "MAP") == 0) {
-            displayColoredMap(Map, current_loc, adjMatrix, building);
+            displayColoredMap(Map, current_loc, adjMatrix, building, inProgress, toDoList);
         }
         else if (strcmp(command, "TO_DO") == 0) {
-            printToDoList(&orders);
+            printToDoList(&toDoList);
         }
         else if (strcmp(command, "IN_PROGRESS") == 0) {
             printInProgress(&inProgress);
         }
+        else if (strcmp(command, "PICK_UP") == 0) {
+            pickUp(&toDoList, &inProgress, &bag, &current_loc, &current_bagcapacity, efekVIP);
+        }
+        else if (strcmp(command, "DROP_OFF") == 0) {
+            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &current_money, &current_bagcapacity, &time_inc);
+        }
         else if (strcmp(command, "BUY") == 0) {
-            buyGadget(&inventory);
+            buyGadget(&inventory, &current_money);
         }
         else if (strcmp(command, "INVENTORY") == 0) {
             displayInventory(&inventory);
+        }
+        else {
+            printf("COMMAND salah. Ketik 'HELP' untuk bantuan atau ketik ulang COMMAND.\n");
         }
 
         /* cek identitas Mobita */

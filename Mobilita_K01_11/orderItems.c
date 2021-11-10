@@ -186,22 +186,33 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
 
         // trus tambahin poin (blm diimplementasi poinnya)
 
-        /* apply efek item */
+        /* write confirmation message and apply item effects */
         if (popped.itemType == 'N') {
+            printf("Pesanan Normal Item berhasil diantarkan.\n");
+            printf("Uang yang didapatkan: 200 Yen.\n");
             *current_money = *current_money + 200;
         }
         else if (popped.itemType == 'H') {
+            printf("Pesanan Heavy Item berhasil diantarkan.\n");
+            printf("Uang yang didapatkan: 400 Yen.\n");
             *current_money = *current_money + 400;
             /* apply speed boost */
         }
         else if (popped.itemType == 'P') {
+            printf("Pesanan Perishable Item berhasil diantarkan.\n");
+            printf("Uang yang didapatkan: 400 Yen.\n");
             *current_money = *current_money + 400;
             increaseBagCapacity(current_bagcapacity, 'i');
         }
         else { /* popped.itemType == 'V' */
+            printf("Pesanan VIP Item berhasil diantarkan.\n");
+            printf("Uang yang didapatkan: 600 Yen.\n");
             *current_money = *current_money + 600;
             /* apply return to sender */
         }
+    }
+    else { /* current loc isn't drop-off location */
+        printf("Tidak ada pesanan yang dapat diantarkan.\n");
     }
 }
 

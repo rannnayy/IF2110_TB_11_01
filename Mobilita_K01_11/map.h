@@ -65,6 +65,16 @@ void displayMap(MAP m);
 8 9 10
 */
 
+int getLocationCode(char locationChar, ListDin building);
 
+boolean isAccessible(char buildingChar1, char buildingChar2, Matrix adjMatrix, ListDin building);
+
+boolean isPickUp(List toDoList, char buildingChar);
+
+boolean isDropOff(List inProgress, char buildingChar);
+
+void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin building, int i, int j, List inProgress, List toDoList);
+
+void displayColoredMap(MAP Map, char current_loc, Matrix adjMatrix, ListDin building, List inProgress, List toDoList);
 
 #endif

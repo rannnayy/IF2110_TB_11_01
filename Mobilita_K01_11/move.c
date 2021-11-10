@@ -49,15 +49,19 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
     }
 
     printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n\n");
-
     printf("ENTER COMMAND (integer): ");
     scanf("%d", &newLoc);
+    while (newLoc < 0 || newLoc > length(accessibleBuilding)) {
+        printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n\n");
+        printf("ENTER COMMAND (integer): ");
+        scanf("%d", &newLoc);
+    }
 
     if (newLoc != 0) {
         *current_loc = ELMT_CHAR(accessibleBuilding, newLoc-1);
         printf("\nMobita sekarang berada di titik %c ", *current_loc);
         TulisPOINT(ELMT_POINT(accessibleBuilding, newLoc-1));
-        printf("!\n\n");
+        printf("!\n");
         
         /* tambahkan waktu dengan 1 */
         *current_time = *current_time + *time_inc;
