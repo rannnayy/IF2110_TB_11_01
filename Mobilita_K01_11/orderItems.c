@@ -111,6 +111,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
                 }
                 else {
                     i++;
+                    p = NEXT(p);
                 }
             }
         }
@@ -131,6 +132,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
                 }
                 else {
                     i++;
+                    p = NEXT(p);
                 }
             }            
         }   
@@ -208,6 +210,7 @@ boolean hasVIP(List *li)
     boolean does = false;
     while(p != NULL && (!does)){
         if(INFO(p).itemType = 'V') does = true;
+        p = NEXT(p);
     }
     return does;
 }
@@ -226,3 +229,30 @@ void increaseBagCapacity(int *bagCapacity, char type)
     if (*bagCapacity > 100) *bagCapacity = 100;
     if (*bagCapacity == 100) printf("Kapasitas tas sudah maksimum!\n");
 }
+
+void removePerishable(Stack *bag, List *inProgress, int time)
+// checks if the inProgress has a perishable item
+//      if so, check if the time limit has exceeded
+//          if so, remove it.
+// check for all perishables.
+{
+    Address p = *inProgress;
+    int i = 0;
+    Elements popped;
+    while(p != NULL){
+        if(INFO(p).itemType = 'P' && INFO(p).perish <= time){
+            deleteLinkedListAt(inProgress, i, &popped);
+            boolean found = false;
+            ElType popThis;
+            popThis.dropOff = popped.dropOff; popThis.perish = popped.perish; 
+            popThis.itemType = popped.itemType; popThis.nTime = popped.nTime;
+            popThis.pickUp = popped.pickUp;
+            popEl(bag, popThis);
+            printf("Ada perishable item yang sudah melewati time limitnya!\n");
+        }
+        else{
+            i++;
+            p = NEXT(p);
+        }
+    }
+};

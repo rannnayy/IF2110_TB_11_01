@@ -45,5 +45,14 @@ boolean hasVIP(List *li);
 void increaseBagCapacity(int *bagCapacity, char type);
 // increases bag capacity (?)
 // type 'd' for double; type 'i' for increment 
+// I.S. kapasitas bag ada
+// F.S. kapasitas bag ditambahkan (dengan cara ditentukan)
 
+void removePerishable(Stack *bag, List *inProgress, int time);
+// checks if the inProgress has a perishable item
+//      if so, check if the time limit has exceeded
+//          if so, remove it.
+// check for all perishables.
+// I.S mungkin punya perishable
+// F.S. perishable dgn waktu perish <= waktu skrg, bakal dihilangkan.
 #endif

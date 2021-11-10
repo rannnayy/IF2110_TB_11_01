@@ -27,9 +27,9 @@
 #include "gadget.c"
 
 // FUNCTIONS AND PROCEDURES
-//void DigitsToInt(Word digits, int* var);
-//void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders, PrioQueue *orderedOrders);
-//MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix);
+void DigitsToInt(Word digits, int* var);
+void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders, PrioQueue *orderedOrders);
+MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix);
 
 // MAIN FUNCTION
 int main()
