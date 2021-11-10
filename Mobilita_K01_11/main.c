@@ -24,6 +24,7 @@
 #include "orderItems.c"
 #include "stack.c"
 #include "listpos.c"
+#include "gadget.c"
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
@@ -78,6 +79,12 @@ int main()
         }
         else if (strcmp(command, "IN_PROGRESS") == 0) {
             printInProgress(&inProgress);
+        }
+        else if (strcmp(command, "BUY") == 0) {
+            buyGadget(&inventory);
+        }
+        else if (strcmp(command, "INVENTORY") == 0) {
+            displayInventory(&inventory);
         }
 
         /* cek identitas Mobita */

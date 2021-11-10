@@ -7,7 +7,7 @@
 void addGadget(ListPos *inventory, int gadget){
 // Menambahkan Gadget ke dalam Inventory
 // I.S. inventory dan gadget terdefinisi
-// F.S. inventory berisi gadget
+// F.S. gadget ditambahkan ke inventory
     boolean added=false;
     int i=0;
     while(!added) {
@@ -28,26 +28,26 @@ void delGadget(ListPos *inventory, int idx) {
     ELMT_LISTPOS(*inventory,idx)=VAL_UNDEF_LISTPOS;
 }
 
-void displayInventory(ListPos inventory) {
+void displayInventory(ListPos *inventory) {
 // memperlihatkan semua gadget yang ada di dalam inventory dan dapat menggunakannya
 // I.S. inventory terdefinisi
 // F.S. gadget yang ada di dalam inventory diperlihatkan 
     int option, gadget,idx;
     for (idx=0;idx<CAPACITY_LISTPOS;idx++) {
         printf("%d. ", idx+1);
-        if (ELMT_LISTPOS(inventory, idx)==1) {
+        if (ELMT_LISTPOS(*inventory, idx)==1) {
             printf("Kain Pembungkus Waktu\n");
         }
-        else if (ELMT_LISTPOS(inventory, idx)==2) {
+        else if (ELMT_LISTPOS(*inventory, idx)==2) {
             printf("Senter Pembesar\n");
         }
-        else if (ELMT_LISTPOS(inventory, idx)==3) {
+        else if (ELMT_LISTPOS(*inventory, idx)==3) {
             printf("Pintu Kemana Saja\n");
         }
-        else if (ELMT_LISTPOS(inventory,idx)==4) {
+        else if (ELMT_LISTPOS(*inventory,idx)==4) {
             printf("Mesin Waktu\n");
         }
-        else if (ELMT_LISTPOS(inventory,idx)==5) {
+        else if (ELMT_LISTPOS(*inventory,idx)==5) {
             printf("Senter Pengecil\n");
         }
         else { //ELMT_LISTPOS(inventory, i)==VAL_UNDEF_LISTPOS
@@ -63,7 +63,7 @@ void displayInventory(ListPos inventory) {
                 exist=true;
             }
             else { // option>0 && option<=5
-                if (ELMT_LISTPOS(inventory,option-1)==VAL_UNDEF_LISTPOS) {
+                if (ELMT_LISTPOS(*inventory,option-1)==VAL_UNDEF_LISTPOS) {
                     printf("Gadget yang dipilih tidak ada\n");
                 }
                 else { //gadget ada di inventory
@@ -77,8 +77,8 @@ void displayInventory(ListPos inventory) {
     } while(!exist);
     if (option!=0) {
         idx=option-1;
-        gadget=ELMT_LISTPOS(inventory,idx);
-        useGadget(inventory, idx);
+        gadget=ELMT_LISTPOS(*inventory,idx);
+        useGadget(inventory,idx);
             switch(gadget){
                 case 1 :
                     printf("Kain Pembungkus Waktu ");
@@ -97,12 +97,12 @@ void displayInventory(ListPos inventory) {
                     break;
                 default :
                     printf("Unknown Gadget ");
-            printf("berhasil digunakan!\n");
             }
+            printf("berhasil digunakan!\n");
         }
 }
 
-void buyGadget(ListPos inventory){
+void buyGadget(ListPos *inventory){
 // membeli gadget dan memasukkannya ke dalam tas
 // I.S. inventory dan gadget terdefinisi
 // F.S. lsit gadget diperlihatkan dan gadget dibeli atau tidak jadi dibeli
@@ -122,11 +122,11 @@ void buyGadget(ListPos inventory){
     }
     if (option!=0) {
         gadget=option;
-        if (isFull_ListPos(inventory)) {
+        if (isFull_ListPos(*inventory)) {
             printf("Kapasitas inventory anda penuh!\n");
         }
         else { // inventory tidak full
-            addGadget(&inventory, gadget);
+            addGadget(inventory, gadget);
             switch(gadget){
                 case 1 :
                     printf("Kain Pembungkus Waktu ");
@@ -150,9 +150,11 @@ void buyGadget(ListPos inventory){
         }
     }
 }
-void useGadget(ListPos inventory, int idx){
+void useGadget(ListPos *inventory, int idx){
 // mmenggunakan gadget pada index idx inventory dan mendapatkan kemampuan spesial dari gadget yang digunakan
 // I.S. inventory dan gadget terdefinisi
 // F.S. gadget digunakan kemudian hangus atau di hapus dalam inventory.
- delGadget(&inventory,idx);
+    int gadget;
+    gadget=ELMT_LISTPOS(*inventory,idx);
+    delGadget(inventory,idx);
 }
