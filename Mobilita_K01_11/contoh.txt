@@ -47,3 +47,33 @@ Q 10 3
 5 G N P 10
 8 O P V
 8 Q L V
+1 G N N
+3 G N H
+2 B M N
+1 M B H
+5 C D N
+3 F E N
+10 P Q P 20
+5 G N P 10
+8 O P V
+8 Q L V
+A
+5
+500
+10
+5
+1 G N N
+3 G N H
+2 B M N
+1 M B H
+5 C D N
+3
+1 G N N
+3 G N H
+2 B M N
+5
+1
+2
+3
+4
+5

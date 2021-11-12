@@ -1,6 +1,7 @@
 /* File: charmachine.c */
 /* Implementasi Character Engine */
 /* Perubahan menyesuaikan kebutuhan Tugas Besar */
+// Last Update : 10/11/2021
 
 #include "charmachine.h"
 #include <stdio.h>
@@ -41,8 +42,10 @@ void advFile() {
 	/* Algoritma */
 	currentCharFile = getc(tapeFile);
 	eotFile = (currentCharFile == MARK_EOF);
-	if (eotFile)
+	if (eotFile){
         fclose(tapeFile);
+        fflush(tapeFile);
+	}
 }
 
 void startConsole() {
@@ -68,8 +71,9 @@ void advConsole() {
 	/* Algoritma */
 	retval = fscanf(tape, "%c", &currentChar);
 	eot = (currentChar == '\n');
-	if (eot){
-        fclose(tape);
-        printf("tape console closed\n");
-	}
+}
+
+void closeTape()
+{
+    fclose(tape);
 }

@@ -9,6 +9,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "wordmachine.h"
+#include "point.h"
+#include "listdin.h"
+#include "matrix.h"
+#include "list_linked.h"
+#include "pcolor.h"
+#include "node.h"
+#include "charmachine.h"
+#include "map.h"
+#include "prioqueue.h"
+#include "orderItems.h"
+#include "stack.h"
+#include "start_game.h"
+#include "move.h"
+#include "listpos.h"
+#include "gadget.h"
+/*
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -25,16 +43,17 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
+*/
 
 // FUNCTIONS AND PROCEDURES
-void DigitsToInt(Word digits, int* var);
-void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders, PrioQueue *orderedOrders);
-MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix);
+//void DigitsToInt(Word digits, int* var);
+//void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders, PrioQueue *orderedOrders);
+//MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix);
 
 // MAIN FUNCTION
 int main()
 {
-    int N, M, nLoc, nOrder;
+    int N, M, nLoc, nOrder, nToDoList, nInProgress, nInventory;
     /* int  bagCapacity = 3; ganti jadi current_bagcapacity */
     POINT headQuarter;
     ListDin building;
@@ -52,7 +71,15 @@ int main()
     CreateListPos(&inventory);
     char command[20];
 
-    StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
+    printf(" _|      _|    _|_|    _|_|_|    _|_|_|  _|        _|_|_|  _|_|_|_|_|    _|_|    \n");
+    printf(" _|_|  _|_|  _|    _|  _|    _|    _|    _|          _|        _|      _|    _|  \n");
+    printf(" _|  _|  _|  _|    _|  _|_|_|      _|    _|          _|        _|      _|_|_|_|  \n");
+    printf(" _|      _|  _|    _|  _|    _|    _|    _|          _|        _|      _|    _|  \n");
+    printf(" _|      _|    _|_|    _|_|_|    _|_|_|  _|_|_|_|  _|_|_|      _|      _|    _|  \n\n");
+
+    LoadGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders,
+              &orderedOrders, &current_loc, &current_time, &current_money, &current_bagcapacity,
+              &nToDoList, &toDoList, &nInProgress, &inProgress, &nInventory, &inventory);
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
     /* start config */
@@ -69,7 +96,9 @@ int main()
 
     /* attempt of making insert command, use strcmp for now */
     printf("\nENTER COMMAND: ");
-    scanf("%s", &command);
+    startWordConsole();
+    memset(&command, '\0', sizeof(command));
+    memcpy(command, currentWord.contents, currentWord.length);
     while (strcmp(command, "EXIT") != 0) {
         updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
         if (strcmp(command, "MOVE") == 0) {
@@ -105,8 +134,12 @@ int main()
         printf("\nWaktu: %d\n", current_time);
 
         printf("\nENTER COMMAND: ");
-        scanf("%s", &command);
+        startWordConsole();
+        memset(&command, '\0', sizeof(command));
+        memcpy(command, currentWord.contents, currentWord.length);
     }
+    SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, orderedOrders, current_loc, current_time, current_money,
+             current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory);
 
     return 0;
 }

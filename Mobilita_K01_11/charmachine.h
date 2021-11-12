@@ -1,6 +1,7 @@
 /* File: charmachine.h */
 /* Definisi Character Engine */
 /* Perubahan menyesuaikan kebutuhan Tugas Besar */
+// Last Update : 10/11/2021
 
 #ifndef CHAR_ENGINE_H
 #define CHAR_ENGINE_H
@@ -44,5 +45,7 @@ void advConsole();
    F.S. : currentChar adalah karakter berikutnya dari currentChar yang lama,
           currentChar mungkin = MARK
 		      Jika  currentChar = MARK maka EOP akan menyala (true) */
+
+void closeTape();
 
 #endif

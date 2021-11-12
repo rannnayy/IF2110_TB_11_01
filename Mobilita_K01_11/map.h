@@ -4,6 +4,7 @@
 #define MAP_H
 
 #include "boolean.h"
+#include "list_linked.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
 #define MAP_ROW_CAP 100

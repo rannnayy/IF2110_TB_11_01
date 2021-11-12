@@ -1,6 +1,7 @@
 /* File: wordmachine.h */
 /* Definisi Word Engine */
 /* Perubahan menyesuaikan kebutuhan Tugas Besar */
+// Last Update : 10/11/2021
 
 #ifndef WORD_ENGINE_H
 #define WORD_ENGINE_H

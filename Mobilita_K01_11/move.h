@@ -14,5 +14,7 @@
 #include "listdin.h"
 #include "matrix.h"
 #include "map.h"
+#include "charmachine.h"
+#include "wordmachine.h"
 
 void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, int* time_inc);

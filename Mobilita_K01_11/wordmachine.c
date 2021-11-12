@@ -95,11 +95,9 @@ void startWordConsole()
           currentChar karakter pertama sesudah karakter terakhir kata */
 {
     startConsole();
-    //printf("Masuk 2");
     ignoreBlankConsole();
     endWord = false;
     copyWordConsole();
-    //printf("Masuk 3");
 }
 void advWordConsole()
 /* I.S. : currentChar adalah karakter pertama kata yang akan diakuisisi
@@ -131,7 +129,6 @@ void copyWordConsole()
         currentWord.contents[i] = currentChar;
         advConsole();
         i += 1;
-        printf("currentChar di copyWord %c %d\n", currentChar, i);
     }
     currentWord.length = i;
 }
