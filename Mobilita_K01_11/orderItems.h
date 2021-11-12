@@ -29,12 +29,12 @@ void updateToDoList(List *toDoList, PrioQueue *orderedOrders, int time, boolean 
 // I.S. to do list bebas
 // F.S. to do list gets added with certain amount of tasks based on the queue and given time.
 
-void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean efekVIP);
+void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean efekVIP, boolean *efekHeavyItem);
 // picks up a specific item if that item exists in the toDoList and moves it into the inProgress
 // I.S. bebas
 // F.S. item might be added to the inProgress list and to the bag stack
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, int* current_money, int* current_bagcapacity, int* time_inc);
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavy, int* current_money, int* current_bagcapacity, int* time_inc);
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
@@ -55,4 +55,12 @@ void removePerishable(Stack *bag, List *inProgress, int time);
 // check for all perishables.
 // I.S mungkin punya perishable
 // F.S. perishable dgn waktu perish <= waktu skrg, bakal dihilangkan.
+
+boolean hasHeavyItem(List *li);
+// checks if the list has a heavy item, returns true if true
+
+void returnToSender(List *toDoList, List *inProgress, Stack *bag);
+// provides the effect "Return to Sender"
+// does not check if the user has the gadget necessary to use it.
+
 #endif

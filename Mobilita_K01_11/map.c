@@ -202,14 +202,14 @@ void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin buil
     if(ELMT_MAP(Map, i, j) == current_loc) {
         print_yellow(ELMT_MAP(Map, i, j));
     }
-    /* lokasi drop off */
-    else if (isDropOff(inProgress, ELMT_MAP(Map, i, j))) {
-        print_blue(ELMT_MAP(Map, i, j));
-    }
-    /* lokasi pick up */
-    else if (isPickUp(toDoList, ELMT_MAP(Map, i, j))) {
-        print_red(ELMT_MAP(Map, i, j));
-    }
+    // /* lokasi drop off */
+    // else if (isDropOff(inProgress, ELMT_MAP(Map, i, j))) {
+    //     print_blue(ELMT_MAP(Map, i, j));
+    // }
+    // /* lokasi pick up */
+    // else if (isPickUp(toDoList, ELMT_MAP(Map, i, j))) {
+    //     print_red(ELMT_MAP(Map, i, j));
+    // }
     /* lokasi destinasi */
     else {
         /*

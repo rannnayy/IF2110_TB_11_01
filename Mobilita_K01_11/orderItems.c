@@ -86,7 +86,7 @@ void updateToDoList(List *toDoList, PrioQueue *orderedOrders, int time, boolean 
     }
 }
 
-void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean efekVIP)
+void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean efekVIP, boolean *efekHeavyItem)
 // picks up a specific item if that item exists in the toDoList and moves it into the inProgress
 // I.S. bebas
 // F.S. item might be added to the inProgress list and to the bag stack
@@ -110,6 +110,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
                     push(bag, temp);
                     itemExists = true;
                     *bagCapacity++;
+                    if (temp.itemType == 'H') *efekHeavyItem = true;
                 }
                 else {
                     i++;
@@ -131,6 +132,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
                     push(bag, temp);
                     itemExists = true;
                     *bagCapacity++;
+                    if (temp.itemType == 'H') *efekHeavyItem = true;
                 }
                 else {
                     i++;
@@ -159,7 +161,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
                     printf("VIP Item ");
                     break;
                 default :
-                    printf("Unkonwn Type ");
+                    printf("Unknown Type ");
             }
             printf("berhasil diambil!\n");
         }
@@ -169,7 +171,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
     }
 }
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, int* current_money, int* current_bagcapacity, int* time_inc)
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, int* time_inc)
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
@@ -183,6 +185,7 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
         
         // set efek VIP ke false klo gk ada item VIP lagi di toDoList sama inProgress
         if (!hasVIP(toDoList) && !hasVIP(inProgress)) *efekVIP = false;
+        if (!hasHeavyItem(inProgress)) *efekHeavyItem = false;
 
         // trus tambahin poin (blm diimplementasi poinnya)
 
@@ -219,6 +222,7 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
 boolean hasVIP(List *li)
 // checks if the list has a VIP item, returns true if true
 {
+    Elements temp;
     Address p = *li;
     boolean does = false;
     while(p != NULL && (!does)){
@@ -252,6 +256,7 @@ void removePerishable(Stack *bag, List *inProgress, int time)
     Address p = *inProgress;
     int i = 0;
     Elements popped;
+    Elements temp;
     while(p != NULL){
         if(INFO(p).itemType = 'P' && INFO(p).perish + INFO(p).nTime <= time){
             deleteLinkedListAt(inProgress, i, &popped);
@@ -267,5 +272,42 @@ void removePerishable(Stack *bag, List *inProgress, int time)
             i++;
             p = NEXT(p);
         }
+
     }
+
 };
+
+boolean hasHeavyItem(List *li)
+// checks if the list has a heavy item, returns true if true
+// use in the linked list in progress
+{
+    Address p = *li;
+    boolean does = false;
+    while(p != NULL && (!does)){
+        if(INFO(p).itemType = 'H') does = true;
+        p = NEXT(p);
+    }
+    return does;
+}
+
+void returnToSender(List *toDoList, List *inProgress, Stack *bag)
+// provides the effect "Return to Sender"
+// does not check if the user has the gadget necessary to use it.
+{
+    Elements temp; ElType popped;
+    deleteLinkedListLast(inProgress, &temp);
+    if (temp.itemType != 'V'){ // fungsinya gbs di item VIP soalnya
+        insertLinkedListLast(toDoList, temp);
+        pop(bag, &popped);
+        switch (temp.itemType){
+            case 'N': printf("Normal"); break;
+            case 'H': printf("Heavy"); break;
+            case 'P': printf("Perishable"); break;
+        }
+        printf(" item berhasil dikembalikan ke Pick Up Point %d\n", temp.pickUp);
+    }
+    else {
+        printf("Ability terbuang karena item VIP\n");
+        insertLinkedListLast(inProgress, temp);
+    }
+}

@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <string.h>
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -45,7 +45,7 @@ int main()
     char current_loc;
     int current_money, current_time, current_bagcapacity;
     int time_inc;
-    boolean efekVIP;
+    boolean efekVIP, efekHeavyItem;
     Stack bag;
     PrioQueue orderedOrders;
     ListPos inventory;
@@ -77,6 +77,7 @@ int main()
         }
         else if (strcmp(command, "MAP") == 0) {
             displayColoredMap(Map, current_loc, adjMatrix, building, inProgress, toDoList);
+            // displayMap(Map);
         }
         else if (strcmp(command, "TO_DO") == 0) {
             printToDoList(&toDoList);
@@ -85,10 +86,10 @@ int main()
             printInProgress(&inProgress);
         }
         else if (strcmp(command, "PICK_UP") == 0) {
-            pickUp(&toDoList, &inProgress, &bag, &current_loc, &current_bagcapacity, efekVIP);
+            pickUp(&toDoList, &inProgress, &bag, &current_loc, &current_bagcapacity, efekVIP, &efekHeavyItem);
         }
         else if (strcmp(command, "DROP_OFF") == 0) {
-            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &current_money, &current_bagcapacity, &time_inc);
+            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc);
         }
         else if (strcmp(command, "BUY") == 0) {
             buyGadget(&inventory, &current_money);
