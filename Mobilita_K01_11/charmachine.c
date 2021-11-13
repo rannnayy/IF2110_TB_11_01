@@ -42,10 +42,12 @@ void advFile() {
 	/* Algoritma */
 	currentCharFile = getc(tapeFile);
 	eotFile = (currentCharFile == MARK_EOF);
+	/*
 	if (eotFile){
-        fclose(tapeFile);
         fflush(tapeFile);
+        fclose(tapeFile);
 	}
+	*/
 }
 
 void startConsole() {

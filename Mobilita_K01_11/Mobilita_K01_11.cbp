@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="charmachine.h" />
+		<Unit filename="gadget.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="gadget.h" />
 		<Unit filename="list_linked.c">
 			<Option compilerVar="CC" />
 		</Unit>
