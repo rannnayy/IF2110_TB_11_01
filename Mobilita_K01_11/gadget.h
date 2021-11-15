@@ -6,6 +6,10 @@
 
 #include "listpos.h"
 #include "boolean.h"
+#include "map.h"
+#include "matrix.h"
+#include "listdin.h"
+#include "point.h"
 
 void addGadget(ListPos *inventory, int gadget);
 // Menambahkan Gadget ke dalam Inventory
@@ -17,7 +21,7 @@ void delGadget(ListPos *inventory, int idx);
 // I.S. inventory dan gadget terdefinisi
 // F.S. gadget dihapus dari inventory
 
-void displayInventory(ListPos *inventory);
+void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time);
 // memperlihatkan semua gadget yang ada di dalam inventory
 // I.S. inventory terdefinisi
 // F.S. gadget yang ada di dalam inventory diperlihatkan
@@ -27,7 +31,7 @@ void buyGadget(ListPos *inventory, int *current_money);
 // I.S. inventory dan gadget terdefinisi
 // F.S. lsit gadget diperlihatkan dan gadget dibeli atau tidak jadi dibeli
 
-void useGadget(ListPos *inventory, int idx);
+void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time);
 // mmenggunakan gadget dan mendapatkan kemampuan spesial dari gadget
 // I.S. gadget terdefinisi
 // F.S. gadget digunakan kemudian hangus atau di hapus dalam inventory.

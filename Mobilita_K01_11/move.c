@@ -11,7 +11,7 @@
 
 #include "move.h"
 
-void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, int* time_inc) {
+void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress) {
     /* KAMUS LOKAL */
     int countAccessible, i, newLoc;
     ListDin accessibleBuilding;
@@ -68,6 +68,6 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
         printf("!\n");
 
         /* tambahkan waktu dengan 1 */
-        *current_time = *current_time + *time_inc;
+        *current_time = *current_time + 1 + countHeavyItem(inProgress);
     }
 }

@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "gadget.h"
+#include "orderItems.h"
 
 void addGadget(ListPos *inventory, int gadget){
 // Menambahkan Gadget ke dalam Inventory
@@ -28,7 +29,7 @@ void delGadget(ListPos *inventory, int idx) {
     ELMT_LISTPOS(*inventory,idx)=VAL_UNDEF_LISTPOS;
 }
 
-void displayInventory(ListPos *inventory) {
+void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time) {
 // memperlihatkan semua gadget yang ada di dalam inventory dan dapat menggunakannya
 // I.S. inventory terdefinisi
 // F.S. gadget yang ada di dalam inventory diperlihatkan 
@@ -78,7 +79,7 @@ void displayInventory(ListPos *inventory) {
     if (option!=0) {
         idx=option-1;
         gadget=ELMT_LISTPOS(*inventory,idx);
-        useGadget(inventory,idx);
+        useGadget(inventory, idx, current_bagcapacity, time_inc, Map, current_loc, adjMatrix, building, headQuarter, current_time);
             switch(gadget){
                 case 1 :
                     printf("Kain Pembungkus Waktu ");
@@ -181,6 +182,25 @@ void useGadget(ListPos *inventory, int idx){
 // I.S. inventory dan gadget terdefinisi
 // F.S. gadget digunakan kemudian hangus atau di hapus dalam inventory.
     int gadget;
+    int temp_time_inc;
     gadget=ELMT_LISTPOS(*inventory,idx);
+    switch(gadget){
+        case 1 :
+            break;
+        case 2 :
+            increaseBagCapacity(current_bagcapacity, 'd');
+            break;
+        case 3 :
+            temp_time_inc = *time_inc;
+            move(Map, current_loc, adjMatrix, building, headQuarter, current_time, temp_time_inc);
+            *time_inc = temp_time_inc;
+            break;
+        case 4 :
+            break;
+        case 5 :
+            break;
+        default : /* unreachable state */
+            printf("Unknown Gadget berhasil dibeli.\n");
+    }
     delGadget(inventory,idx);
 }

@@ -151,7 +151,7 @@ int main()
             buyGadget(&inventory, &current_money);
         }
         else if (strcmp(command, "INVENTORY") == 0) {
-            displayInventory(&inventory);
+            displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, &current_time);
         }
         else if (strcmp(command, "HELP") == 0) {
             Help();

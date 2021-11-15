@@ -182,6 +182,9 @@ boolean isDropOff(List inProgress, char buildingChar) {
 
     /* ALGORITMA */
     p = inProgress;
+    return (INFO(p).dropOff == buildingChar);
+    }
+    /*
     exist = false;
     while (p != NULL && !exist) {
         if (INFO(p).dropOff == buildingChar) {
@@ -192,7 +195,7 @@ boolean isDropOff(List inProgress, char buildingChar) {
         }
     }
     return exist;
-}
+    */
 
 void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin building, int i, int j, List inProgress, List toDoList) {
     /* KAMUS LOKAL */
@@ -202,31 +205,27 @@ void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin buil
     if(ELMT_MAP(Map, i, j) == current_loc) {
         print_yellow(ELMT_MAP(Map, i, j));
     }
-    // /* lokasi drop off */
-    // else if (isDropOff(inProgress, ELMT_MAP(Map, i, j))) {
-    //     print_blue(ELMT_MAP(Map, i, j));
-    // }
-    // /* lokasi pick up */
-    // else if (isPickUp(toDoList, ELMT_MAP(Map, i, j))) {
-    //     print_red(ELMT_MAP(Map, i, j));
-    // }
-    /* lokasi destinasi */
-    else {
-        /*
-        location to headQuarter
-        if ((isAccessible('8', current_loc, adjMatrix, building)) && (ELMT_MAP(Map, i, j) != current_loc)) {
-            print_green(ELMT_MAP(Map, i, j));
-        }
-        */
-
-        /* location to building */
-        if ((isAccessible(ELMT_MAP(Map, i, j), current_loc, adjMatrix, building)) && (ELMT_MAP(Map, i, j) != current_loc) && (ELMT_MAP(Map, i, j) != '*')) {
-            print_green(ELMT_MAP(Map, i, j));
-        }
-        else {
-            printf("%c", ELMT_MAP(Map, i, j));
-        }
+    /* lokasi drop off */
+    else if (isDropOff(inProgress, ELMT_MAP(Map, i, j))) {
+        print_blue(ELMT_MAP(Map, i, j));
     }
+    /* lokasi pick up */
+    else if (isPickUp(toDoList, ELMT_MAP(Map, i, j))) {
+        print_red(ELMT_MAP(Map, i, j));
+    }
+    /* location to building */
+    else if ((isAccessible(ELMT_MAP(Map, i, j), current_loc, adjMatrix, building)) && (ELMT_MAP(Map, i, j) != current_loc) && (ELMT_MAP(Map, i, j) != '*')) {
+        print_green(ELMT_MAP(Map, i, j));
+    }
+    else {
+        printf("%c", ELMT_MAP(Map, i, j));
+    }
+    /*
+    location to headQuarter
+    if ((isAccessible('8', current_loc, adjMatrix, building)) && (ELMT_MAP(Map, i, j) != current_loc)) {
+        print_green(ELMT_MAP(Map, i, j));
+    }
+    */
 }
 
 void displayColoredMap(MAP Map, char current_loc, Matrix adjMatrix, ListDin building, List inProgress, List toDoList) {

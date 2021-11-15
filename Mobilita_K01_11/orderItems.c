@@ -245,6 +245,9 @@ void increaseBagCapacity(int *bagCapacity, char type)
 {
     if (type == 'd'){
         *bagCapacity *= 2;
+        if (*bagCapacity > 100) {
+            *bagCapacity = 100;
+        }
     }
     else if (type == 'i'){
         *bagCapacity++;
@@ -295,6 +298,23 @@ boolean hasHeavyItem(List *li)
         p = NEXT(p);
     }
     return does;
+}
+
+int countHeavyItem(List li) {
+    /* KAMUS LOKAL */
+    Address p;
+    int count;
+
+    /* ALGORITMA */
+    p = li;
+    count = 0;
+    while (p!= NULL) {
+        if (INFO(p).itemType == 'H') {
+            count++;
+        }
+        p = NEXT(p);
+    }
+    return count;
 }
 
 void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility)

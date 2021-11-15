@@ -17,4 +17,4 @@
 #include "charmachine.h"
 #include "wordmachine.h"
 
-void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, int* time_inc);
+void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress);

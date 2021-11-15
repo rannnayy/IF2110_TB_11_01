@@ -59,6 +59,8 @@ void removePerishable(Stack *bag, List *inProgress, int time);
 boolean hasHeavyItem(List *li);
 // checks if the list has a heavy item, returns true if true
 
+int countHeavyItem(List li);
+
 void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility);
 // provides the effect "Return to Sender"
 // does not check if the user has the gadget necessary to use it.
