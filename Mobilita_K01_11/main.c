@@ -26,7 +26,7 @@
 #include "move.h"
 #include "listpos.h"
 #include "gadget.h"
-
+/*
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -43,7 +43,7 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
-
+*/
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
