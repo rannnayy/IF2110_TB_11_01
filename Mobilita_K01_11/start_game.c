@@ -679,3 +679,13 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
     else
         printf("Tidak bisa menyimpan ke file.");
 }
+
+boolean endGame(char current_loc, int current_time, List toDoList, List inProgress, Stack bag){
+    boolean gameOn = true;
+
+    if ((current_loc == '8') && (current_time > 0) && (isLinkedListEmpty(toDoList)) && (isLinkedListEmpty(inProgress)) && (isStackEmpty(bag))){
+        gameOn = false;
+    }
+
+    return gameOn;
+}

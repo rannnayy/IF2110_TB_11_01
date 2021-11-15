@@ -48,3 +48,6 @@ void Help();
 void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin building, Matrix adjMatrix, List orders,
               PrioQueue orderedOrders, char current_loc, int current_time, int current_money, int current_bagcapacity,
               int nToDoList, List toDoList, int nInProgress, List inProgress, int nInventory, ListPos inventory);
+
+boolean endGame(char current_loc, int current_time, List toDoList, List inProgress, Stack bag);
+

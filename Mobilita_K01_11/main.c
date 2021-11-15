@@ -70,6 +70,7 @@ int main()
     ListPos inventory;
     CreateListPos(&inventory);
     char command[20];
+    boolean gameOn;
 
     printf("\n");
     printf("\t\t _|      _|    _|_|    _|_|_|    _|_|_|  _|        _|_|_|  _|_|_|_|_|    _|_|    \n");
@@ -96,6 +97,7 @@ int main()
     efekVIP = false;
     current_loc = '8'; /* always start at headQuarter */
     /* use char instead of POINT to ease referencing */
+    gameOn = true;
 
     /* cek identitas Mobita */
     printf("\nWaktu: %d\n", current_time);
@@ -108,6 +110,11 @@ int main()
 
     while (strcmp(command, "EXIT") != 0) {
         updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
+        gameOn = endGame(current_loc, current_money, toDoList, inProgress, bag);
+        if (!gameOn){
+            printf("Selamat anda telah menyelesaikan permainan mobita dalam %d satuan waktu\n\n!", current_time);
+            break;
+        }
         //displayStack(bag);
         if (strcmp(command, "MOVE") == 0) {
             move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, &time_inc);
