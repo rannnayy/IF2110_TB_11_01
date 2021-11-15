@@ -35,6 +35,12 @@ typedef struct {
 #define HEAD(pq) (pq).buffer[(pq).idxHead]
 #define TAIL(pq) (pq).buffer[(pq).idxTail]
 
+#define NTIME(e) (e).nTime
+#define PICKUP(e) (e).pickUp
+#define DROPOFF(e) (e).dropOff
+#define ITEMTYPE(e) (e).itemType
+#define PERISH(e) (e).perish
+
 /* *** Kreator *** */
 void CreatePrioQueue(PrioQueue *pq);
 /* I.S. sembarang */
@@ -65,7 +71,7 @@ void dequeue(PrioQueue * pq, pqEls *val);
 /* Proses: Menghapus val pada q dengan aturan FIFO */
 /* I.S. pq tidak mungkin kosong */
 /* F.S. val = nilai elemen HEAD pd
-I.S., HEAD dan IDX_HEAD "mundur"; 
+I.S., HEAD dan IDX_HEAD "mundur";
         pq mungkin kosong */
 
 #endif

@@ -43,8 +43,12 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
     startWordConsole();
 
     char filename[FILENAME_MAX];
-    memset(&filename, '\0', sizeof(filename));
-    memcpy(filename, currentWord.contents, currentWord.length);
+    for(int i = 0; i < currentWord.length; i++)
+        filename[i] = currentWord.contents[i];
+    //memset(&filename, '\0', sizeof(filename));
+    for(int i = currentWord.length; i < FILENAME_MAX; i++)
+        filename[i] = '\0';
+    //memcpy(filename, currentWord.contents, currentWord.length);
     int lenBefore = currentWord.length;
 
     // Start file reading
@@ -210,8 +214,10 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
     startWordConsole();
 
     char filename[FILENAME_MAX];
-    memset(&filename, '\0', sizeof(filename));
-    memcpy(filename, currentWord.contents, currentWord.length);
+    for(int i = 0; i < currentWord.length; i++)
+        filename[i] = currentWord.contents[i];
+    for(int i = currentWord.length; i < FILENAME_MAX; i++)
+        filename[i] = '\0';
     int lenBefore = currentWord.length;
 
     // Start file reading
@@ -532,59 +538,59 @@ void Help()
     printf("| $$  | $$| $$$$$$$$| $$$$$$$$| $$\n");
     printf("|__/  |__/|________/|________/|__/\n");
 
-    print_red("COMMANDS\n");
-    print_blue("1. New Game\n");
+    printf("COMMANDS\n");
+    printf("1. New Game\n");
     printf("    Ketik NEW_GAME untuk memulai permainan baru.\n");
 
-    print_blue("2. Load Game\n");
+    printf("2. Load Game\n");
     printf("    Ketik LOAD_GAME untuk melanjutkan permainan yang telah tersimpan.\n");
 
-    print_blue("3. Exit\n");
+    printf("3. Exit\n");
     printf("    Ketik EXIT untuk keluar dari permainan.\n");
 
-    print_blue("4. Waktu\n");
+    printf("4. Waktu\n");
     printf("    Ketik TIME untuk menunjukkan waktu permainan saat ini.\n");
 
-    print_blue("5. Daftar Pesanan\n");
+    printf("5. Daftar Pesanan\n");
     printf("    Ketik ORDER untuk menunjukkan daftar pesanan.\n");
 
-    print_blue("6. To Do List\n");
+    printf("6. To Do List\n");
     printf("    Ketik TO_DO untuk menunjukkan To Do List.\n");
 
-    print_blue("7. In Progress List\n");
+    printf("7. In Progress List\n");
     printf("    Ketik IN_PROGRESS untuk menunjukkan In Progress List.\n");
 
-    print_blue("8. Kapasitas Tas\n");
+    printf("8. Kapasitas Tas\n");
     printf("    Ketik BAG untuk menunjukkan kapasitas tas saat ini.\n");
 
-    print_blue("9. Jenis Item\n");
+    printf("9. Jenis Item\n");
     printf("    Ketik ITEM untuk menunjukkan jenis item yang tersedia.\n");
 
-    print_blue("10. Ability Aktif\n");
+    printf("10. Ability Aktif\n");
     printf("    Ketik ACTIVE_ABILITY untuk melihat ability yang sedang aktif.\n");
 
-    print_blue("11. Gadget\n");
+    printf("11. Gadget\n");
     printf("    Ketik GADGET untuk menujukkan daftar gadget yang tersedia.\n");
 
-    print_blue("12. Gadget Aktif\n");
+    printf("12. Gadget Aktif\n");
     printf("    Ketik ACTIVE_GADGET untuk melihat gadget yang sedang aktif.\n");
 
-    print_blue("13. Daftar Inventory\n");
+    printf("13. Daftar Inventory\n");
     printf("    Ketik INVENTORY untuk menunjukkan daftar inventory yang tersedia.\n");
 
-    print_blue("14. Map\n");
+    printf("14. Map\n");
     printf("    Ketik MAP untuk menunjukkan peta permainan saat ini.\n");
 
-    print_blue("15. Move\n");
+    printf("15. Move\n");
     printf("    Ketik MOVE untuk menunjukkan lokasi-lokasi yang dapat disinggahi.\n    Lalu, silahkan memilih angka yang hendak dituju.\n");
 
-    print_blue("16. Pick Up\n");
+    printf("16. Pick Up\n");
     printf("    Ketik PICK_UP untuk mengambil item jika ada pesanan yang harus diambil pada lokasi.\n");
 
-    print_blue("17. Drop Off\n");
+    printf("17. Drop Off\n");
     printf("    Ketik DROP_OFF untuk mengantarkan item ke lokasi jika item di tumpukan teratas tas sesuai dengan pesanan\n");
 
-    print_blue("18. Buy\n");
+    printf("18. Buy\n");
     printf("    Ketik BUY pada posisi Headquarters untuk menampilkan gadget yang dapat dibeli lalu membelinya.\n    Setelah muncul daftar gadget, silahkan masukkan angka gadget yang hendak dibeli.\n");
 }
 
@@ -597,9 +603,11 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
     printf("Masukkan nama file penyimpanan: ");
     startWordConsole();
 
-    memset(&out_filename, '\0', sizeof(out_filename));
-    memcpy(out_filename, currentWord.contents, currentWord.length);
-    //printf("%s\n", out_filename);
+    for(int i = 0; i < currentWord.length; i++)
+        out_filename[i] = currentWord.contents[i];
+    for(int i = currentWord.length; i < FILENAME_MAX; i++)
+        out_filename[i] = '\0';
+    int lenBefore = currentWord.length;
 
     // If file of name out_filename existed, the content will be overwritten, else will make new file and fill it
     writeFile = fopen(out_filename, "w");
@@ -627,10 +635,11 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
             fprintf(writeFile, "%d %c %c %c %d\n", NTIME(INFO(p)), PICKUP(INFO(p)), DROPOFF(INFO(p)), ITEMTYPE(INFO(p)), PERISH(INFO(p)));
             p = NEXT(p);
         }
-        p = IDX_HEAD(orderedOrders);
+
         for(int i = 0; i < nOrder; i++){
-            fprintf(writeFile, "%d %c %c %c %d\n", NTIME(INFO(p)), PICKUP(INFO(p)), DROPOFF(INFO(p)), ITEMTYPE(INFO(p)), PERISH(INFO(p)));
-            p = NEXT(p);
+            pqEls tempPQ;
+            dequeue(&orderedOrders, &tempPQ);
+            fprintf(writeFile, "%d %c %c %c %d\n", NTIME(tempPQ), PICKUP(tempPQ), DROPOFF(tempPQ), ITEMTYPE(tempPQ), PERISH(tempPQ));
         }
 
         fprintf(writeFile, "%c\n", current_loc);
@@ -649,7 +658,10 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
 
         p = FIRST(inProgress);
         for(int i = 0; i < nInProgress; i++){
-            fprintf(writeFile, "%d %c %c %c %d\n", NTIME(INFO(p)), PICKUP(INFO(p)), DROPOFF(INFO(p)), ITEMTYPE(INFO(p)), PERISH(INFO(p)));
+            if(PERISH(INFO(p)) == -1)
+                fprintf(writeFile, "%d %c %c %c\n", NTIME(INFO(p)), PICKUP(INFO(p)), DROPOFF(INFO(p)), ITEMTYPE(INFO(p)));
+            else
+                fprintf(writeFile, "%d %c %c %c %d\n", NTIME(INFO(p)), PICKUP(INFO(p)), DROPOFF(INFO(p)), ITEMTYPE(INFO(p)), PERISH(INFO(p)));
             p = NEXT(p);
         }
 

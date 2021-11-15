@@ -1,5 +1,5 @@
 /*
-    File Name   : 
+    File Name   :
     Author      : K01_11
     Last Update : 28/10/2021
     Description : contains all the procedures and functions for to do list and in progress.
@@ -29,7 +29,7 @@ void printInProgress(List *li)
 // prints the in progress linked list
 // the list is a "stack" with the top of the stack as the first info from the linked list
 // insert new items with insertFirst()
-{   
+{
     Address p = *li;
     int i = 1;
     printf("Pesanan yang sedang diantarkan:\n");
@@ -95,6 +95,8 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
     Elements popped;
     int i = 0;
     boolean itemExists = false;
+    *efekHeavyItem = false;
+
     if (lengthLinkedList(*inProgress) < *bagCapacity){      // kalo kapasitas tas cukup
         if (!efekVIP){                                               // Bila tidak ada efek VIP
             while (p != NULL && (!itemExists)){
@@ -138,8 +140,8 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
                     i++;
                     p = NEXT(p);
                 }
-            }            
-        }   
+            }
+        }
 
 
         if (!itemExists){
@@ -171,7 +173,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
     }
 }
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, int* time_inc)
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, int* time_inc, boolean* speedBoost)
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
@@ -182,7 +184,7 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
         Elements temp;
         pop(bag, &popped);
         deleteLinkedListFirst(inProgress, &temp);
-        
+
         // set efek VIP ke false klo gk ada item VIP lagi di toDoList sama inProgress
         if (!hasVIP(toDoList) && !hasVIP(inProgress)) *efekVIP = false;
         if (!hasHeavyItem(inProgress)) *efekHeavyItem = false;
@@ -199,7 +201,7 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
             printf("Pesanan Heavy Item berhasil diantarkan.\n");
             printf("Uang yang didapatkan: 400 Yen.\n");
             *current_money = *current_money + 400;
-            /* apply speed boost */
+            speedBoost = true;
         }
         else if (popped.itemType == 'P') {
             printf("Pesanan Perishable Item berhasil diantarkan.\n");
@@ -234,7 +236,7 @@ boolean hasVIP(List *li)
 
 void increaseBagCapacity(int *bagCapacity, char type)
 // increases bag capacity (?)
-// type 'd' for double; type 'i' for increment 
+// type 'd' for double; type 'i' for increment
 {
     if (type == 'd'){
         *bagCapacity *= 2;
@@ -262,7 +264,7 @@ void removePerishable(Stack *bag, List *inProgress, int time)
             deleteLinkedListAt(inProgress, i, &popped);
             boolean found = false;
             ElType popThis;
-            popThis.dropOff = popped.dropOff; popThis.perish = popped.perish; 
+            popThis.dropOff = popped.dropOff; popThis.perish = popped.perish;
             popThis.itemType = popped.itemType; popThis.nTime = popped.nTime;
             popThis.pickUp = popped.pickUp;
             popEl(bag, popThis);

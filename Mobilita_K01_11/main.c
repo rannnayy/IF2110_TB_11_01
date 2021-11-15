@@ -63,19 +63,20 @@ int main()
     MAP Map;
     char current_loc;
     int current_money, current_time, current_bagcapacity;
-    int time_inc;
-    boolean efekVIP, efekHeavyItem;
+    int time_inc, boostCount;
+    boolean efekVIP, efekHeavyItem, speedBoost;
     Stack bag;
     PrioQueue orderedOrders;
     ListPos inventory;
     CreateListPos(&inventory);
     char command[20];
 
-    printf(" _|      _|    _|_|    _|_|_|    _|_|_|  _|        _|_|_|  _|_|_|_|_|    _|_|    \n");
-    printf(" _|_|  _|_|  _|    _|  _|    _|    _|    _|          _|        _|      _|    _|  \n");
-    printf(" _|  _|  _|  _|    _|  _|_|_|      _|    _|          _|        _|      _|_|_|_|  \n");
-    printf(" _|      _|  _|    _|  _|    _|    _|    _|          _|        _|      _|    _|  \n");
-    printf(" _|      _|    _|_|    _|_|_|    _|_|_|  _|_|_|_|  _|_|_|      _|      _|    _|  \n\n");
+    printf("\n");
+    printf("\t\t _|      _|    _|_|    _|_|_|    _|_|_|  _|        _|_|_|  _|_|_|_|_|    _|_|    \n");
+    printf("\t\t _|_|  _|_|  _|    _|  _|    _|    _|    _|          _|        _|      _|    _|  \n");
+    printf("\t\t _|  _|  _|  _|    _|  _|_|_|      _|    _|          _|        _|      _|_|_|_|  \n");
+    printf("\t\t _|      _|  _|    _|  _|    _|    _|    _|          _|        _|      _|    _|  \n");
+    printf("\t\t _|      _|    _|_|    _|_|_|    _|_|_|  _|_|_|_|  _|_|_|      _|      _|    _|  \n\n");
 
     LoadGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders,
               &orderedOrders, &current_loc, &current_time, &current_money, &current_bagcapacity,
@@ -87,6 +88,8 @@ int main()
     current_money = 0;
     current_bagcapacity = 3;
     time_inc = 1;
+    boostCount = 0;
+    speedBoost = false;
     efekVIP = false;
     current_loc = '8'; /* always start at headQuarter */
     /* use char instead of POINT to ease referencing */
@@ -103,6 +106,15 @@ int main()
         updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
         if (strcmp(command, "MOVE") == 0) {
             move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, &time_inc);
+            if(speedBoost && boostCount <= 10){
+                time_inc -= 1;
+                if(boostCount == 10){
+                    boostCount = 0;
+                    speedBoost = false;
+                }
+                else
+                    boostCount += 1;
+            }
         }
         else if (strcmp(command, "MAP") == 0) {
             displayColoredMap(Map, current_loc, adjMatrix, building, inProgress, toDoList);
@@ -116,15 +128,21 @@ int main()
         }
         else if (strcmp(command, "PICK_UP") == 0) {
             pickUp(&toDoList, &inProgress, &bag, &current_loc, &current_bagcapacity, efekVIP, &efekHeavyItem);
+            if(efekHeavyItem){
+                speedBoost = false;
+            }
         }
         else if (strcmp(command, "DROP_OFF") == 0) {
-            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc);
+            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc, &speedBoost);
         }
         else if (strcmp(command, "BUY") == 0) {
             buyGadget(&inventory, &current_money);
         }
         else if (strcmp(command, "INVENTORY") == 0) {
             displayInventory(&inventory);
+        }
+        else if (strcmp(command, "HELP") == 0) {
+            Help();
         }
         else {
             printf("COMMAND salah. Ketik 'HELP' untuk bantuan atau ketik ulang COMMAND.\n");
