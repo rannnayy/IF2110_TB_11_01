@@ -78,15 +78,18 @@ int main()
     printf("\t\t _|      _|  _|    _|  _|    _|    _|    _|          _|        _|      _|    _|  \n");
     printf("\t\t _|      _|    _|_|    _|_|_|    _|_|_|  _|_|_|_|  _|_|_|      _|      _|    _|  \n\n");
 
+    /*
     LoadGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders,
               &orderedOrders, &current_loc, &current_time, &current_money, &current_bagcapacity,
               &nToDoList, &toDoList, &nInProgress, &inProgress, &nInventory, &inventory);
+    */
+    StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
     /* start config */
     current_time = 0;
     current_money = 0;
-    current_bagcapacity = 3;
+    current_bagcapacity = 10;
     time_inc = 1;
     boostCount = 0;
     speedBoost = false;
@@ -102,8 +105,10 @@ int main()
     startWordConsole();
     memset(&command, '\0', sizeof(command));
     memcpy(command, currentWord.contents, currentWord.length);
+
     while (strcmp(command, "EXIT") != 0) {
         updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
+        //displayStack(bag);
         if (strcmp(command, "MOVE") == 0) {
             move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, &time_inc);
             if(speedBoost && boostCount <= 10){

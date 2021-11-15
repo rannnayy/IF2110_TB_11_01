@@ -103,7 +103,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
                 if (INFO(p).pickUp == *currentLoc){
                     deleteLinkedListAt(toDoList, i, &popped);
                     insertLinkedListFirst(inProgress, popped);
-                    ElType temp;
+                    stackEl temp;
                     temp.dropOff = popped.dropOff;
                     temp.itemType = popped.itemType;
                     temp.nTime = popped.nTime;
@@ -125,7 +125,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
                 if (INFO(p).pickUp == *currentLoc && INFO(p).itemType == 'V'){
                     deleteLinkedListAt(toDoList, i, &popped);
                     insertLinkedListFirst(inProgress, popped);
-                    ElType temp;
+                    stackEl temp;
                     temp.dropOff = popped.dropOff;
                     temp.itemType = popped.itemType;
                     temp.nTime = popped.nTime;
@@ -178,9 +178,12 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
 {
+    printf("Current Loc: %c\n", *currentLoc);
+    printf("Top: %c\n", TOP(*bag).dropOff);
+    displayStack(*bag);
     if(TOP(*bag).dropOff == *currentLoc){
         // pop dari inProgress sm bag
-        ElType popped;
+        stackEl popped;
         Elements temp;
         pop(bag, &popped);
         deleteLinkedListFirst(inProgress, &temp);
@@ -265,7 +268,7 @@ void removePerishable(Stack *bag, List *inProgress, int time)
         if(INFO(p).itemType = 'P' && INFO(p).perish + INFO(p).nTime <= time){
             deleteLinkedListAt(inProgress, i, &popped);
             boolean found = false;
-            ElType popThis;
+            stackEl popThis;
             popThis.dropOff = popped.dropOff; popThis.perish = popped.perish;
             popThis.itemType = popped.itemType; popThis.nTime = popped.nTime;
             popThis.pickUp = popped.pickUp;
@@ -298,11 +301,11 @@ void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbi
 // provides the effect "Return to Sender"
 // does not check if the user has the gadget necessary to use it.
 {
-    Elements temp; ElType popped;
+    Elements temp; stackEl popped;
     deleteLinkedListFirst(inProgress, &temp);
     if (temp.itemType != 'V' && *returnAbility > 0){ // fungsinya gbs di item VIP soalnya
         pop(bag, &popped);
-        
+
         insertLinkedListFirst(toDoList, temp);
         switch (temp.itemType){
             case 'N': printf("Normal"); break;

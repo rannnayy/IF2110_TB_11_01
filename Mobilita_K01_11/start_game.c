@@ -394,13 +394,13 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
     DigitsToInt(currentWordFile, &(*current_time));
     //printf("%d\n", *current_time);
 
-    *current_time = 0;
+    *current_money = 0;
     advWordFile();
     // Assign current_money (last current money)
     DigitsToInt(currentWordFile, &(*current_money));
     //printf("%d\n", *current_money);
 
-    *current_time = 0;
+    *current_bagcapacity = 0;
     advWordFile();
     // Assign current_bagcapacity (last current bag capacity)
     DigitsToInt(currentWordFile, &(*current_bagcapacity));

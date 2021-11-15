@@ -21,7 +21,7 @@ boolean isStackFull(Stack s){
 /* Mengirim true jika tabel penampung nilai s stack penuh */
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void push(Stack *s, ElType val){
+void push(Stack *s, stackEl val){
     IDX_TOP(*s)++;
     TOP(*s) = val;
 };
@@ -30,7 +30,7 @@ void push(Stack *s, ElType val){
 /* F.S. val menjadi TOP yang baru,IDX_TOP bertambah 1 */
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void pop(Stack *s, ElType *val){
+void pop(Stack *s, stackEl *val){
     *val = TOP(*s);
     IDX_TOP(*s)--;
 };
@@ -38,10 +38,10 @@ void pop(Stack *s, ElType *val){
 /* I.S. s tidak mungkin kosong */
 /* F.S. val adalah nilai elemen TOP yang lama, IDX_TOP berkurang 1 */
 
-void popEl(Stack *s, ElType val){
+void popEl(Stack *s, stackEl val){
     Stack temp;
     CreateStack(&temp);
-    ElType popped;
+    stackEl popped;
 
     while(!isStackEmpty(*s)){
         pop(s, &popped);
@@ -57,3 +57,13 @@ void popEl(Stack *s, ElType val){
 // Menghapus elemen val dalam stack
 // I.S. ada elemen val dalam stack
 // F.S. elemen val hilang
+
+void displayStack(Stack s)
+{
+    stackEl temp;
+    while(!isStackEmpty(s)){
+        pop(&s, &temp);
+        printf("%c,", temp.dropOff);
+    }
+    printf("\n");
+}
