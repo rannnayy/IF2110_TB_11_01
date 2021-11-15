@@ -530,6 +530,7 @@ MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building,
 
 void Help()
 {
+    printf("\n");
     printf(" /$$   /$$ /$$$$$$$$ /$$       /$$$$$$$\n");
     printf("| $$  | $$| $$_____/| $$      | $$__  $$\n");
     printf("| $$  | $$| $$      | $$      | $$  \\ $$\n");
@@ -539,7 +540,7 @@ void Help()
     printf("| $$  | $$| $$$$$$$$| $$$$$$$$| $$\n");
     printf("|__/  |__/|________/|________/|__/\n");
 
-    printf("COMMANDS\n");
+    printf("\nCOMMANDS\n\n");
     printf("1. New Game\n");
     printf("    Ketik NEW_GAME untuk memulai permainan baru.\n");
 
@@ -551,9 +552,6 @@ void Help()
 
     printf("4. Waktu\n");
     printf("    Ketik TIME untuk menunjukkan waktu permainan saat ini.\n");
-
-    printf("5. Daftar Pesanan\n");
-    printf("    Ketik ORDER untuk menunjukkan daftar pesanan.\n");
 
     printf("6. To Do List\n");
     printf("    Ketik TO_DO untuk menunjukkan To Do List.\n");
@@ -573,9 +571,6 @@ void Help()
     printf("11. Gadget\n");
     printf("    Ketik GADGET untuk menujukkan daftar gadget yang tersedia.\n");
 
-    printf("12. Gadget Aktif\n");
-    printf("    Ketik ACTIVE_GADGET untuk melihat gadget yang sedang aktif.\n");
-
     printf("13. Daftar Inventory\n");
     printf("    Ketik INVENTORY untuk menunjukkan daftar inventory yang tersedia.\n");
 
@@ -593,6 +588,8 @@ void Help()
 
     printf("18. Buy\n");
     printf("    Ketik BUY pada posisi Headquarters untuk menampilkan gadget yang dapat dibeli lalu membelinya.\n    Setelah muncul daftar gadget, silahkan masukkan angka gadget yang hendak dibeli.\n");
+
+    //TAMBAH RETURN TO SENDER
 }
 
 void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin building, Matrix adjMatrix, List orders,

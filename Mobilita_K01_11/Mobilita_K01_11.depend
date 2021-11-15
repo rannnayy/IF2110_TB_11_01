@@ -18,7 +18,7 @@
 	"boolean.h"
 	"charmachine.h"
 
-1636989432 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\main.c
+1636993496 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -103,31 +103,35 @@
 
 1636688676 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\pcolor.h
 
-1636989855 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\start_game.c
+1636993171 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\start_game.c
 	<stdio.h>
 	<stdlib.h>
 	"start_game.h"
 
-1636989855 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\start_game.c
+1636993171 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\start_game.c
 	<stdio.h>
 	<stdlib.h>
 	"start_game.h"
 
-1636988011 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\move.c
+1636993132 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\move.c
 	<stdio.h>
 	<stdlib.h>
 	"move.h"
 
-1636691087 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map.h
+1636993294 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map.h
 	"boolean.h"
 	"list_linked.h"
+	"pcolor.h"
+	"boolean.h"
+	"listdin.h"
+	"matrix.h"
 
-1636988811 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\orderitems.c
+1636993132 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\orderitems.c
 	<stdio.h>
 	<stdlib.h>
 	"orderItems.h"
 
-1636988041 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\orderitems.h
+1636993132 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\orderitems.h
 	"prioqueue.h"
 	"list_linked.h"
 	"stack.h"
@@ -148,12 +152,12 @@
 	"stack.h"
 	<stdio.h>
 
-1636988011 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\move.c
+1636993132 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\move.c
 	<stdio.h>
 	<stdlib.h>
 	"move.h"
 
-1636988811 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\orderitems.c
+1636993132 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\orderitems.c
 	<stdio.h>
 	<stdlib.h>
 	"orderItems.h"
@@ -197,13 +201,9 @@
 	<stdio.h>
 	<stdlib.h>
 
-1636689278 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map.c
+1636993295 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map.c
 	<stdio.h>
 	<stdlib.h>
-	"pcolor.h"
-	"boolean.h"
-	"listdin.h"
-	"matrix.h"
 	"map.h"
 
 1636018133 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\prioqueue.c
@@ -214,16 +214,12 @@
 	"stack.h"
 	<stdio.h>
 
-1636689278 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map.c
+1636993295 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map.c
 	<stdio.h>
 	<stdlib.h>
-	"pcolor.h"
-	"boolean.h"
-	"listdin.h"
-	"matrix.h"
 	"map.h"
 
-1636691207 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\start_game.h
+1636991320 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\start_game.h
 	<stdio.h>
 	<stdlib.h>
 	"wordmachine.h"
@@ -236,7 +232,7 @@
 	"orderItems.h"
 	"listpos.h"
 
-1636690527 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\move.h
+1636993132 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\move.h
 	<stdio.h>
 	<stdlib.h>
 	"pcolor.h"
@@ -258,15 +254,21 @@
 	"listpos.h"
 	<stdio.h>
 
-1636689278 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\gadget.c
+1636993344 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\gadget.c
 	<stdio.h>
 	"gadget.h"
+	"orderItems.h"
 
-1636689278 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\gadget.h
+1636993132 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\gadget.h
 	"listpos.h"
 	"boolean.h"
+	"map.h"
+	"matrix.h"
+	"listdin.h"
+	"point.h"
 
-1636689278 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\gadget.c
+1636993344 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\gadget.c
 	<stdio.h>
 	"gadget.h"
+	"orderItems.h"
 

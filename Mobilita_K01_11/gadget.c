@@ -32,7 +32,7 @@ void delGadget(ListPos *inventory, int idx) {
 void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time) {
 // memperlihatkan semua gadget yang ada di dalam inventory dan dapat menggunakannya
 // I.S. inventory terdefinisi
-// F.S. gadget yang ada di dalam inventory diperlihatkan 
+// F.S. gadget yang ada di dalam inventory diperlihatkan
     int option, gadget,idx;
     for (idx=0;idx<CAPACITY_LISTPOS;idx++) {
         printf("%d. ", idx+1);
@@ -177,7 +177,7 @@ void buyGadget(ListPos *inventory, int *current_money){
         }
     }
 }
-void useGadget(ListPos *inventory, int idx){
+void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time){
 // mmenggunakan gadget pada index idx inventory dan mendapatkan kemampuan spesial dari gadget yang digunakan
 // I.S. inventory dan gadget terdefinisi
 // F.S. gadget digunakan kemudian hangus atau di hapus dalam inventory.

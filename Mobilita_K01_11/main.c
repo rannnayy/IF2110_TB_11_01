@@ -117,7 +117,7 @@ int main()
         }
         //displayStack(bag);
         if (strcmp(command, "MOVE") == 0) {
-            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, &time_inc);
+            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress);
             if(speedBoost && boostCount <= 10){
                 time_inc -= 1;
                 if(boostCount == 10){

@@ -5,6 +5,10 @@
 
 #include "boolean.h"
 #include "list_linked.h"
+#include "pcolor.h"
+#include "boolean.h"
+#include "listdin.h"
+#include "matrix.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
 #define MAP_ROW_CAP 100

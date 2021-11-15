@@ -8,10 +8,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "pcolor.h"
-#include "boolean.h"
-#include "listdin.h"
-#include "matrix.h"
 #include "map.h"
 
 /* rowEff >= 1 dan colEff >= 1 */
