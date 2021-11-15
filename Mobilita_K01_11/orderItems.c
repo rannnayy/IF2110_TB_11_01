@@ -67,13 +67,13 @@ void printToDoList(List *li)
 void updateToDoList(List *toDoList, PrioQueue *orderedOrders, int time, boolean *efekVIP)
 // updates to do list based on the current time;
 {
-    while(HEAD(*orderedOrders).nTime <= time){      // kalo waktunya dibawah atau sama dengan waktu yg ditetapkan
+    while(NTIME(HEAD(*orderedOrders)) <= time && pqLength(*orderedOrders) > 0){      // kalo waktunya dibawah atau sama dengan waktu yg ditetapkan
         Elements temp;
-        temp.nTime = HEAD(*orderedOrders).nTime;
-        temp.dropOff = HEAD(*orderedOrders).dropOff;
-        temp.itemType = HEAD(*orderedOrders).itemType;
-        temp.pickUp = HEAD(*orderedOrders).pickUp;
-        temp.perish = HEAD(*orderedOrders).perish;
+        NTIME(temp) = NTIME(HEAD(*orderedOrders));
+        DROPOFF(temp) = DROPOFF(HEAD(*orderedOrders));
+        ITEMTYPE(temp) = ITEMTYPE(HEAD(*orderedOrders));
+        PICKUP(temp) = PICKUP(HEAD(*orderedOrders));
+        PERISH(temp) = PERISH(HEAD(*orderedOrders));
 
         // tambahin ke toDoList
         insertLinkedListLast(toDoList, temp);
