@@ -26,7 +26,7 @@
 #include "move.h"
 #include "listpos.h"
 #include "gadget.h"
-/*
+
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -43,7 +43,7 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
-*/
+
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
@@ -63,7 +63,7 @@ int main()
     MAP Map;
     char current_loc;
     int current_money, current_time, current_bagcapacity;
-    int time_inc, boostCount;
+    int time_inc, boostCount, returnAbility, kainPembungkusWaktuGadget;
     boolean efekVIP, efekHeavyItem, speedBoost;
     Stack bag;
     PrioQueue orderedOrders;
@@ -133,7 +133,7 @@ int main()
             }
         }
         else if (strcmp(command, "DROP_OFF") == 0) {
-            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc, &speedBoost);
+            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc, &speedBoost, &returnAbility);
         }
         else if (strcmp(command, "BUY") == 0) {
             buyGadget(&inventory, &current_money);

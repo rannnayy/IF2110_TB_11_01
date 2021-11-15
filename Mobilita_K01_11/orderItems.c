@@ -37,7 +37,7 @@ void printInProgress(List *li)
         printf("%d. ", i);
         if (INFO(p).itemType == 'N') printf("Normal  Item (Tujuan: %c)\n", INFO(p).dropOff);
         else if (INFO(p).itemType == 'H') printf("Heavy  Item (Tujuan: %c)\n", INFO(p).dropOff);
-        else if (INFO(p).itemType == 'P') printf("Perishable  Item (Tujuan: %c)\n", INFO(p).dropOff);
+        else if (INFO(p).itemType == 'P') printf("Perishable  Item (Tujuan: %c, Waktu tersisa: %d)\n", INFO(p).dropOff, INFO(p).perish);
         else if (INFO(p).itemType == 'V') printf("VIP  Item (Tujuan: %c)\n", INFO(p).dropOff);
         p = NEXT(p);
         i++;
@@ -173,7 +173,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
     }
 }
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, int* time_inc, boolean* speedBoost)
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, int* time_inc, boolean* speedBoost, int *returnAbility)
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
@@ -201,7 +201,7 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
             printf("Pesanan Heavy Item berhasil diantarkan.\n");
             printf("Uang yang didapatkan: 400 Yen.\n");
             *current_money = *current_money + 400;
-            speedBoost = true;
+            *speedBoost = true;
         }
         else if (popped.itemType == 'P') {
             printf("Pesanan Perishable Item berhasil diantarkan.\n");
@@ -212,8 +212,10 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
         else { /* popped.itemType == 'V' */
             printf("Pesanan VIP Item berhasil diantarkan.\n");
             printf("Uang yang didapatkan: 600 Yen.\n");
+            printf("Mendapatkan ability Return To Sender.\n");
             *current_money = *current_money + 600;
             /* apply return to sender */
+            *returnAbility++;
         }
     }
     else { /* current loc isn't drop-off location */
@@ -292,24 +294,52 @@ boolean hasHeavyItem(List *li)
     return does;
 }
 
-void returnToSender(List *toDoList, List *inProgress, Stack *bag)
+void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility)
 // provides the effect "Return to Sender"
 // does not check if the user has the gadget necessary to use it.
 {
     Elements temp; ElType popped;
-    deleteLinkedListLast(inProgress, &temp);
-    if (temp.itemType != 'V'){ // fungsinya gbs di item VIP soalnya
-        insertLinkedListLast(toDoList, temp);
+    deleteLinkedListFirst(inProgress, &temp);
+    if (temp.itemType != 'V' && *returnAbility > 0){ // fungsinya gbs di item VIP soalnya
         pop(bag, &popped);
+        
+        insertLinkedListFirst(toDoList, temp);
         switch (temp.itemType){
             case 'N': printf("Normal"); break;
             case 'H': printf("Heavy"); break;
             case 'P': printf("Perishable"); break;
         }
         printf(" item berhasil dikembalikan ke Pick Up Point %d\n", temp.pickUp);
+        *returnAbility =- 1;
     }
     else {
-        printf("Ability terbuang karena item VIP\n");
-        insertLinkedListLast(inProgress, temp);
+        printf("Ability tidak dipakai karena item VIP atau tidak punya ability Return To Sender\n");
+        insertLinkedListFirst(inProgress, temp);
+    }
+}
+
+void kainPembungkusWaktu(List *inProgress, Stack *bag, int *kainPembungkusWaktuGadget){
+    if (*kainPembungkusWaktuGadget > 0){
+        if(TOP(*bag).itemType = 'P'){
+            Elements temp;
+            deleteLinkedListFirst(inProgress, &temp);
+            temp.perish = TOP(*bag).perish;
+            insertLinkedListFirst(inProgress, temp);
+        }
+        printf("Kain Pembungkus Waktu berhasil digunakan!\n");
+        *kainPembungkusWaktuGadget--;
+    }
+    else{
+        printf("Gadget Kain Pembungkus Waktu tidak ada!\n");
+    }
+}
+
+void updatePerishable(List *inProgress){
+    Address p = FIRST(*inProgress);
+    while(NEXT(p) != NULL){
+        if (INFO(p).itemType == 'P'){
+            INFO(p).perish--;
+        }
+        p = NEXT(p);
     }
 }

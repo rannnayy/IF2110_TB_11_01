@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "start_game.h"
+// #include "pcolor.h"
 
 FILE* writeFile;
 
@@ -531,7 +532,7 @@ void Help()
 {
     printf(" /$$   /$$ /$$$$$$$$ /$$       /$$$$$$$\n");
     printf("| $$  | $$| $$_____/| $$      | $$__  $$\n");
-    printf("| $$  | $$| $$      | $$      | $$  \ $$\n");
+    printf("| $$  | $$| $$      | $$      | $$  \\ $$\n");
     printf("| $$$$$$$$| $$$$$   | $$      | $$$$$$$/\n");
     printf("| $$__  $$| $$__/   | $$      | $$____/\n");
     printf("| $$  | $$| $$      | $$      | $$\n");
@@ -641,6 +642,7 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
             dequeue(&orderedOrders, &tempPQ);
             fprintf(writeFile, "%d %c %c %c %d\n", NTIME(tempPQ), PICKUP(tempPQ), DROPOFF(tempPQ), ITEMTYPE(tempPQ), PERISH(tempPQ));
         }
+        // Baca array orderedOrders.buffer[IDX_HEAD] -- orderedOrders.buffer[IDX_TAIL]
 
         fprintf(writeFile, "%c\n", current_loc);
         fprintf(writeFile, "%d\n", current_time);
