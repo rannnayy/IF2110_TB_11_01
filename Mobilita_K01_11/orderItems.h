@@ -34,7 +34,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
 // I.S. bebas
 // F.S. item might be added to the inProgress list and to the bag stack
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavy, int* current_money, int* current_bagcapacity, int* time_inc, boolean* speedBoost);
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavy, int* current_money, int* current_bagcapacity, int* time_inc, boolean* speedBoost, int *returnAbility);
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
@@ -59,8 +59,23 @@ void removePerishable(Stack *bag, List *inProgress, int time);
 boolean hasHeavyItem(List *li);
 // checks if the list has a heavy item, returns true if true
 
-void returnToSender(List *toDoList, List *inProgress, Stack *bag);
+void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility);
 // provides the effect "Return to Sender"
 // does not check if the user has the gadget necessary to use it.
+// returnAbility is the amount of return to sender the player has
+// I.S. bebas
+// F.S. item teratas di tas akan dikembalikan apabila ada ability return to sender dan item bukan item VIP
+
+void updatePerishable(List *inProgress);
+// updates the perishable in the inProgress list by 1 (needs to be caled everytime MOVE is called)
+// karena yg diupdate cuman di in progress list, yg di bag info perish akan tetap, apabila perlu diset ulang pakai info dari bag.
+// I.S. bebas
+// F.S. semua item perishable dalam in progress list akan berkurang waktu perish sebesar 1
+
+void kainPembungkusWaktu(List *inProgress, Stack *bag, int *kainPembungkusWaktuGadget);
+// gadget kainPembungkusWaktu
+// memakai info dari bag, reset time perish
+// I.S. bebas
+// F.S. apabila gadget teratas tas merupakan perishable, reset timer perishable di in progress
 
 #endif
