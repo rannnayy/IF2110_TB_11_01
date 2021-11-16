@@ -199,8 +199,9 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
 }
 
 void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders,
-              PrioQueue* orderedOrders, char* current_loc, int* current_time, int* current_money, int* current_bagcapacity,
-              int* nToDoList, List* toDoList, int* nInProgress, List* inProgress, int* nInventory, ListPos* inventory)
+              int* nOrderedOrders, PrioQueue* orderedOrders, char* current_loc, int* current_time, int* current_money, int* current_bagcapacity,
+              int* nToDoList, List* toDoList, int* nInProgress, List* inProgress, int* nInventory, ListPos* inventory,
+              int* boostCount, boolean* speedBoost, Stack* bag, boolean* efekVIP, boolean* efekHeavyItem)
 /*  Memulai permainan dengan membaca nama file berisi konfigurasi permainan, lalu membaca N (jumlah baris), M (jumlah kolom),
     POINT headQuarter (koordinat dalam Map NxM), nLoc (jumlah lokasi), nLoc baris lokasi ListDin building(terdiri atas karakter
     bangunan dan POINT koordinat bangunan), nLoc+1 baris dan nLoc+1 kolom adjMatrix (Matrix Adjacency), nOrder (jumlah pesanan),
@@ -255,7 +256,7 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
     // Assign M (number of columns)
     DigitsToInt(currentWordFile, &(*M));
 
-    // printf("%d %d\n", *N, *M);
+    //printf("%d %d\n", *N, *M);
 
     int x, y;
     x = 0;
@@ -272,15 +273,15 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
     // Make POINT headQuarter
     *headQuarter = MakePOINT(x, y);
 
-    // TulisPOINT(*headQuarter);
-    // printf("\n");
+    //TulisPOINT(*headQuarter);
+    //printf("\n");
 
     *nLoc = 0;
     advWordFile();
     // Assign nLoc (number of locations)
     DigitsToInt(currentWordFile, &(*nLoc));
 
-    // printf("%d\n", *nLoc);
+    //printf("%d\n", *nLoc);
 
     int i;
     CreateListDin(&(*building), *nLoc);
@@ -301,8 +302,8 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
         ELMT_POINT(*building, i) = MakePOINT(x, y);
 
     }
-    // displayList(*building);
-    // printf("\n");
+    //displayList(*building);
+    //printf("\n");
 
     int j;
     // Store Adjacency Matrix
@@ -313,15 +314,15 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
             ELMT_MATRIX(*adjMatrix, i, j) = (int)(currentWordFile.contents[0] - 48);
         }
     }
-    // displayMatrix(*adjMatrix);
-    // printf("\n");
+    //displayMatrix(*adjMatrix);
+    //printf("\n");
 
     *nOrder = 0;
     advWordFile();
     // Assign nOrder (number of Orders)
     DigitsToInt(currentWordFile, &(*nOrder));
 
-    // printf("%d\n", *nOrder);
+    //printf("%d\n", *nOrder);
 
     CreateList(&(*orders));
     Elements ordEl;
@@ -345,19 +346,26 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
             PERISH(ordEl) = 0;
             DigitsToInt(currentWordFile, &PERISH(ordEl));
         }
-        else
+        else{
+            advWordFile();
             PERISH(ordEl) = -1;
+        }
 
         // Store Elements in Linked List
         insertLinkedListLast(&(*orders), ordEl);
     }
-    // displayLinkedList(*orders);
-    // printf("\n");
+    //displayLinkedList(*orders);
+    //printf("\n");
+
+    *nOrderedOrders = 0;
+    advWordFile();
+    // Assign nOrder (number of Orders)
+    DigitsToInt(currentWordFile, &(*nOrderedOrders));
 
     // sorts the orders
     CreatePrioQueue(orderedOrders);
     pqEls pqEl;
-    for(i = 0; i < (*nOrder); i++){
+    for(i = 0; i < (*nOrderedOrders); i++){
         advWordFile();
         NTIME(pqEl) = 0;
         DigitsToInt(currentWordFile, &NTIME(pqEl));
@@ -379,6 +387,7 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
         else
             PERISH(pqEl) = -1;
 
+        //printf("%d %c %c %c %d\n", NTIME(pqEl), PICKUP(pqEl), DROPOFF(pqEl), ITEMTYPE(pqEl), PERISH(pqEl));
         // Store Elements in Linked List
         enqueue(&(*orderedOrders), pqEl);
     }
@@ -432,8 +441,10 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
             PERISH(tdlEl) = 0;
             DigitsToInt(currentWordFile, &PERISH(tdlEl));
         }
-        else
+        else{
+            advWordFile();
             PERISH(tdlEl) = -1;
+        }
 
         // Store Elements in Linked List
         insertLinkedListLast(&(*toDoList), tdlEl);
@@ -467,8 +478,10 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
             PERISH(ipEl) = 0;
             DigitsToInt(currentWordFile, &PERISH(ipEl));
         }
-        else
+        else{
+            advWordFile();
             PERISH(ipEl) = -1;
+        }
 
         // Store Elements in Linked List
         insertLinkedListLast(&(*inProgress), ipEl);
@@ -491,6 +504,84 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
     }
     //displayList_ListPos(*inventory);
     //printf("\n");
+
+    *boostCount = 0;
+    advWordFile();
+    DigitsToInt(currentWordFile, &(*boostCount));
+    //printf("boostCount : %d\n", *boostCount);
+
+    temp = 0;
+    advWordFile();
+    DigitsToInt(currentWordFile, &temp);
+    if(temp == 0){
+        *speedBoost = false;
+    }
+    else{
+        *speedBoost = true;
+    }
+    //printf("%d\n", *speedBoost);
+
+    // STACK BAG (number of elements in stack bag always same as inProgress)
+    Stack tempBag;
+    CreateStack(&tempBag);
+    CreateStack(&(*bag));
+    stackEl stEl;
+    for(i = 0; i < (*nInProgress); i++){
+        advWordFile();
+        NTIME(stEl) = 0;
+        DigitsToInt(currentWordFile, &NTIME(stEl));
+
+        advWordFile();
+        PICKUP(stEl) = (char)currentWordFile.contents[0];
+
+        advWordFile();
+        DROPOFF(stEl) = (char)currentWordFile.contents[0];
+
+        advWordFile();
+        ITEMTYPE(stEl) = (char)currentWordFile.contents[0];
+
+        if (ITEMTYPE(stEl) == 'P'){
+            advWordFile();
+            PERISH(stEl) = 0;
+            DigitsToInt(currentWordFile, &PERISH(ipEl));
+        }
+        else{
+            advWordFile();
+            PERISH(stEl) = -1;
+        }
+
+        // Store Elements in Stack
+        push(&tempBag, stEl);
+    }
+    // reverse order of stack
+    for(i = 0; i < (*nInProgress); i++){
+        pop(&tempBag, &stEl);
+        push(&(*bag), stEl);
+    }
+    // displayStack(*bag);
+    // printf("\n");
+
+    temp = 0;
+    advWordFile();
+    DigitsToInt(currentWordFile, &temp);
+    if(temp == 0){
+        *efekVIP = false;
+    }
+    else{
+        *efekVIP = true;
+    }
+    // printf("%d\n", *efekVIP);
+
+    temp = 0;
+    advWordFile();
+    DigitsToInt(currentWordFile, &temp);
+    if(temp == 0){
+        *efekHeavyItem = false;
+    }
+    else{
+        *efekHeavyItem = true;
+    }
+    // printf("%d\n", *efekHeavyItem);
 }
 
 MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix)
@@ -571,30 +662,31 @@ void Help()
     printf("11. Gadget\n");
     printf("    Ketik GADGET untuk menujukkan daftar gadget yang tersedia.\n");
 
-    printf("13. Daftar Inventory\n");
+    printf("12. Daftar Inventory\n");
     printf("    Ketik INVENTORY untuk menunjukkan daftar inventory yang tersedia.\n");
 
-    printf("14. Map\n");
+    printf("13. Map\n");
     printf("    Ketik MAP untuk menunjukkan peta permainan saat ini.\n");
 
-    printf("15. Move\n");
+    printf("14. Move\n");
     printf("    Ketik MOVE untuk menunjukkan lokasi-lokasi yang dapat disinggahi.\n    Lalu, silahkan memilih angka yang hendak dituju.\n");
 
-    printf("16. Pick Up\n");
+    printf("15. Pick Up\n");
     printf("    Ketik PICK_UP untuk mengambil item jika ada pesanan yang harus diambil pada lokasi.\n");
 
-    printf("17. Drop Off\n");
+    printf("16. Drop Off\n");
     printf("    Ketik DROP_OFF untuk mengantarkan item ke lokasi jika item di tumpukan teratas tas sesuai dengan pesanan\n");
 
-    printf("18. Buy\n");
+    printf("17. Buy\n");
     printf("    Ketik BUY pada posisi Headquarters untuk menampilkan gadget yang dapat dibeli lalu membelinya.\n    Setelah muncul daftar gadget, silahkan masukkan angka gadget yang hendak dibeli.\n");
 
     //TAMBAH RETURN TO SENDER
 }
 
 void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin building, Matrix adjMatrix, List orders,
-              PrioQueue orderedOrders, char current_loc, int current_time, int current_money, int current_bagcapacity,
-              int nToDoList, List toDoList, int nInProgress, List inProgress, int nInventory, ListPos inventory)
+              int nOrderedOrders, PrioQueue orderedOrders, char current_loc, int current_time, int current_money, int current_bagcapacity,
+              int nToDoList, List toDoList, int nInProgress, List inProgress, int nInventory, ListPos inventory,
+              int boostCount, boolean speedBoost, Stack bag, boolean efekVIP, boolean efekHeavyItem)
 {
     char out_filename[FILENAME_MAX];
 
@@ -605,7 +697,6 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
         out_filename[i] = currentWord.contents[i];
     for(int i = currentWord.length; i < FILENAME_MAX; i++)
         out_filename[i] = '\0';
-    int lenBefore = currentWord.length;
 
     // If file of name out_filename existed, the content will be overwritten, else will make new file and fill it
     writeFile = fopen(out_filename, "w");
@@ -615,8 +706,12 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
         fprintf(writeFile, "%d %d\n", N, M);
         fprintf(writeFile, "%d %d\n", Absis(headQuarter), Ordinat(headQuarter));
         fprintf(writeFile, "%d\n", nLoc);
-        for(int i = 0; i < nLoc; i++)
-            fprintf(writeFile, "%c %d %d\n", ELMT_CHAR(building, i), Absis(ELMT_POINT(building, i)), Ordinat(ELMT_POINT(building, i)));
+        if(!isEmpty(building)){
+            for(int i = 0; i < nLoc; i++){
+                fprintf(writeFile, "%c %d %d\n", ELMT_CHAR(building, i), Absis(ELMT_POINT(building, i)), Ordinat(ELMT_POINT(building, i)));
+            }
+        }
+
         for(int i = 0; i < nLoc+1; i++){
             for(int j = 0; j < nLoc+1; j++){
                 fprintf(writeFile, "%d", ELMT_MATRIX(adjMatrix, i, j));
@@ -633,8 +728,10 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
             p = NEXT(p);
         }
 
-        for(int i = 0; i < nOrder; i++){
-            pqEls tempPQ;
+        fprintf(writeFile, "%d\n", nOrderedOrders);
+
+        pqEls tempPQ;
+        for(int i = 0; i < nOrderedOrders; i++){
             dequeue(&orderedOrders, &tempPQ);
             fprintf(writeFile, "%d %c %c %c %d\n", NTIME(tempPQ), PICKUP(tempPQ), DROPOFF(tempPQ), ITEMTYPE(tempPQ), PERISH(tempPQ));
         }
@@ -656,19 +753,26 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
 
         p = FIRST(inProgress);
         for(int i = 0; i < nInProgress; i++){
-            if(PERISH(INFO(p)) == -1)
-                fprintf(writeFile, "%d %c %c %c\n", NTIME(INFO(p)), PICKUP(INFO(p)), DROPOFF(INFO(p)), ITEMTYPE(INFO(p)));
-            else
-                fprintf(writeFile, "%d %c %c %c %d\n", NTIME(INFO(p)), PICKUP(INFO(p)), DROPOFF(INFO(p)), ITEMTYPE(INFO(p)), PERISH(INFO(p)));
+            fprintf(writeFile, "%d %c %c %c %d\n", NTIME(INFO(p)), PICKUP(INFO(p)), DROPOFF(INFO(p)), ITEMTYPE(INFO(p)), PERISH(INFO(p)));
             p = NEXT(p);
         }
 
         fprintf(writeFile, "%d\n", nInventory);
         for(int i = 0; i < nInventory; i++){
-            fprintf(writeFile, "%d", ELMT_LISTPOS(inventory, i));
-            if(i < nInventory-1)
-                fprintf(writeFile, "\n");
+            fprintf(writeFile, "%d\n", ELMT_LISTPOS(inventory, i));
         }
+
+        fprintf(writeFile, "%d\n", boostCount);
+        fprintf(writeFile, "%d\n", speedBoost);
+
+        stackEl stEl;
+        for(int i = 0; i < (nInProgress); i++){
+            pop(&bag, &stEl);
+            fprintf(writeFile, "%d %c %c %c %d\n", NTIME(stEl), PICKUP(stEl), DROPOFF(stEl), ITEMTYPE(stEl), PERISH(stEl));
+        }
+
+        fprintf(writeFile, "%d\n", efekVIP);
+        fprintf(writeFile, "%d", efekHeavyItem);
 
         fclose(writeFile);
     }

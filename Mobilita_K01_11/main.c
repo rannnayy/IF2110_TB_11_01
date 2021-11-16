@@ -54,7 +54,7 @@
 // MAIN FUNCTION
 int main()
 {
-    int N, M, nLoc, nOrder, nToDoList, nInProgress, nInventory;
+    int N, M, nLoc, nOrder, nOrderedOrders, nToDoList, nInProgress, nInventory;
     /* int  bagCapacity = 3; ganti jadi current_bagcapacity */
     POINT headQuarter;
     ListDin building;
@@ -74,6 +74,12 @@ int main()
     char command[20];
     boolean gameOn;
 
+    /*Inisialisasi nilai variabel game in general*/
+    gameOn = true;
+    boostCount = 0;
+    speedBoost = false;
+    efekVIP = false;
+
     printf("\n");
     printf("\t\t _|      _|    _|_|    _|_|_|    _|_|_|  _|        _|_|_|  _|_|_|_|_|    _|_|    \n");
     printf("\t\t _|_|  _|_|  _|    _|  _|    _|    _|    _|          _|        _|      _|    _|  \n");
@@ -85,11 +91,15 @@ int main()
     printf("NEW_GAME, LOAD_GAME, dan EXIT \n\n");
     printf("\nENTER COMMAND: ");
     startWordConsole();
-    memset(&command, '\0', sizeof(command));
-    memcpy(command, currentWord.contents, currentWord.length);
+    for(int i = 0; i < currentWord.length; i++)
+        command[i] = currentWord.contents[i];
+    for(int i = currentWord.length; i < FILENAME_MAX; i++)
+        command[i] = '\0';
+    int lenBefore = currentWord.length;
 
     if (isWordEqual("NEW_GAME")){
         StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
+        nOrderedOrders = nOrder;
         /* start config */
         returnAbility = 1; //mau ngecek return
         current_time = 0;
@@ -99,9 +109,10 @@ int main()
         /* use char instead of POINT to ease referencing */
     }
     else if (isWordEqual("LOAD_GAME")){
-        LoadGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders,
+        LoadGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &nOrderedOrders,
                 &orderedOrders, &current_loc, &current_time, &current_money, &current_bagcapacity,
-                &nToDoList, &toDoList, &nInProgress, &inProgress, &nInventory, &inventory);
+                &nToDoList, &toDoList, &nInProgress, &inProgress, &nInventory, &inventory,
+                &boostCount, &speedBoost, &bag, &efekVIP, &efekHeavyItem);
     }
     else if (isWordEqual("EXIT")){
         return 0;
@@ -111,19 +122,22 @@ int main()
     }
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
-    /*Inisiasi game in general*/
-    gameOn = true;
-    boostCount = 0;
-    speedBoost = false;
-    efekVIP = false;
     /* cek identitas Mobita */
     printf("\nWaktu: %d\n", current_time);
 
     /* attempt of making insert command, use strcmp for now */
     printf("\nENTER COMMAND: ");
     startWordConsole();
-    memset(&command, '\0', sizeof(command));
-    memcpy(command, currentWord.contents, currentWord.length);
+    if(lenBefore > currentWord.length)
+        for(int i = 0; i < lenBefore; i++)
+            if(i < currentWord.length)
+                command[i] = currentWord.contents[i];
+            else
+                command[i] = '\0';
+    else
+        for(int i = 0; i < currentWord.length; i++)
+            command[i] = currentWord.contents[i];
+    lenBefore = currentWord.length;
 
     while (!isWordEqual("EXIT")) {
         updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
@@ -206,17 +220,39 @@ int main()
 
         printf("\nENTER COMMAND: ");
         startWordConsole();
-        memset(&command, '\0', sizeof(command));
-        memcpy(command, currentWord.contents, currentWord.length);
+        if(lenBefore > currentWord.length)
+            for(int i = 0; i < lenBefore; i++)
+                if(i < currentWord.length)
+                    command[i] = currentWord.contents[i];
+                else
+                    command[i] = '\0';
+        else
+            for(int i = 0; i < currentWord.length; i++)
+                command[i] = currentWord.contents[i];
+        lenBefore = currentWord.length;
     }
 
     printf("\nApakah game ingin disave (Y atau N)?");
     startWordConsole();
-    memset(&command, '\0', sizeof(command));
-    memcpy(command, currentWord.contents, currentWord.length);
+    if(lenBefore > currentWord.length)
+        for(int i = 0; i < lenBefore; i++)
+            if(i < currentWord.length)
+                command[i] = currentWord.contents[i];
+            else
+                command[i] = '\0';
+    else
+        for(int i = 0; i < currentWord.length; i++)
+            command[i] = currentWord.contents[i];
+    lenBefore = currentWord.length;
     if (isWordEqual("Y")){
-        SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, orderedOrders, current_loc, current_time, current_money,
-                current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory);
+        nOrder = lengthLinkedList(orders);
+        nOrderedOrders = pqLength(orderedOrders);
+        nToDoList = lengthLinkedList(toDoList);
+        nInProgress = lengthLinkedList(inProgress);
+        nInventory = length_ListPos(inventory);
+        SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, nOrderedOrders, orderedOrders, current_loc, current_time, current_money,
+                current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory,
+                boostCount, speedBoost, bag, efekVIP, efekHeavyItem);
     } else {
         printf("\nTerima kasih telah bermain ^_^)b\n");
     }

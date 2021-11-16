@@ -28,6 +28,12 @@ typedef struct {
 #define IDX_TOP(s) (s).idxTop
 #define     TOP(s) (s).buffer[(s).idxTop]
 
+#define NTIME(e) (e).nTime
+#define PICKUP(e) (e).pickUp
+#define DROPOFF(e) (e).dropOff
+#define ITEMTYPE(e) (e).itemType
+#define PERISH(e) (e).perish
+
 /* *** Konstruktor/Kreator *** */
 void CreateStack(Stack *s);
 /* I.S. sembarang; */
