@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+/*
 #include "wordmachine.h"
 #include "point.h"
 #include "listdin.h"
@@ -26,7 +26,7 @@
 #include "move.h"
 #include "listpos.h"
 #include "gadget.h"
-/*
+*/
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -43,7 +43,7 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
-*/
+
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
@@ -165,7 +165,7 @@ int main()
             dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc, &speedBoost, &boostCount, &returnAbility);
         }
         else if (isWordEqual("BUY")) {
-            if (current_loc='8') {
+            if (current_loc =='8') {
                 buyGadget(&inventory, &current_money);
             }
             else {
@@ -173,7 +173,7 @@ int main()
             }
         }
         else if (isWordEqual("INVENTORY")) {
-            displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, &inProgress, &bag, &current_time, &efekHeavyItem);
+            displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, &inProgress, &bag, &current_time, &efekHeavyItem, &speedBoost, &boostCount);
         }
         else if (isWordEqual("BAG")){
             displayStack(bag);
