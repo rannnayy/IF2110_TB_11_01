@@ -63,7 +63,7 @@ int main()
     MAP Map;
     char current_loc;
     int current_money, current_time, current_bagcapacity;
-    int time_inc, boostCount, returnAbility, kainPembungkusWaktuGadget;
+    int time_inc, boostCount, returnAbility;
     boolean efekVIP, efekHeavyItem, speedBoost;
     Stack bag;
     CreateStack(&bag);
@@ -89,6 +89,7 @@ int main()
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
     /* start config */
+    returnAbility = 0; 
     current_time = 0;
     current_money = 0;
     current_bagcapacity = 10;
@@ -112,12 +113,17 @@ int main()
     while (!isWordEqual("EXIT")) {
         updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
         gameOn = endGame(current_loc, current_money, toDoList, inProgress, bag);
+        
+        // buat tes gadget
+        // current_money += 1000;
+
         if (!gameOn){
             printf("Selamat anda telah menyelesaikan permainan mobita dalam %d satuan waktu\n\n!", current_time);
             break;
         }
-        // displayStack(bag);
+        //displayStack(bag);
         if (isWordEqual("MOVE")) {
+            int deltaTime = current_time;
             move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress, false);
             if(speedBoost && boostCount <= 10){
                 time_inc -= 1;
@@ -128,6 +134,9 @@ int main()
                 else
                     boostCount += 1;
             }
+            deltaTime = current_time - deltaTime;
+            updatePerishable(&inProgress, deltaTime);
+            removePerishable(&bag, &inProgress);
         }
         else if (isWordEqual("MAP")) {
             displayColoredMap(Map, current_loc, adjMatrix, building, inProgress, toDoList);
@@ -152,7 +161,7 @@ int main()
             buyGadget(&inventory, &current_money);
         }
         else if (isWordEqual("INVENTORY")) {
-            displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, inProgress, &current_time);
+            displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, &inProgress, &bag, &current_time);
         }
         else if (isWordEqual("BAG")){
             displayStack(bag);
@@ -172,6 +181,9 @@ int main()
         }
         else if (isWordEqual("HELP")) {
             Help();
+        }
+        else if(strcmp(command, "RETURN") == 0){
+            returnToSender(&toDoList, &inProgress, &bag, &returnAbility);
         }
         else {
             printf("COMMAND salah. Ketik 'HELP' untuk bantuan atau ketik ulang COMMAND.\n");

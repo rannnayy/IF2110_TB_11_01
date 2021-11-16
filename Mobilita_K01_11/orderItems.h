@@ -48,37 +48,24 @@ void increaseBagCapacity(int *bagCapacity, char type);
 // I.S. kapasitas bag ada
 // F.S. kapasitas bag ditambahkan (dengan cara ditentukan)
 
-void removePerishable(Stack *bag, List *inProgress, int time);
+void removePerishable(Stack *bag, List *inProgress);
 // checks if the inProgress has a perishable item
 //      if so, check if the time limit has exceeded
 //          if so, remove it.
 // check for all perishables.
 // I.S mungkin punya perishable
-// F.S. perishable dgn waktu perish <= waktu skrg, bakal dihilangkan.
+// F.S. perishable dgn waktu perish == 0, bakal dihilangkan.
 
 boolean hasHeavyItem(List *li);
 // checks if the list has a heavy item, returns true if true
 
 int countHeavyItem(List li);
 
-void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility);
-// provides the effect "Return to Sender"
-// does not check if the user has the gadget necessary to use it.
-// returnAbility is the amount of return to sender the player has
-// I.S. bebas
-// F.S. item teratas di tas akan dikembalikan apabila ada ability return to sender dan item bukan item VIP
-
-void updatePerishable(List *inProgress);
-// updates the perishable in the inProgress list by 1 (needs to be caled everytime MOVE is called)
+void updatePerishable(List *inProgress, int deltaTime);
+// updates the perishable in the inProgress list by deltaTime (needs to be caled everytime MOVE is called)
 // karena yg diupdate cuman di in progress list, yg di bag info perish akan tetap, apabila perlu diset ulang pakai info dari bag.
 // I.S. bebas
 // F.S. semua item perishable dalam in progress list akan berkurang waktu perish sebesar 1
-
-void kainPembungkusWaktu(List *inProgress, Stack *bag, int *kainPembungkusWaktuGadget);
-// gadget kainPembungkusWaktu
-// memakai info dari bag, reset time perish
-// I.S. bebas
-// F.S. apabila gadget teratas tas merupakan perishable, reset timer perishable di in progress
 
 void itemInfo();
 #endif

@@ -218,7 +218,7 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
             printf("Mendapatkan ability Return To Sender.\n");
             *current_money = *current_money + 600;
             /* apply return to sender */
-            *returnAbility++;
+            *returnAbility = *returnAbility + 1;
         }
     }
     else { /* current loc isn't drop-off location */
@@ -233,7 +233,7 @@ boolean hasVIP(List *li)
     Address p = *li;
     boolean does = false;
     while(p != NULL && (!does)){
-        if(INFO(p).itemType = 'V') does = true;
+        if(INFO(p).itemType == 'V') does = true;
         p = NEXT(p);
     }
     return does;
@@ -257,18 +257,18 @@ void increaseBagCapacity(int *bagCapacity, char type)
     if (*bagCapacity == 100) printf("Kapasitas tas sudah maksimum!\n");
 }
 
-void removePerishable(Stack *bag, List *inProgress, int time)
+void removePerishable(Stack *bag, List *inProgress)
 // checks if the inProgress has a perishable item
 //      if so, check if the time limit has exceeded
 //          if so, remove it.
 // check for all perishables.
 {
-    Address p = *inProgress;
+    Address p = FIRST(*inProgress);
     int i = 0;
     Elements popped;
     Elements temp;
     while(p != NULL){
-        if(INFO(p).itemType = 'P' && INFO(p).perish + INFO(p).nTime <= time){
+        if(INFO(p).itemType == 'P' && INFO(p).perish < 1){
             deleteLinkedListAt(inProgress, i, &popped);
             boolean found = false;
             stackEl popThis;
@@ -276,13 +276,12 @@ void removePerishable(Stack *bag, List *inProgress, int time)
             popThis.itemType = popped.itemType; popThis.nTime = popped.nTime;
             popThis.pickUp = popped.pickUp;
             popEl(bag, popThis);
-            printf("Ada perishable item yang sudah melewati time limitnya!\n");
+            printf("\nAda perishable item yang sudah melewati time limitnya!\n");
         }
         else{
             i++;
-            p = NEXT(p);
         }
-
+        p = NEXT(p);
     }
 
 };
@@ -317,51 +316,11 @@ int countHeavyItem(List li) {
     return count;
 }
 
-void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility)
-// provides the effect "Return to Sender"
-// does not check if the user has the gadget necessary to use it.
-{
-    Elements temp; stackEl popped;
-    deleteLinkedListFirst(inProgress, &temp);
-    if (temp.itemType != 'V' && *returnAbility > 0){ // fungsinya gbs di item VIP soalnya
-        pop(bag, &popped);
-
-        insertLinkedListFirst(toDoList, temp);
-        switch (temp.itemType){
-            case 'N': printf("Normal"); break;
-            case 'H': printf("Heavy"); break;
-            case 'P': printf("Perishable"); break;
-        }
-        printf(" item berhasil dikembalikan ke Pick Up Point %d\n", temp.pickUp);
-        *returnAbility =- 1;
-    }
-    else {
-        printf("Ability tidak dipakai karena item VIP atau tidak punya ability Return To Sender\n");
-        insertLinkedListFirst(inProgress, temp);
-    }
-}
-
-void kainPembungkusWaktu(List *inProgress, Stack *bag, int *kainPembungkusWaktuGadget){
-    if (*kainPembungkusWaktuGadget > 0){
-        if(TOP(*bag).itemType = 'P'){
-            Elements temp;
-            deleteLinkedListFirst(inProgress, &temp);
-            temp.perish = TOP(*bag).perish;
-            insertLinkedListFirst(inProgress, temp);
-        }
-        printf("Kain Pembungkus Waktu berhasil digunakan!\n");
-        *kainPembungkusWaktuGadget--;
-    }
-    else{
-        printf("Gadget Kain Pembungkus Waktu tidak ada!\n");
-    }
-}
-
-void updatePerishable(List *inProgress){
+void updatePerishable(List *inProgress, int deltaTime){
     Address p = FIRST(*inProgress);
-    while(NEXT(p) != NULL){
+    while(p != NULL){
         if (INFO(p).itemType == 'P'){
-            INFO(p).perish--;
+            INFO(p).perish -= deltaTime;
         }
         p = NEXT(p);
     }

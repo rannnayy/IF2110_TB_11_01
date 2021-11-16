@@ -21,7 +21,7 @@ void delGadget(ListPos *inventory, int idx);
 // I.S. inventory dan gadget terdefinisi
 // F.S. gadget dihapus dari inventory
 
-void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List inProgress, int* current_time);
+void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time);
 // memperlihatkan semua gadget yang ada di dalam inventory
 // I.S. inventory terdefinisi
 // F.S. gadget yang ada di dalam inventory diperlihatkan
@@ -31,7 +31,7 @@ void buyGadget(ListPos *inventory, int *current_money);
 // I.S. inventory dan gadget terdefinisi
 // F.S. lsit gadget diperlihatkan dan gadget dibeli atau tidak jadi dibeli
 
-void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List inProgress, int* current_time);
+void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time);
 // mmenggunakan gadget dan mendapatkan kemampuan spesial dari gadget
 // I.S. gadget terdefinisi
 // F.S. gadget digunakan kemudian hangus atau di hapus dalam inventory.
@@ -39,4 +39,18 @@ void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_
 void gadgetInfo();
 /* I.S. Sembarang */
 /* F.S. Output berupa info dari gadget */
+
+void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility);
+// provides the effect "Return to Sender"
+// does not check if the user has the gadget necessary to use it.
+// returnAbility is the amount of return to sender the player has
+// I.S. bebas
+// F.S. item teratas di tas akan dikembalikan apabila ada ability return to sender dan item bukan item VIP
+
+void kainPembungkusWaktu(List *inProgress, Stack *bag);
+// gadget kainPembungkusWaktu
+// memakai info dari bag, reset time perish
+// I.S. bebas
+// F.S. apabila gadget teratas tas merupakan perishable, reset timer perishable di in progress
+
 #endif
