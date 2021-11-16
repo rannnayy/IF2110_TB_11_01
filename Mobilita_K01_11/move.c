@@ -11,7 +11,7 @@
 
 #include "move.h"
 
-void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress) {
+void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean teleport) {
     /* KAMUS LOKAL */
     int countAccessible, i, newLoc;
     ListDin accessibleBuilding;
@@ -67,7 +67,12 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
         TulisPOINT(ELMT_POINT(accessibleBuilding, newLoc-1));
         printf("!\n");
 
-        /* tambahkan waktu dengan 1 */
-        *current_time = *current_time + 1 + countHeavyItem(inProgress);
+        /* tambahkan waktu */
+        if (teleport) {
+            *current_time = *current_time;
+        }
+        else {
+            *current_time = *current_time + 1 + countHeavyItem(inProgress);
+        }
     }
 }

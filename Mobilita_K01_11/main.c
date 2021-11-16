@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+/*
 #include "wordmachine.h"
 #include "point.h"
 #include "listdin.h"
@@ -26,7 +26,7 @@
 #include "move.h"
 #include "listpos.h"
 #include "gadget.h"
-/*
+*/
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -43,7 +43,7 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
-*/
+
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
@@ -117,7 +117,7 @@ int main()
         }
         //displayStack(bag);
         if (strcmp(command, "MOVE") == 0) {
-            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress);
+            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress, false);
             if(speedBoost && boostCount <= 10){
                 time_inc -= 1;
                 if(boostCount == 10){
@@ -151,7 +151,7 @@ int main()
             buyGadget(&inventory, &current_money);
         }
         else if (strcmp(command, "INVENTORY") == 0) {
-            displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, &current_time);
+            displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, inProgress, &current_time);
         }
         else if (strcmp(command, "HELP") == 0) {
             Help();
