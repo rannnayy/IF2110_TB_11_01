@@ -80,27 +80,42 @@ int main()
     printf("\t\t _|      _|  _|    _|  _|    _|    _|    _|          _|        _|      _|    _|  \n");
     printf("\t\t _|      _|    _|_|    _|_|_|    _|_|_|  _|_|_|_|  _|_|_|      _|      _|    _|  \n\n");
 
-    /*
-    LoadGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders,
-              &orderedOrders, &current_loc, &current_time, &current_money, &current_bagcapacity,
-              &nToDoList, &toDoList, &nInProgress, &inProgress, &nInventory, &inventory);
-    */
-    StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
+    printf("COMMAND yang tersedia: \n");
+    printf("NEW_GAME, LOAD_GAME, dan EXIT \n\n");
+    printf("\nENTER COMMAND: ");
+    startWordConsole();
+    memset(&command, '\0', sizeof(command));
+    memcpy(command, currentWord.contents, currentWord.length);
+
+    if (isWordEqual("NEW_GAME")){
+        StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
+        /* start config */
+        returnAbility = 1; //mau ngecek return
+        current_time = 0;
+        current_money = 0;
+        current_bagcapacity = 10;
+        current_loc = '8'; /* always start at headQuarter */
+        /* use char instead of POINT to ease referencing */
+    }
+    else if (isWordEqual("LOAD_GAME")){
+        LoadGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders,
+                &orderedOrders, &current_loc, &current_time, &current_money, &current_bagcapacity,
+                &nToDoList, &toDoList, &nInProgress, &inProgress, &nInventory, &inventory);
+    }
+    else if (isWordEqual("EXIT")){
+        return 0;
+    }
+    else {
+        printf("Command Tidak VALID!\n");
+    }
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
-    /* start config */
-    returnAbility = 1; //mau ngecek return
-    current_time = 0;
-    current_money = 0;
-    current_bagcapacity = 10;
+    /*Inisiasi game in general*/
+    gameOn = true;
     time_inc = 1;
     boostCount = 0;
     speedBoost = false;
     efekVIP = false;
-    current_loc = '8'; /* always start at headQuarter */
-    /* use char instead of POINT to ease referencing */
-    gameOn = true;
-
     /* cek identitas Mobita */
     printf("\nWaktu: %d\n", current_time);
 
@@ -187,7 +202,7 @@ int main()
         else if (isWordEqual("HELP")) {
             Help();
         }
-        else if(strcmp(command, "RETURN") == 0){
+        else if(isWordEqual("RETURN")){
             returnToSender(&toDoList, &inProgress, &bag, &returnAbility);
         }
         else {
@@ -202,8 +217,17 @@ int main()
         memset(&command, '\0', sizeof(command));
         memcpy(command, currentWord.contents, currentWord.length);
     }
-    SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, orderedOrders, current_loc, current_time, current_money,
-             current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory);
+    
+    printf("\nApakah game ingin disave (Y atau N)?");
+    startWordConsole();
+    memset(&command, '\0', sizeof(command));
+    memcpy(command, currentWord.contents, currentWord.length);
+    if (isWordEqual("Y")){
+        SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, orderedOrders, current_loc, current_time, current_money,
+                current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory);        
+    } else {
+        printf("\nTerima kasih telah bermain ^_^)b\n");
+    }
 
     return 0;
 }
