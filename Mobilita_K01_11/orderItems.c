@@ -1,5 +1,5 @@
 /*
-    File Name   :
+    File Name   : orderItems.c
     Author      : K01_11
     Last Update : 28/10/2021
     Description : contains all the procedures and functions for to do list and in progress.
@@ -179,14 +179,11 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
     }
 }
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, int* time_inc, boolean* speedBoost, int* boostCount, int *returnAbility)
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, boolean* speedBoost, int* boostCount, int *returnAbility)
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
 {
-    printf("Current Loc: %c\n", *currentLoc);
-    printf("Top: %c\n", TOP(*bag).dropOff);
-    displayStack(*bag);
     if(TOP(*bag).dropOff == *currentLoc){
         // pop dari inProgress sm bag
         stackEl popped;
@@ -210,11 +207,11 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
             printf("Pesanan Heavy Item berhasil diantarkan.\n");
             printf("Uang yang didapatkan: 400 Yen.\n");
             *current_money = *current_money + 400;
-            if(speedBoost == true){ // masih ada efek speedBoost, reset
+            if(*speedBoost == true){ // masih ada efek speedBoost, reset
                 *boostCount = 0;
             }
             else{
-                if(!hasHeavyItem(&(*bag))){
+                if(!hasHeavyItemStack(*bag)){
                     *speedBoost = true;
                     *boostCount = 0;
                 }
@@ -243,7 +240,6 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
 boolean hasVIP(List *li)
 // checks if the list has a VIP item, returns true if true
 {
-    Elements temp;
     Address p = *li;
     boolean does = false;
     while(p != NULL && (!does)){
@@ -280,11 +276,9 @@ void removePerishable(Stack *bag, List *inProgress)
     Address p = FIRST(*inProgress);
     int i = 0;
     Elements popped;
-    Elements temp;
     while(p != NULL){
         if(INFO(p).itemType == 'P' && INFO(p).perish < 1){
             deleteLinkedListAt(inProgress, i, &popped);
-            boolean found = false;
             stackEl popThis;
             popThis.dropOff = popped.dropOff; popThis.perish = popped.perish;
             popThis.itemType = popped.itemType; popThis.nTime = popped.nTime;
@@ -304,11 +298,25 @@ boolean hasHeavyItem(List *li)
 // checks if the list has a heavy item, returns true if true
 // use in the linked list in progress
 {
-    Address p = *li;
+    Address p = FIRST(*li);
     boolean does = false;
     while(p != NULL && (!does)){
-        if(INFO(p).itemType = 'H') does = true;
+        if(INFO(p).itemType == 'H') does = true;
         p = NEXT(p);
+    }
+    return does;
+}
+
+boolean hasHeavyItemStack(Stack li)
+// checks if the list has a heavy item, returns true if true
+// use in the linked list in progress
+{
+    stackEl temp;
+    boolean does = false;
+
+    while(!isStackEmpty(li) && (!does)){
+        pop(&li, &temp);
+        if(temp.itemType == 'H') does = true;
     }
     return does;
 }

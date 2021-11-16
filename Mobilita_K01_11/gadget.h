@@ -11,6 +11,10 @@
 #include "listdin.h"
 #include "point.h"
 #include "stack.h"
+#include "wordmachine.h"
+#include "move.h"
+#include "start_game.h"
+#include "orderItems.h"
 
 void addGadget(ListPos *inventory, int gadget);
 // Menambahkan Gadget ke dalam Inventory
@@ -22,7 +26,7 @@ void delGadget(ListPos *inventory, int idx);
 // I.S. inventory dan gadget terdefinisi
 // F.S. gadget dihapus dari inventory
 
-void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekHeavyItem, boolean* speedBoost, int* boostCount);
+void displayInventory(ListPos *inventory, int *current_bagcapacity, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekHeavyItem, boolean* speedBoost, int* boostCount);
 // memperlihatkan semua gadget yang ada di dalam inventory
 // I.S. inventory terdefinisi
 // F.S. gadget yang ada di dalam inventory diperlihatkan
@@ -32,7 +36,7 @@ void buyGadget(ListPos *inventory, int *current_money);
 // I.S. inventory dan gadget terdefinisi
 // F.S. lsit gadget diperlihatkan dan gadget dibeli atau tidak jadi dibeli
 
-void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekHeavyItem, boolean* speedBoost, int* boostCount);
+void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekHeavyItem, boolean* speedBoost, int* boostCount);
 // mmenggunakan gadget dan mendapatkan kemampuan spesial dari gadget
 // I.S. gadget terdefinisi
 // F.S. gadget digunakan kemudian hangus atau di hapus dalam inventory.

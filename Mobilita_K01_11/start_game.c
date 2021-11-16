@@ -611,7 +611,6 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
     writeFile = fopen(out_filename, "w");
     if(writeFile != NULL){
         printf("Disimpan dalam file %s\n", out_filename);
-        rewind(writeFile);
 
         fprintf(writeFile, "%d %d\n", N, M);
         fprintf(writeFile, "%d %d\n", Absis(headQuarter), Ordinat(headQuarter));

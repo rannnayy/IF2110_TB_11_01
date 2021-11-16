@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-/*
+
 #include "wordmachine.h"
 #include "point.h"
 #include "listdin.h"
@@ -26,7 +26,8 @@
 #include "move.h"
 #include "listpos.h"
 #include "gadget.h"
-*/
+
+/*
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -43,7 +44,7 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
-
+*/
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
@@ -63,7 +64,7 @@ int main()
     MAP Map;
     char current_loc;
     int current_money, current_time, current_bagcapacity;
-    int time_inc, boostCount, returnAbility;
+    int boostCount, returnAbility;
     boolean efekVIP, efekHeavyItem, speedBoost;
     Stack bag;
     CreateStack(&bag);
@@ -112,7 +113,6 @@ int main()
 
     /*Inisiasi game in general*/
     gameOn = true;
-    time_inc = 1;
     boostCount = 0;
     speedBoost = false;
     efekVIP = false;
@@ -162,7 +162,7 @@ int main()
             }
         }
         else if (isWordEqual("DROP_OFF")) {
-            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc, &speedBoost, &boostCount, &returnAbility);
+            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &speedBoost, &boostCount, &returnAbility);
         }
         else if (isWordEqual("BUY")) {
             if (current_loc =='8') {
@@ -173,7 +173,7 @@ int main()
             }
         }
         else if (isWordEqual("INVENTORY")) {
-            displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, &inProgress, &bag, &current_time, &efekHeavyItem, &speedBoost, &boostCount);
+            displayInventory(&inventory, &current_bagcapacity, Map, &current_loc, adjMatrix, building, headQuarter, &inProgress, &bag, &current_time, &efekHeavyItem, &speedBoost, &boostCount);
         }
         else if (isWordEqual("BAG")){
             displayStack(bag);
