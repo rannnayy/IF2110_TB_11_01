@@ -10,6 +10,7 @@
 #include "matrix.h"
 #include "listdin.h"
 #include "point.h"
+#include "stack.h"
 
 void addGadget(ListPos *inventory, int gadget);
 // Menambahkan Gadget ke dalam Inventory

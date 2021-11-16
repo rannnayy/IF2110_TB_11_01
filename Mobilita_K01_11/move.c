@@ -11,7 +11,7 @@
 
 #include "move.h"
 
-void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean teleport) {
+void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean teleport, boolean* speedBoost, int* boostCount) {
     /* KAMUS LOKAL */
     int countAccessible, i, newLoc;
     ListDin accessibleBuilding;
@@ -70,6 +70,17 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
         /* tambahkan waktu */
         if (teleport) {
             *current_time = *current_time;
+        }
+        else if(*speedBoost && *boostCount <= 10){
+            *boostCount += 1;
+            if(*boostCount%2 == 0){
+                *current_time += 1;
+            }
+
+            if(boostCount == 10){
+                *speedBoost = false;
+                *boostCount = 0;
+            }
         }
         else {
             *current_time = *current_time + 1 + countHeavyItem(inProgress);

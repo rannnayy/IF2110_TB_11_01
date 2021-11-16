@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include "gadget.h"
 #include "orderItems.h"
-#include "wordmachine.h"
 
 void addGadget(ListPos *inventory, int gadget){
 // Menambahkan Gadget ke dalam Inventory
@@ -35,6 +34,7 @@ void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_in
 // I.S. inventory terdefinisi
 // F.S. gadget yang ada di dalam inventory diperlihatkan
     int option, gadget,idx;
+    char input;
     for (idx=0;idx<CAPACITY_LISTPOS;idx++) {
         printf("%d. ", idx+1);
         if (ELMT_LISTPOS(*inventory, idx)==1) {
@@ -59,9 +59,8 @@ void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_in
     printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n");
     boolean exist=false; // exist true jika gadget yang dipilih ada pada inventory atau tidak jadi menggunakan gadget
     do {
-        option=0;
-        startWordConsole();
-        DigitsToInt(currentWord, &option);
+        scanf("%s", &input);
+        option=input-'0';
         if (option>=0 && option<=5) {
             if (option==0) {
                 exist=true;
@@ -111,6 +110,7 @@ void buyGadget(ListPos *inventory, int *current_money){
 // I.S. inventory dan gadget terdefinisi
 // F.S. lsit gadget diperlihatkan dan gadget dibeli atau tidak jadi dibeli
     int option, gadget;
+    char input;
     boolean succeed = false;
     printf("Uang Anda sekarang: %d\n", *current_money);
     printf("Gadget yang tersedia:\n");
@@ -123,9 +123,8 @@ void buyGadget(ListPos *inventory, int *current_money){
     printf("Enter Command: ");
     scanf("%d", &option);
     do {
-        option=0;
-        startWordConsole();
-        DigitsToInt(currentWord, &option);
+        scanf("%s", &input);
+        option=input-'0';
         if (option<0 || option>5) {
             printf("Masukkan anda salah, masukkan angka yang tertera pada list\n");
         }

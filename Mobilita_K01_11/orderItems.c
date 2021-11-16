@@ -86,7 +86,7 @@ void updateToDoList(List *toDoList, PrioQueue *orderedOrders, int time, boolean 
     }
 }
 
-void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean efekVIP, boolean *efekHeavyItem)
+void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int *bagCapacity, boolean efekVIP, boolean *efekHeavyItem, boolean* speedBoost, int* countBoost)
 // picks up a specific item if that item exists in the toDoList and moves it into the inProgress
 // I.S. bebas
 // F.S. item might be added to the inProgress list and to the bag stack
@@ -112,7 +112,13 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
                     push(bag, temp);
                     itemExists = true;
                     *bagCapacity++;
-                    if (temp.itemType == 'H') *efekHeavyItem = true;
+                    if (temp.itemType == 'H'){
+                        *efekHeavyItem = true;
+                        if(speedBoost){
+                            *speedBoost = false;
+                            *countBoost = 0;
+                        }
+                    }
                 }
                 else {
                     i++;
@@ -173,7 +179,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
     }
 }
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, int* time_inc, boolean* speedBoost, int *returnAbility)
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, int* time_inc, boolean* speedBoost, int* boostCount, int *returnAbility)
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
@@ -204,7 +210,15 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
             printf("Pesanan Heavy Item berhasil diantarkan.\n");
             printf("Uang yang didapatkan: 400 Yen.\n");
             *current_money = *current_money + 400;
-            *speedBoost = true;
+            if(speedBoost == true){ // masih ada efek speedBoost, reset
+                *boostCount = 0;
+            }
+            else{
+                if(!hasHeavyItem(&(*bag))){
+                    *speedBoost = true;
+                    *boostCount = 0;
+                }
+            }
         }
         else if (popped.itemType == 'P') {
             printf("Pesanan Perishable Item berhasil diantarkan.\n");

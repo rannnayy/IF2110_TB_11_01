@@ -148,6 +148,6 @@ boolean isWordEqual(char command[]){
             i++;
         }
     }
-    
+
     return equal;
 }

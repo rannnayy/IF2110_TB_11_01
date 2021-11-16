@@ -26,7 +26,7 @@
 #include "move.h"
 #include "listpos.h"
 #include "gadget.h"
-
+/*
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -43,7 +43,7 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
-
+*/
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
@@ -128,7 +128,7 @@ int main()
     while (!isWordEqual("EXIT")) {
         updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
         gameOn = endGame(current_loc, current_money, toDoList, inProgress, bag);
-        
+
         // buat tes gadget
         // current_money += 1000;
 
@@ -139,16 +139,8 @@ int main()
         //displayStack(bag);
         if (isWordEqual("MOVE")) {
             int deltaTime = current_time;
-            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress, false);
-            if(speedBoost && boostCount <= 10){
-                time_inc -= 1;
-                if(boostCount == 10){
-                    boostCount = 0;
-                    speedBoost = false;
-                }
-                else
-                    boostCount += 1;
-            }
+            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress, false, &speedBoost, &boostCount);
+
             deltaTime = current_time - deltaTime;
             updatePerishable(&inProgress, deltaTime);
             removePerishable(&bag, &inProgress);
@@ -164,13 +156,13 @@ int main()
             printInProgress(&inProgress);
         }
         else if (isWordEqual("PICK_UP")) {
-            pickUp(&toDoList, &inProgress, &bag, &current_loc, &current_bagcapacity, efekVIP, &efekHeavyItem);
+            pickUp(&toDoList, &inProgress, &bag, &current_loc, &current_bagcapacity, efekVIP, &efekHeavyItem, &speedBoost, &boostCount);
             if(efekHeavyItem){
                 speedBoost = false;
             }
         }
         else if (isWordEqual("DROP_OFF")) {
-            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc, &speedBoost, &returnAbility);
+            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc, &speedBoost, &boostCount, &returnAbility);
         }
         else if (isWordEqual("BUY")) {
             if (current_loc='8') {
@@ -217,14 +209,14 @@ int main()
         memset(&command, '\0', sizeof(command));
         memcpy(command, currentWord.contents, currentWord.length);
     }
-    
+
     printf("\nApakah game ingin disave (Y atau N)?");
     startWordConsole();
     memset(&command, '\0', sizeof(command));
     memcpy(command, currentWord.contents, currentWord.length);
     if (isWordEqual("Y")){
         SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, orderedOrders, current_loc, current_time, current_money,
-                current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory);        
+                current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory);
     } else {
         printf("\nTerima kasih telah bermain ^_^)b\n");
     }
