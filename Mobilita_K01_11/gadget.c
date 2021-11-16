@@ -29,11 +29,12 @@ void delGadget(ListPos *inventory, int idx) {
     ELMT_LISTPOS(*inventory,idx)=VAL_UNDEF_LISTPOS;
 }
 
-void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time) {
+void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekHeavyItem) {
 // memperlihatkan semua gadget yang ada di dalam inventory dan dapat menggunakannya
 // I.S. inventory terdefinisi
 // F.S. gadget yang ada di dalam inventory diperlihatkan
     int option, gadget,idx;
+    char input;
     for (idx=0;idx<CAPACITY_LISTPOS;idx++) {
         printf("%d. ", idx+1);
         if (ELMT_LISTPOS(*inventory, idx)==1) {
@@ -58,7 +59,8 @@ void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_in
     printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n");
     boolean exist=false; // exist true jika gadget yang dipilih ada pada inventory atau tidak jadi menggunakan gadget
     do {
-        scanf("%d", &option);
+        scanf("%s", &input);
+        option=input-'0';
         if (option>=0 && option<=5) {
             if (option==0) {
                 exist=true;
@@ -79,7 +81,7 @@ void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_in
     if (option!=0) {
         idx=option-1;
         gadget=ELMT_LISTPOS(*inventory,idx);
-        useGadget(inventory, idx, current_bagcapacity, time_inc, Map, current_loc, adjMatrix, building, headQuarter, inProgress, bag, current_time);
+        useGadget(inventory, idx, current_bagcapacity, time_inc, Map, current_loc, adjMatrix, building, headQuarter, inProgress, bag, current_time, efekHeavyItem);
             switch(gadget){
                 case 1 :
                     printf("Kain Pembungkus Waktu ");
@@ -108,6 +110,7 @@ void buyGadget(ListPos *inventory, int *current_money){
 // I.S. inventory dan gadget terdefinisi
 // F.S. lsit gadget diperlihatkan dan gadget dibeli atau tidak jadi dibeli
     int option, gadget;
+    char input;
     boolean succeed = false;
     printf("Uang Anda sekarang: %d\n", *current_money);
     printf("Gadget yang tersedia:\n");
@@ -119,10 +122,13 @@ void buyGadget(ListPos *inventory, int *current_money){
     printf("Gadget mana yang ingin kau beli? (ketik 0 jika ingin kembali)\n");
     printf("Enter Command: ");
     scanf("%d", &option);
-    while(option<0 || option>5) {
-        printf("Masukkan anda salah, masukkan angka yang tertera pada list\n");
-        scanf("%d", &option);
-    }
+    do {
+        scanf("%s", &input);
+        option=input-'0';
+        if (option<0 || option>5) {
+            printf("Masukkan anda salah, masukkan angka yang tertera pada list\n");
+        }
+    }while(option<0 || option>5);
     if (option!=0) {
         gadget=option;
         if (isFull_ListPos(*inventory)) {
@@ -177,7 +183,7 @@ void buyGadget(ListPos *inventory, int *current_money){
         }
     }
 }
-void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time){
+void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_inc, MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekHeavyItem){
 // mmenggunakan gadget pada index idx inventory dan mendapatkan kemampuan spesial dari gadget yang digunakan
 // I.S. inventory dan gadget terdefinisi
 // F.S. gadget digunakan kemudian hangus atau di hapus dalam inventory.
@@ -194,8 +200,17 @@ void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_
             move(Map, current_loc, adjMatrix, building, headQuarter, current_time, *inProgress, true);
             break;
         case 4 :
+            if (*current_time<=50) {
+                *current_time=0;
+            }
+            else {
+                *current_time-=50;
+            }
             break;
         case 5 :
+            if (*efekHeavyItem) {
+                *efekHeavyItem=false;
+            }
             break;
         default : /* unreachable state */
             printf("Unknown Gadget berhasil dibeli.\n");

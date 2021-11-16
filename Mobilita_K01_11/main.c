@@ -158,10 +158,15 @@ int main()
             dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc, &speedBoost, &returnAbility);
         }
         else if (isWordEqual("BUY")) {
-            buyGadget(&inventory, &current_money);
+            if (current_loc='8') {
+                buyGadget(&inventory, &current_money);
+            }
+            else {
+                printf("Gadget hanya bisa dibeli saat berada di Headquarters");
+            }
         }
         else if (isWordEqual("INVENTORY")) {
-            displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, &inProgress, &bag, &current_time);
+            displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, &inProgress, &bag, &current_time, &efekHeavyItem);
         }
         else if (isWordEqual("BAG")){
             displayStack(bag);
