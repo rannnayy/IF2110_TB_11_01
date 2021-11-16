@@ -178,7 +178,7 @@ boolean isDropOff(List inProgress, char buildingChar) {
 
     /* ALGORITMA */
     p = inProgress;
-    return (INFO(p).dropOff == buildingChar);
+    return ((p != NULL) && (INFO(p).dropOff == buildingChar));
     }
     /*
     exist = false;
@@ -198,15 +198,15 @@ void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin buil
 
     /* ALGORITMA */
     /* posisi Mobita */
-    if(ELMT_MAP(Map, i, j) == current_loc) {
+    if(ELMT_MAP(Map, i, j) == current_loc && (ELMT_MAP(Map, i, j) != '*')) {
         print_yellow(ELMT_MAP(Map, i, j));
     }
     /* lokasi drop off */
-    else if (isDropOff(inProgress, ELMT_MAP(Map, i, j))) {
+    else if (isDropOff(inProgress, ELMT_MAP(Map, i, j)) && (ELMT_MAP(Map, i, j) != '*')) {
         print_blue(ELMT_MAP(Map, i, j));
     }
     /* lokasi pick up */
-    else if (isPickUp(toDoList, ELMT_MAP(Map, i, j))) {
+    else if (isPickUp(toDoList, ELMT_MAP(Map, i, j)) && (ELMT_MAP(Map, i, j) != '*')) {
         print_red(ELMT_MAP(Map, i, j));
     }
     /* location to building */
