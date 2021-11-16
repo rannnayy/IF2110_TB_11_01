@@ -89,7 +89,7 @@ int main()
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
     /* start config */
-    returnAbility = 0; 
+    returnAbility = 1; //mau ngecek return
     current_time = 0;
     current_money = 0;
     current_bagcapacity = 10;

@@ -251,23 +251,28 @@ void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbi
 // does not check if the user has the gadget necessary to use it.
 {
     Elements temp; stackEl popped;
-    deleteLinkedListFirst(inProgress, &temp);
-    // printf("%c, %d\n", temp.itemType, *returnAbility); buat ngetes
-    if (temp.itemType != 'V' && *returnAbility > 0){ // fungsinya gbs di item VIP soalnya
-        pop(bag, &popped);
+    if (!isLinkedListEmpty(*inProgress)){
+        deleteLinkedListFirst(inProgress, &temp);
+        // printf("%c, %d\n", temp.itemType, *returnAbility); buat ngetes
+        if (temp.itemType != 'V' && *returnAbility > 0){ // fungsinya gbs di item VIP soalnya
+            pop(bag, &popped);
 
-        insertLinkedListFirst(toDoList, temp);
-        switch (temp.itemType){
-            case 'N': printf("Normal"); break;
-            case 'H': printf("Heavy"); break;
-            case 'P': printf("Perishable"); break;
+            insertLinkedListFirst(toDoList, temp);
+            switch (temp.itemType){
+                case 'N': printf("Normal"); break;
+                case 'H': printf("Heavy"); break;
+                case 'P': printf("Perishable"); break;
+            }
+            printf(" item berhasil dikembalikan ke Pick Up Point %c\n", temp.pickUp);
+            *returnAbility =- 1;
         }
-        printf(" item berhasil dikembalikan ke Pick Up Point %c\n", temp.pickUp);
-        *returnAbility =- 1;
+        else {
+            printf("Ability tidak dipakai karena item VIP atau tidak punya ability Return To Sender\n");
+            insertLinkedListFirst(inProgress, temp);
+        }
     }
     else {
-        printf("Ability tidak dipakai karena item VIP atau tidak punya ability Return To Sender\n");
-        insertLinkedListFirst(inProgress, temp);
+        printf("Tidak ada item di bag.\n");
     }
 }
 
