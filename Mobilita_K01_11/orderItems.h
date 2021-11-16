@@ -80,4 +80,5 @@ void kainPembungkusWaktu(List *inProgress, Stack *bag, int *kainPembungkusWaktuG
 // I.S. bebas
 // F.S. apabila gadget teratas tas merupakan perishable, reset timer perishable di in progress
 
+void itemInfo();
 #endif

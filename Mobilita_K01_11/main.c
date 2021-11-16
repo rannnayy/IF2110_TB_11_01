@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-/*
+
 #include "wordmachine.h"
 #include "point.h"
 #include "listdin.h"
@@ -26,7 +26,7 @@
 #include "move.h"
 #include "listpos.h"
 #include "gadget.h"
-*/
+
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -66,6 +66,7 @@ int main()
     int time_inc, boostCount, returnAbility, kainPembungkusWaktuGadget;
     boolean efekVIP, efekHeavyItem, speedBoost;
     Stack bag;
+    CreateStack(&bag);
     PrioQueue orderedOrders;
     ListPos inventory;
     CreateListPos(&inventory);
@@ -108,15 +109,15 @@ int main()
     memset(&command, '\0', sizeof(command));
     memcpy(command, currentWord.contents, currentWord.length);
 
-    while (strcmp(command, "EXIT") != 0) {
+    while (!isWordEqual("EXIT")) {
         updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
         gameOn = endGame(current_loc, current_money, toDoList, inProgress, bag);
         if (!gameOn){
             printf("Selamat anda telah menyelesaikan permainan mobita dalam %d satuan waktu\n\n!", current_time);
             break;
         }
-        //displayStack(bag);
-        if (strcmp(command, "MOVE") == 0) {
+        // displayStack(bag);
+        if (isWordEqual("MOVE")) {
             move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress, false);
             if(speedBoost && boostCount <= 10){
                 time_inc -= 1;
@@ -128,32 +129,48 @@ int main()
                     boostCount += 1;
             }
         }
-        else if (strcmp(command, "MAP") == 0) {
+        else if (isWordEqual("MAP")) {
             displayColoredMap(Map, current_loc, adjMatrix, building, inProgress, toDoList);
             // displayMap(Map);
         }
-        else if (strcmp(command, "TO_DO") == 0) {
+        else if (isWordEqual("TO_DO")) {
             printToDoList(&toDoList);
         }
-        else if (strcmp(command, "IN_PROGRESS") == 0) {
+        else if (isWordEqual("IN_PROGRESS")) {
             printInProgress(&inProgress);
         }
-        else if (strcmp(command, "PICK_UP") == 0) {
+        else if (isWordEqual("PICK_UP")) {
             pickUp(&toDoList, &inProgress, &bag, &current_loc, &current_bagcapacity, efekVIP, &efekHeavyItem);
             if(efekHeavyItem){
                 speedBoost = false;
             }
         }
-        else if (strcmp(command, "DROP_OFF") == 0) {
+        else if (isWordEqual("DROP_OFF")) {
             dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &time_inc, &speedBoost, &returnAbility);
         }
-        else if (strcmp(command, "BUY") == 0) {
+        else if (isWordEqual("BUY")) {
             buyGadget(&inventory, &current_money);
         }
-        else if (strcmp(command, "INVENTORY") == 0) {
+        else if (isWordEqual("INVENTORY")) {
             displayInventory(&inventory, &current_bagcapacity, &time_inc, Map, &current_loc, adjMatrix, building, headQuarter, inProgress, &current_time);
         }
-        else if (strcmp(command, "HELP") == 0) {
+        else if (isWordEqual("BAG")){
+            displayStack(bag);
+        }
+        else if (isWordEqual("ITEM")){
+            itemInfo();
+        }
+        else if (isWordEqual("GADGET")){
+            gadgetInfo();
+        }
+        else if (isWordEqual("ACTIVE_ABILITY")){
+            if (speedBoost){
+                printf("Ability Speed Boost aktif (%d lokasi)\n", boostCount);
+            } else {
+                printf("Tidak ada Ability yang aktif\n");
+            }
+        }
+        else if (isWordEqual("HELP")) {
             Help();
         }
         else {

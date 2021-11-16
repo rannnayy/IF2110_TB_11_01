@@ -201,3 +201,31 @@ void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_
     }
     delGadget(inventory,idx);
 }
+
+void gadgetInfo(){
+    /* I.S. Sembarang */
+    /* F.S. Output berupa info dari gadget */
+    printf("1. Kain Pembungkus Waktu\n");
+    printf("    Harga: 800 Yen\n");
+    printf("    Setiap kain pembungkus waktu dapat dipakai sekali untuk perishable item\n");
+    printf("    teratas pada tas agar kembali ke durasi semula\n");
+    printf("2. Senter Pembesar\n");
+    printf("    Senter pembesar dapat digunakan untuk meningkatkan kapasitas tas sebesar\n");
+    printf("    dua kali lipat, namun tidak melebihi batas kapasitas maksimum\n");
+    printf("3. Pintu Kemana Saja\n");
+    printf("    Harga: 1500 Yen\n");
+    printf("    Pintu Kemana Saja dapat digunakan sekali untuk berpindah lokasi yang diinginkan\n");
+    printf("    tanpa menambah unit waktu.\n");
+    printf("4. Mesin Waktu\n");
+    printf("    Harga: 3000 Yen\n");
+    printf("    Mesin waktu dapat digunakan untuk mengurangi waktu sebanyak 50 unit (jika waktu\n");
+    printf("    kurang dari 50 unit, maka waktu menjadi 0 unit). Pesanan yang masuk dalam jangka\n");
+    printf("    waktu 50 unit tersebut tidak akan hilang/kembali ke To Do List, dan tidak akan \n");
+    printf("    muncul kembali ke To Do List ketika waktu masuknya dilampaui lagi.\n");
+    printf("5. Senter Pengecil\n");
+    printf("    Harga: 800 Yen\n");
+    printf("    Senter pengecil dapat digunakan untuk menghilangkan efek dari satu heavy item\n");
+    printf("    jika terdapat pada tumpukan teratas tas. Efek dari senter pengecil ini akan\n");
+    printf("    berlangsung sampai melakukan Drop Off/Return pertama kali setelah penggunaan\n");
+    printf("    gadget ini.\n");
+}

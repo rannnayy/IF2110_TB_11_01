@@ -61,9 +61,20 @@ void popEl(Stack *s, stackEl val){
 void displayStack(Stack s)
 {
     stackEl temp;
-    while(!isStackEmpty(s)){
-        pop(&s, &temp);
-        printf("%c,", temp.dropOff);
+    int i = 1;
+    
+    if (isStackEmpty(s)){
+        printf("Bag kosong. Silahkan lanjutkan permainan!\n");
+    } else {
+        while(!isStackEmpty(s)){
+            pop(&s, &temp);
+            printf("%d. ", i);
+            printf("%c -> %c ", (temp).pickUp, (temp).dropOff);
+            if ((temp).itemType == 'N') printf("(Normal Item)\n");
+            else if ((temp).itemType == 'H') printf("(Heavy Item)\n");
+            else if ((temp).itemType == 'P') printf("(Perishable Item, siswa waktu %d)\n", (temp).perish);
+            else if ((temp).itemType == 'V') printf("(VIP Item)\n");
+            i++;
+        }
     }
-    printf("\n");
 }

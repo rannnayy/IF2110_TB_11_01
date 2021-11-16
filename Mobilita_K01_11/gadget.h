@@ -36,4 +36,7 @@ void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, int *time_
 // I.S. gadget terdefinisi
 // F.S. gadget digunakan kemudian hangus atau di hapus dalam inventory.
 
+void gadgetInfo();
+/* I.S. Sembarang */
+/* F.S. Output berupa info dari gadget */
 #endif

@@ -198,6 +198,7 @@ void displayColoredLoc(MAP Map, char current_loc, Matrix adjMatrix, ListDin buil
 
     /* ALGORITMA */
     /* posisi Mobita */
+    printf(" ");
     if(ELMT_MAP(Map, i, j) == current_loc && (ELMT_MAP(Map, i, j) != '*')) {
         print_yellow(ELMT_MAP(Map, i, j));
     }

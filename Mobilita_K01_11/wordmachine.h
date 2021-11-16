@@ -79,4 +79,7 @@ void copyWordConsole();
           currentChar adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi CAPACITY, maka sisa kata terpotong */
 
+boolean isWordEqual(char command[]);
+/* Return true if currentWord is equal to command */
+
 #endif

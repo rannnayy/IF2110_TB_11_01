@@ -366,3 +366,27 @@ void updatePerishable(List *inProgress){
         p = NEXT(p);
     }
 }
+
+void itemInfo(){
+    /* I.S Sembarang */
+    /* F.S.Output info dari item */
+    printf("1. Normal Item\n");
+    printf("    - Item ini tidak memiliki efek samping ketika di-pick up atau reward ability\n");
+    printf("      tambahan ketika di-drop off.\n");
+    printf("    - Item ini bernilai 200 Yen.\n");
+    printf("2. Heavy Item\n");
+    printf("    - Efek  : Setiap pindah 1 lokasi maka waktu akan bertambah 1 unit (1 + 1 = 2 unit).\n");
+    printf("    - Reward: Mobita akan mendapatkan ability Speed Boost jika berhasil mengantarkan item ini.\n");
+    printf("    - Item ini bernilai 400 Yen.\n");
+    printf("3. Perishable Item\n");
+    printf("    - Efek: Item harus diantarkan ke lokasi drop off dalam waktu yang ditentukan.\n");
+    printf("      Jika waktu habis, maka item akan dikeluarkan secara otomatis dari tas, dan pesanan akan dihapus\n");
+    printf("      secara otomatis dari In Progress List.\n");
+    printf("    - Item ini berinilai 400 Yen.\n");
+    printf("4. VIP Item\n");
+    printf("    - Efek  : Efek ini aktif saat pesanan masuk ke To Do List. Pesanan dengan item ini\n");
+    printf("      harus segera dilayani (Pick Up dan Drop Off), sehingga Mobita tidak bisa melakukan\n");
+    printf("      Pick Up untuk item lain.\n");
+    printf("    - Reward: Mobita akan mendapatkan ability Return To Sender jika berhasil mengantarkan item ini.\n");
+    printf("    - Item ini bernilai 600 Yen.\n");
+}
