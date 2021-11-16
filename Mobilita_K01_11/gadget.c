@@ -61,7 +61,7 @@ void displayInventory(ListPos *inventory, int *current_bagcapacity, int *time_in
     do {
         option=0;
         startWordConsole();
-        DigitsToInt(currentWordFile, &option);
+        DigitsToInt(currentWord, &option);
         if (option>=0 && option<=5) {
             if (option==0) {
                 exist=true;
@@ -125,7 +125,7 @@ void buyGadget(ListPos *inventory, int *current_money){
     do {
         option=0;
         startWordConsole();
-        DigitsToInt(currentWordFile, &option);
+        DigitsToInt(currentWord, &option);
         if (option<0 || option>5) {
             printf("Masukkan anda salah, masukkan angka yang tertera pada list\n");
         }
