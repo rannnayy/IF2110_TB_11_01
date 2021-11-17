@@ -43,12 +43,10 @@ void advFile() {
 	/* Algoritma */
 	currentCharFile = getc(tapeFile);
 	eotFile = (currentCharFile == MARK_EOF);
-	/*
 	if (eotFile){
         fflush(tapeFile);
         fclose(tapeFile);
 	}
-	*/
 }
 
 void startConsole() {
@@ -84,7 +82,7 @@ void closeTape()
 void processWrite(char out_filename[FILE_NAME_CAP], int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin building, Matrix adjMatrix, List orders,
               int nOrderedOrders, PrioQueue orderedOrders, char current_loc, int current_time, int current_money, int current_bagcapacity,
               int nToDoList, List toDoList, int nInProgress, List inProgress, int nInventory, ListPos inventory,
-              int boostCount, boolean speedBoost, Stack bag, boolean efekVIP, boolean efekHeavyItem)
+              int boostCount, boolean speedBoost, Stack bag, boolean efekVIP, boolean efekHeavyItem, boolean efekSenterPengecil)
 {
     writeFile = fopen(out_filename, "w");
     if(writeFile != NULL){
@@ -160,7 +158,8 @@ void processWrite(char out_filename[FILE_NAME_CAP], int N, int M, int nLoc, int 
         }
 
         fprintf(writeFile, "%d\n", efekVIP);
-        fprintf(writeFile, "%d", efekHeavyItem);
+        fprintf(writeFile, "%d\n", efekHeavyItem);
+        fprintf(writeFile, "%d", efekSenterPengecil);
 
         fclose(writeFile);
     }

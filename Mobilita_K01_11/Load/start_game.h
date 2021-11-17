@@ -37,7 +37,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
 void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders,
               int* nOrderedOrders, PrioQueue* orderedOrders, char* current_loc, int* current_time, int* current_money, int* current_bagcapacity,
               int* nToDoList, List* toDoList, int* nInProgress, List* inProgress, int* nInventory, ListPos* inventory,
-              int* boostCount, boolean* speedBoost, Stack* bag, boolean* efekVIP, boolean* efekHeavyItem);
+              int* boostCount, boolean* speedBoost, Stack* bag, boolean* efekVIP, boolean* efekHeavyItem, boolean* efekSenterPengecil);
 
 MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix);
 /*  Membuat konfigurasi Map setelah dibaca dari fungsi StartGame, N dan M (ukuran NxM dari peta),
@@ -50,7 +50,7 @@ void Help();
 void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin building, Matrix adjMatrix, List orders,
               int nOrderedOrders, PrioQueue orderedOrders, char current_loc, int current_time, int current_money, int current_bagcapacity,
               int nToDoList, List toDoList, int nInProgress, List inProgress, int nInventory, ListPos inventory,
-              int boostCount, boolean speedBoost, Stack bag, boolean efekVIP, boolean efekHeavyItem);
+              int boostCount, boolean speedBoost, Stack bag, boolean efekVIP, boolean efekHeavyItem, boolean efekSenterPengecil);
 
 boolean endGame(char current_loc, int current_time, List toDoList, List inProgress, Stack bag, PrioQueue orderedOrders);
 

@@ -111,6 +111,7 @@ int main()
     efekVIP = false;
     lenBefore = 0;
     ordersCount = 0;
+    efekSenterPengecil = false;
 
     printf("\n");
     printf("\t\t _|      _|    _|_|    _|_|_|    _|_|_|  _|        _|_|_|  _|_|_|_|_|    _|_|    \n");
@@ -146,7 +147,7 @@ int main()
             LoadGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &nOrderedOrders,
                     &orderedOrders, &current_loc, &current_time, &current_money, &current_bagcapacity,
                     &nToDoList, &toDoList, &nInProgress, &inProgress, &nInventory, &inventory,
-                    &boostCount, &speedBoost, &bag, &efekVIP, &efekHeavyItem);
+                    &boostCount, &speedBoost, &bag, &efekVIP, &efekHeavyItem, &efekSenterPengecil);
         }
         else if (isWordEqual(exitWord)){
             return 0;
@@ -345,7 +346,7 @@ int main()
             */
             SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, nOrderedOrders, orderedOrders, current_loc, current_time, current_money,
                     current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory,
-                    boostCount, speedBoost, bag, efekVIP, efekHeavyItem);
+                    boostCount, speedBoost, bag, efekVIP, efekHeavyItem, efekSenterPengecil);
         } else if (isWordEqual(NWord) || isWordEqual(nWord)){
             gameSave = true;
             printf("\nTerima kasih telah bermain ^_^)b\n");
@@ -366,6 +367,7 @@ int main()
         }
 
     }
+    closeTape();
 
     return 0;
 }

@@ -197,7 +197,7 @@ void StartGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListD
 void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDin* building, Matrix* adjMatrix, List* orders,
               int* nOrderedOrders, PrioQueue* orderedOrders, char* current_loc, int* current_time, int* current_money, int* current_bagcapacity,
               int* nToDoList, List* toDoList, int* nInProgress, List* inProgress, int* nInventory, ListPos* inventory,
-              int* boostCount, boolean* speedBoost, Stack* bag, boolean* efekVIP, boolean* efekHeavyItem)
+              int* boostCount, boolean* speedBoost, Stack* bag, boolean* efekVIP, boolean* efekHeavyItem, boolean* efekSenterPengecil)
 /*  Memulai permainan dengan membaca nama file berisi konfigurasi permainan, lalu membaca N (jumlah baris), M (jumlah kolom),
     POINT headQuarter (koordinat dalam Map NxM), nLoc (jumlah lokasi), nLoc baris lokasi ListDin building(terdiri atas karakter
     bangunan dan POINT koordinat bangunan), nLoc+1 baris dan nLoc+1 kolom adjMatrix (Matrix Adjacency), nOrder (jumlah pesanan),
@@ -580,6 +580,17 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
         *efekHeavyItem = true;
     }
     // printf("%d\n", *efekHeavyItem);
+
+    temp = 0;
+    advWordFile();
+    DigitsToInt(currentWordFile, &temp);
+    if(temp == 0){
+        *efekSenterPengecil = false;
+    }
+    else{
+        *efekSenterPengecil = true;
+    }
+    // printf("%d\n", *efekHeavyItem);
 }
 
 MAP StartMapConfiguration(int* N, int* M, POINT* headQuarter, ListDin* building, Matrix* adjMatrix)
@@ -687,7 +698,7 @@ void Help()
 void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin building, Matrix adjMatrix, List orders,
               int nOrderedOrders, PrioQueue orderedOrders, char current_loc, int current_time, int current_money, int current_bagcapacity,
               int nToDoList, List toDoList, int nInProgress, List inProgress, int nInventory, ListPos inventory,
-              int boostCount, boolean speedBoost, Stack bag, boolean efekVIP, boolean efekHeavyItem)
+              int boostCount, boolean speedBoost, Stack bag, boolean efekVIP, boolean efekHeavyItem, boolean efekSenterPengecil)
 {
     char out_filename[FILENAME_MAX];
 
@@ -702,7 +713,7 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
 
     startWriteFile(out_filename, N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, nOrderedOrders, orderedOrders, current_loc, current_time, current_money,
                     current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory,
-                    boostCount, speedBoost, bag, efekVIP, efekHeavyItem);
+                    boostCount, speedBoost, bag, efekVIP, efekHeavyItem, efekSenterPengecil);
     // If file of name out_filename existed, the content will be overwritten, else will make new file and fill it
 }
 
