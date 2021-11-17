@@ -27,7 +27,7 @@
 #include "Map/map.h"
 #include "Map/move.h"
 
-
+/*
 #include "Gadget/gadget.c"
 #include "Item/prioqueue.c"
 #include "Item/orderItems.c"
@@ -44,7 +44,7 @@
 #include "Map/pcolor.c"
 #include "Map/map.c"
 #include "Map/move.c"
-
+*/
 
 // Word definition
 Word newGameWord = {"NEW_GAME", 8};
@@ -273,7 +273,7 @@ int main()
             printf("Selamat anda telah menyelesaikan permainan mobita dengan mengantarkan %d jumlah pesanan dalam %d satuan waktu!\n\n", ordersCount, current_time);
             break;
         }
-    
+
         /* cek identitas Mobita */
         printf("\nWaktu: %d\n", current_time);
 
@@ -312,6 +312,7 @@ int main()
             nToDoList = lengthLinkedList(toDoList);
             nInProgress = lengthLinkedList(inProgress);
             nInventory = length_ListPos(inventory);
+            /*
             printf("%d %d\n", N, M);
             printf("%d\n", nLoc);
             printf("%d\n", nOrder);
@@ -341,7 +342,7 @@ int main()
             displayStack(bag);
             printf("%c\n", efekVIP);
             printf("%c\n", efekHeavyItem);
-
+            */
             SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, nOrderedOrders, orderedOrders, current_loc, current_time, current_money,
                     current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory,
                     boostCount, speedBoost, bag, efekVIP, efekHeavyItem);

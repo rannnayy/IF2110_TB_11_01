@@ -157,12 +157,16 @@ boolean isWordEqual(Word command){
     }
 }
 
-// int readInt()
-// {
-//     int var = 0;
-
-//     startWordConsole();
-//     DigitsToInt(currentWord, &(var));
-
-//     return var;
-// }
+void startWriteFile(char filename[FILE_NAME_CAP], int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin building, Matrix adjMatrix, List orders,
+              int nOrderedOrders, PrioQueue orderedOrders, char current_loc, int current_time, int current_money, int current_bagcapacity,
+              int nToDoList, List toDoList, int nInProgress, List inProgress, int nInventory, ListPos inventory,
+              int boostCount, boolean speedBoost, Stack bag, boolean efekVIP, boolean efekHeavyItem)
+/* I.S. : currentChar sembarang
+   F.S. : endWord = true, dan currentChar = MARK;
+          atau endWord = false, currentWord adalah kata yang sudah diakuisisi,
+          currentChar karakter pertama sesudah karakter terakhir kata */
+{
+    processWrite(filename, N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, nOrderedOrders, orderedOrders, current_loc, current_time, current_money,
+                    current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory,
+                    boostCount, speedBoost, bag, efekVIP, efekHeavyItem);
+}
