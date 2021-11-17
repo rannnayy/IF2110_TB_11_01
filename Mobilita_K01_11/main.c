@@ -27,7 +27,7 @@
 #include "listpos.h"
 #include "gadget.h"
 
-
+/*
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -44,6 +44,7 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
+*/
 
 // Word definition
 Word newGameWord = {"NEW_GAME", 8};
