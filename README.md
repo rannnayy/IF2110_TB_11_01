@@ -60,45 +60,38 @@ List the ready features here:
 </ul>
 
 ## Setup
-What are the project requirements/dependencies? Where are they listed? A requirements.txt or a Pipfile.lock file perhaps? Where is it located?
-
-Proceed to describe how to install / setup one's local environment / get started with the project.
-
+gcc dibutuhkan untuk melakukan build terhadap program ini.
 
 ## Usage
-How does one go about using it?
-Provide various use cases and code examples here.
-
-`write-your-code-here`
+Gunakan command prompt/terminal
+Pindahkan direktori ke folder yang terdapat main.c untuk melakukan build
+`run.bat`
+Command ini akan secara otomatis melakukan compile terhadap semua file yang dibutuhkan dan akan secara otomatis menjalankan program
+atu
+`main.exe`
+Main program sudah di-_built_ dan bisa langsung dijalankan dengan command tersebut
 
 
 ## Project Status
-Project is: _in progress_ / _complete_ / _no longer being worked on_. If you are no longer working on it, provide reasons why.
-
+Project ini sudah  _selesai_ 
 
 ## Room for Improvement
-Include areas you believe need improvement / could be improved. Also add TODOs for future development.
-
 Room for improvement:
-- Improvement to be done 1
-- Improvement to be done 2
-
-To do:
-- Feature to be added 1
-- Feature to be added 2
-
+- Program ini hanya menggunakan _command line_ sehingga bisa dilakukan visualisasi yang lebih menarik
+- Sebagian dari source code yang ditulis itu _redundant_, sehingga bisa dilakukan pengecekan dan penghapusan terhadap beberapa code
+- Projek ini terbatas deadline, sehingga code secara keseluruhan agak berantakan dan dapat dikembangkan lebih rapih lagi
 
 ## Acknowledgements
-Give credit here.
-- This project was inspired by...
-- This project was based on [this tutorial](https://www.example.com).
-- Many thanks to...
-
+- Projek ini dikerjakan untuk memenuhi tugas besar mata kuliah IF2110 Algoritma dan Struktur Data
+- Terima kasih kepada seluruh dosen pengajar mata kuliah IF2110 dan asisten
 
 ## Contact
-Created by [@flynerdpl](https://www.flynerd.pl/) - feel free to contact me!
-
-
+Created by:
+- [@rannnayy](https://github.com/rannnayy)
+- [@apwic](https://github.com/apwic)
+- [@Noxira](https://github.com/Noxira)
+- [@dclairvoyance](https://github.com/dclairvoyance)
+- [@barizahaqi](https://github.com/barizahaqi)
 <!-- Optional -->
 <!-- ## License -->
 <!-- This project is open source and available under the [... License](). -->
