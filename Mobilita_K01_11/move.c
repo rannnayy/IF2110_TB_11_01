@@ -77,7 +77,7 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
                 *current_time += 1;
             }
 
-            if(boostCount == 10){
+            if(*boostCount == 10){
                 *speedBoost = false;
                 *boostCount = 0;
             }

@@ -17,6 +17,7 @@
 #include "map.h"
 #include "orderItems.h"
 #include "listpos.h"
+#include "prioqueue.h"
 
 void DigitsToInt(Word digits, int* var);
 /*  Mengkonversi nilai pada pita kata yang berupa angka menjadi angka, bukan lagi char[]  */
@@ -51,5 +52,5 @@ void SaveGame(int N, int M, int nLoc, int nOrder, POINT headQuarter, ListDin bui
               int nToDoList, List toDoList, int nInProgress, List inProgress, int nInventory, ListPos inventory,
               int boostCount, boolean speedBoost, Stack bag, boolean efekVIP, boolean efekHeavyItem);
 
-boolean endGame(char current_loc, int current_time, List toDoList, List inProgress, Stack bag);
+boolean endGame(char current_loc, int current_time, List toDoList, List inProgress, Stack bag, PrioQueue orderedOrders);
 

@@ -133,7 +133,7 @@ void copyWordConsole()
     currentWord.length = i;
 }
 
-boolean isWordEqual(char command[]){
+boolean isWordEqual(Word command){
     /* Return true if currentWord is equal to command */
     int i, n;
     boolean equal;
@@ -141,13 +141,18 @@ boolean isWordEqual(char command[]){
     i = 0;
     equal = true;
 
-    while (i < currentWord.length && equal){
-        if (currentWord.contents[i] != command[i]){
-            equal = false;
-        } else {
-            i++;
-        }
+    if (currentWord.length != command.length){
+        return false;
     }
+    else {
+        while (i < currentWord.length && equal){
+            if (currentWord.contents[i] != command.contents[i]){
+                equal = false;
+            } else {
+                i++;
+            }
+        }
 
-    return equal;
+        return equal;
+    }
 }

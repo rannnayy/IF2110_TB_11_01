@@ -27,7 +27,7 @@
 #include "listpos.h"
 #include "gadget.h"
 
-/*
+
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -44,7 +44,29 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
-*/
+
+// Word definition
+Word newGameWord = {"NEW_GAME", 8};
+Word loadGameWord = {"LOAD_GAME", 9};
+Word exitWord = {"EXIT", 4};
+Word moveWord = {"MOVE", 4};
+Word mapWord = {"MAP", 3};
+Word toDoWord = {"TO_DO", 5};
+Word inProgressWord = {"IN_PROGRESS", 11};
+Word pickUpWord = {"PICK_UP", 7};
+Word dropOffWord = {"DROP_OFF", 8};
+Word buyWord = {"BUY", 3};
+Word inventoryWord = {"INVENTORY", 9};
+Word bagWord = {"BAG", 3};
+Word gadgetWord = {"GADGET", 6};
+Word itemWord = {"ITEM", 4};
+Word activeAbilityWord = {"ACTIVE_ABILITY", 14};
+Word helpWord = {"HELP", 4};
+Word returnWord = {"RETURN", 6};
+Word yWord = {"Y", 1};
+Word YWord = {"y", 1};
+Word nWord = {"n", 1};
+Word NWord = {"N", 1};
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
@@ -73,6 +95,8 @@ int main()
     CreateListPos(&inventory);
     char command[20];
     boolean gameOn;
+    boolean gameStart;
+    boolean gameSave;
 
     /*Inisialisasi nilai variabel game in general*/
     gameOn = true;
@@ -96,29 +120,43 @@ int main()
     for(int i = currentWord.length; i < FILENAME_MAX; i++)
         command[i] = '\0';
     int lenBefore = currentWord.length;
+    gameStart = false;
 
-    if (isWordEqual("NEW_GAME")){
-        StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
-        nOrderedOrders = nOrder;
-        /* start config */
-        returnAbility = 1; //mau ngecek return
-        current_time = 0;
-        current_money = 0;
-        current_bagcapacity = 10;
-        current_loc = '8'; /* always start at headQuarter */
-        /* use char instead of POINT to ease referencing */
-    }
-    else if (isWordEqual("LOAD_GAME")){
-        LoadGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &nOrderedOrders,
-                &orderedOrders, &current_loc, &current_time, &current_money, &current_bagcapacity,
-                &nToDoList, &toDoList, &nInProgress, &inProgress, &nInventory, &inventory,
-                &boostCount, &speedBoost, &bag, &efekVIP, &efekHeavyItem);
-    }
-    else if (isWordEqual("EXIT")){
-        return 0;
-    }
-    else {
-        printf("Command Tidak VALID!\n");
+    while (!gameStart){
+        if (isWordEqual(newGameWord)){
+            gameStart = true;
+            StartGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &orderedOrders);
+            nOrderedOrders = nOrder;
+            /* start config */
+            returnAbility = 1; //mau ngecek return
+            current_time = 0;
+            current_money = 0;
+            current_bagcapacity = 10;
+            current_loc = '8'; /* always start at headQuarter */
+            /* use char instead of POINT to ease referencing */
+        }
+        else if (isWordEqual(loadGameWord)){
+            gameStart = true;
+            LoadGame(&N, &M, &nLoc, &nOrder, &headQuarter, &building, &adjMatrix, &orders, &nOrderedOrders,
+                    &orderedOrders, &current_loc, &current_time, &current_money, &current_bagcapacity,
+                    &nToDoList, &toDoList, &nInProgress, &inProgress, &nInventory, &inventory,
+                    &boostCount, &speedBoost, &bag, &efekVIP, &efekHeavyItem);
+        }
+        else if (isWordEqual(exitWord)){
+            return 0;
+        }
+        else {
+            printf("Command Tidak VALID!\n\n");
+            printf("COMMAND yang tersedia: \n");
+            printf("NEW_GAME, LOAD_GAME, dan EXIT \n\n");
+            printf("\nENTER COMMAND: ");
+            startWordConsole();
+            for(int i = 0; i < currentWord.length; i++)
+                command[i] = currentWord.contents[i];
+            for(int i = currentWord.length; i < FILENAME_MAX; i++)
+                command[i] = '\0';
+            int lenBefore = currentWord.length;
+        }
     }
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
@@ -139,19 +177,19 @@ int main()
             command[i] = currentWord.contents[i];
     lenBefore = currentWord.length;
 
-    while (!isWordEqual("EXIT")) {
+    while (!isWordEqual(exitWord)) {
         updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
-        gameOn = endGame(current_loc, current_money, toDoList, inProgress, bag);
+        gameOn = endGame(current_loc, current_time, toDoList, inProgress, bag, orderedOrders);
 
         // buat tes gadget
         // current_money += 1000;
 
         if (!gameOn){
-            printf("Selamat anda telah menyelesaikan permainan mobita dalam %d satuan waktu\n\n!", current_time);
+            printf("Selamat anda telah menyelesaikan permainan mobita dalam %d satuan waktu!\n\n", current_time);
             break;
         }
         //displayStack(bag);
-        if (isWordEqual("MOVE")) {
+        if (isWordEqual(moveWord)) {
             int deltaTime = current_time;
             move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress, false, &speedBoost, &boostCount);
 
@@ -159,26 +197,26 @@ int main()
             updatePerishable(&inProgress, deltaTime);
             removePerishable(&bag, &inProgress);
         }
-        else if (isWordEqual("MAP")) {
+        else if (isWordEqual(mapWord)) {
             displayColoredMap(Map, current_loc, adjMatrix, building, inProgress, toDoList);
             // displayMap(Map);
         }
-        else if (isWordEqual("TO_DO")) {
+        else if (isWordEqual(toDoWord)) {
             printToDoList(&toDoList);
         }
-        else if (isWordEqual("IN_PROGRESS")) {
+        else if (isWordEqual(inProgressWord)) {
             printInProgress(&inProgress);
         }
-        else if (isWordEqual("PICK_UP")) {
+        else if (isWordEqual(pickUpWord)) {
             pickUp(&toDoList, &inProgress, &bag, &current_loc, &current_bagcapacity, efekVIP, &efekHeavyItem, &speedBoost, &boostCount);
             if(efekHeavyItem){
                 speedBoost = false;
             }
         }
-        else if (isWordEqual("DROP_OFF")) {
+        else if (isWordEqual(dropOffWord)) {
             dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &speedBoost, &boostCount, &returnAbility);
         }
-        else if (isWordEqual("BUY")) {
+        else if (isWordEqual(buyWord)) {
             if (current_loc =='8') {
                 buyGadget(&inventory, &current_money);
             }
@@ -186,29 +224,29 @@ int main()
                 printf("Gadget hanya bisa dibeli saat berada di Headquarters");
             }
         }
-        else if (isWordEqual("INVENTORY")) {
+        else if (isWordEqual(inventoryWord)) {
             displayInventory(&inventory, &current_bagcapacity, Map, &current_loc, adjMatrix, building, headQuarter, &inProgress, &bag, &current_time, &efekHeavyItem, &speedBoost, &boostCount);
         }
-        else if (isWordEqual("BAG")){
+        else if (isWordEqual(bagWord)){
             displayStack(bag);
         }
-        else if (isWordEqual("ITEM")){
+        else if (isWordEqual(itemWord)){
             itemInfo();
         }
-        else if (isWordEqual("GADGET")){
+        else if (isWordEqual(gadgetWord)){
             gadgetInfo();
         }
-        else if (isWordEqual("ACTIVE_ABILITY")){
+        else if (isWordEqual(activeAbilityWord)){
             if (speedBoost){
                 printf("Ability Speed Boost aktif (%d lokasi)\n", boostCount);
             } else {
                 printf("Tidak ada Ability yang aktif\n");
             }
         }
-        else if (isWordEqual("HELP")) {
+        else if (isWordEqual(helpWord)) {
             Help();
         }
-        else if(isWordEqual("RETURN")){
+        else if (isWordEqual(returnWord)){
             returnToSender(&toDoList, &inProgress, &bag, &returnAbility);
         }
         else {
@@ -231,7 +269,8 @@ int main()
                 command[i] = currentWord.contents[i];
         lenBefore = currentWord.length;
     }
-
+    
+    gameSave = false;
     printf("\nApakah game ingin disave (Y atau N)?");
     startWordConsole();
     if(lenBefore > currentWord.length)
@@ -244,17 +283,36 @@ int main()
         for(int i = 0; i < currentWord.length; i++)
             command[i] = currentWord.contents[i];
     lenBefore = currentWord.length;
-    if (isWordEqual("Y")){
-        nOrder = lengthLinkedList(orders);
-        nOrderedOrders = pqLength(orderedOrders);
-        nToDoList = lengthLinkedList(toDoList);
-        nInProgress = lengthLinkedList(inProgress);
-        nInventory = length_ListPos(inventory);
-        SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, nOrderedOrders, orderedOrders, current_loc, current_time, current_money,
-                current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory,
-                boostCount, speedBoost, bag, efekVIP, efekHeavyItem);
-    } else {
-        printf("\nTerima kasih telah bermain ^_^)b\n");
+    while(!gameSave){
+        if (isWordEqual(YWord) || isWordEqual(yWord)){
+            gameSave=true;
+            nOrder = lengthLinkedList(orders);
+            nOrderedOrders = pqLength(orderedOrders);
+            nToDoList = lengthLinkedList(toDoList);
+            nInProgress = lengthLinkedList(inProgress);
+            nInventory = length_ListPos(inventory);
+            SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, nOrderedOrders, orderedOrders, current_loc, current_time, current_money,
+                    current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory,
+                    boostCount, speedBoost, bag, efekVIP, efekHeavyItem);
+        } else if (isWordEqual(NWord) || isWordEqual(nWord)){
+            gameSave = true;
+            printf("\nTerima kasih telah bermain ^_^)b\n");
+        } else {
+            printf("Command tidak VALID!\n");
+            printf("\nApakah game ingin disave (Y atau N)?");
+            startWordConsole();
+            if(lenBefore > currentWord.length)
+                for(int i = 0; i < lenBefore; i++)
+                    if(i < currentWord.length)
+                        command[i] = currentWord.contents[i];
+                    else
+                        command[i] = '\0';
+            else
+                for(int i = 0; i < currentWord.length; i++)
+                    command[i] = currentWord.contents[i];
+            lenBefore = currentWord.length;
+        }
+
     }
 
     return 0;
