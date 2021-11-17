@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
 #include "Gadget/gadget.h"
 #include "Item/prioqueue.h"
 #include "Item/orderItems.h"
@@ -26,8 +27,8 @@
 #include "Map/pcolor.h"
 #include "Map/map.h"
 #include "Map/move.h"
+*/
 
-/*
 #include "Gadget/gadget.c"
 #include "Item/prioqueue.c"
 #include "Item/orderItems.c"
@@ -44,7 +45,7 @@
 #include "Map/pcolor.c"
 #include "Map/map.c"
 #include "Map/move.c"
-*/
+
 
 // Word definition
 Word newGameWord = {"NEW_GAME", 8};
@@ -201,7 +202,7 @@ int main()
         //displayStack(bag);
         if (isWordEqual(moveWord)) {
             int deltaTime = current_time;
-            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress, &speedBoost, &boostCount);
+            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress, &speedBoost, &boostCount, efekSenterPengecil);
 
             deltaTime = current_time - deltaTime;
             updatePerishable(&inProgress, deltaTime);
@@ -209,7 +210,6 @@ int main()
         }
         else if (isWordEqual(mapWord)) {
             displayColoredMap(Map, current_loc, adjMatrix, building, inProgress, toDoList);
-            // displayMap(Map);
         }
         else if (isWordEqual(toDoWord)) {
             printToDoList(&toDoList);

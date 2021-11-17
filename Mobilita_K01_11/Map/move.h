@@ -19,7 +19,7 @@
 #include "../Load/wordmachine.h"
 #include "../Load/start_game.h"
 
-void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean* speedBoost, int* boostCount);
+void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean* speedBoost, int* boostCount, boolean efekSenterPengecil);
 /* Memindahkan Mobita ke lokasi baru yang dapat diakses sesuai adjMatrix.
    Menambahkan waktu 1 (default) atau sesuai efek gadget/ability/item. */
 

@@ -21,7 +21,7 @@ int readInt()
     return var;
 }
 
-void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean* speedBoost, int* boostCount) {
+void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean* speedBoost, int* boostCount, boolean efekSenterPengecil) {
 /* Memindahkan Mobita ke lokasi baru yang dapat diakses sesuai adjMatrix.
    Menambahkan waktu 1 (default) atau sesuai efek gadget/ability/item. */
     /* KAMUS LOKAL */
@@ -87,6 +87,9 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
                 *boostCount = 0;
             }
         }
+        else if (efekSenterPengecil) {
+            *current_time = *current_time + 1 + countHeavyItem(inProgress) - 1;
+        }  
         else {
             *current_time = *current_time + 1 + countHeavyItem(inProgress);
         }
