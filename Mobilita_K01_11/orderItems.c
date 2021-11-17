@@ -57,7 +57,7 @@ void printToDoList(List *li)
         printf("%c -> %c ", INFO(p).pickUp, INFO(p).dropOff);
         if (INFO(p).itemType == 'N') printf("(Normal Item)\n");
         else if (INFO(p).itemType == 'H') printf("(Heavy Item)\n");
-        else if (INFO(p).itemType == 'P') printf("(Perishable Item, siswa waktu %d)\n", INFO(p).perish);
+        else if (INFO(p).itemType == 'P') printf("(Perishable Item, sisa waktu %d)\n", INFO(p).perish);
         else if (INFO(p).itemType == 'V') printf("(VIP Item)\n");
         p = NEXT(p);
         i++;
