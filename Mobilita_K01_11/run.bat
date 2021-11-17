@@ -1,0 +1,1 @@
+gcc main.c "Gadget/gadget.c" "Item/prioqueue.c" "Item/orderItems.c" "Item/stack.c" "List/listdin.c" "List/list_linked.c" "List/node.c" "List/listpos.c" "Load/wordmachine.c" "Load/charmachine.c" "Load/start_game.c" "Map/point.c" "Map/matrix.c" "Map/pcolor.c" "Map/map.c" "Map/move.c" -o main

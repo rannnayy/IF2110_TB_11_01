@@ -9,12 +9,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../boolean.h"
 #include "pcolor.h"
-#include "boolean.h"
-#include "listdin.h"
 #include "matrix.h"
 #include "map.h"
-#include "charmachine.h"
-#include "wordmachine.h"
+#include "../Item/orderItems.h"
+#include "../List/listdin.h"
+#include "../Load/charmachine.h"
+#include "../Load/wordmachine.h"
+#include "../Load/start_game.h"
 
 void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean teleport, boolean* speedBoost, int* boostCount);
+
+int readInt();

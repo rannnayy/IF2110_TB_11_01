@@ -680,6 +680,9 @@ void Help()
     printf("17. Buy\n");
     printf("    Ketik BUY pada posisi Headquarters untuk menampilkan gadget yang dapat dibeli lalu membelinya.\n    Setelah muncul daftar gadget, silahkan masukkan angka gadget yang hendak dibeli.\n");
 
+    printf("18. Return To Sender\n");
+    printf("    Ketik RETURN untuk mengembalikan item teratas pada tas ke To Do List pad urutan terakhir.\n");
+
     //TAMBAH RETURN TO SENDER
 }
 

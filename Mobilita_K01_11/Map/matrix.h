@@ -3,7 +3,7 @@
 #ifndef Matrix_H
 #define Matrix_H
 
-#include "boolean.h"
+#include "../boolean.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
 #define ROW_CAP 100
@@ -79,7 +79,7 @@ Matrix addMatrix(Matrix m1, Matrix m2);
 /* Mengirim hasil penjumlahan matriks: m1 + m2 */
 Matrix subtractMatrix(Matrix m1, Matrix m2);
 /* Prekondisi : m1 berukuran sama dengan m2 */
-/* Mengirim hasil pengurangan matriks: salinan m1 – m2 */
+/* Mengirim hasil pengurangan matriks: salinan m1 ï¿½ m2 */
 Matrix multiplyMatrix(Matrix m1, Matrix m2);
 /* Prekondisi : Ukuran kolom efektif m1 = ukuran baris efektif m2 */
 /* Mengirim hasil perkalian matriks: salinan m1 * m2 */
@@ -113,7 +113,7 @@ boolean isIdentity(Matrix m);
 /* Mengirimkan true jika m adalah matriks satuan: isSquare(m) dan
    setiap elemen diagonal m bernilai 1 dan elemen yang bukan diagonal bernilai 0 */
 boolean isSparse(Matrix m);
-/* Mengirimkan true jika m adalah matriks sparse: matriks “jarang” dengan definisi:
+/* Mengirimkan true jika m adalah matriks sparse: matriks ï¿½jarangï¿½ dengan definisi:
    hanya maksimal 5% dari memori matriks yang efektif bukan bernilai 0 */
 Matrix inverse1(Matrix m);
 /* Menghasilkan salinan m dengan setiap elemen "di-invers", yaitu dinegasikan (dikalikan -1) */

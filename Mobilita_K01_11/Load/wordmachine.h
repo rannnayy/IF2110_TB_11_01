@@ -6,7 +6,7 @@
 #ifndef WORD_ENGINE_H
 #define WORD_ENGINE_H
 
-#include "boolean.h"
+#include "../boolean.h"
 #include "charmachine.h"
 
 #define CAPACITY_WORD 50
@@ -82,6 +82,6 @@ void copyWordConsole();
 boolean isWordEqual(Word command);
 /* Return true if currentWord is equal to command */
 
-int readInt();
+// int readInt();
 
 #endif

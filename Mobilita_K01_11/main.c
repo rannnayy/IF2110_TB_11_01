@@ -10,40 +10,40 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "wordmachine.h"
-#include "point.h"
-#include "listdin.h"
-#include "matrix.h"
-#include "list_linked.h"
-#include "pcolor.h"
-#include "node.h"
-#include "charmachine.h"
-#include "map.h"
-#include "prioqueue.h"
-#include "orderItems.h"
-#include "stack.h"
-#include "start_game.h"
-#include "move.h"
-#include "listpos.h"
-#include "gadget.h"
+#include "Gadget/gadget.h"
+#include "Item/prioqueue.h"
+#include "Item/orderItems.h"
+#include "Item/stack.h"
+#include "List/listdin.h"
+#include "List/list_linked.h"
+#include "List/listpos.h"
+#include "List/node.h"
+#include "Load/wordmachine.h"
+#include "Load/charmachine.h"
+#include "Load/start_game.h"
+#include "Map/point.h"
+#include "Map/matrix.h"
+#include "Map/pcolor.h"
+#include "Map/map.h"
+#include "Map/move.h"
 
 /*
-#include "wordmachine.c"
-#include "point.c"
-#include "listdin.c"
-#include "matrix.c"
-#include "list_linked.c"
-#include "pcolor.c"
-#include "node.c"
-#include "charmachine.c"
-#include "start_game.c"
-#include "map.c"
-#include "move.c"
-#include "prioqueue.c"
-#include "orderItems.c"
-#include "stack.c"
-#include "listpos.c"
-#include "gadget.c"
+#include "Gadget/gadget.c"
+#include "Item/prioqueue.c"
+#include "Item/orderItems.c"
+#include "Item/stack.c"
+#include "List/listdin.c"
+#include "List/list_linked.c"
+#include "List/listpos.c"
+#include "List/node.c"
+#include "Load/wordmachine.c"
+#include "Load/charmachine.c"
+#include "Load/start_game.c"
+#include "Map/point.c"
+#include "Map/matrix.c"
+#include "Map/pcolor.c"
+#include "Map/map.c"
+#include "Map/move.c"
 */
 // Word definition
 Word newGameWord = {"NEW_GAME", 8};
@@ -67,6 +67,7 @@ Word yWord = {"Y", 1};
 Word YWord = {"y", 1};
 Word nWord = {"n", 1};
 Word NWord = {"N", 1};
+Word cheatCode = {"CHEAT", 5};
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
@@ -262,6 +263,11 @@ int main()
         }
         else if (isWordEqual(returnWord)){
             returnToSender(&toDoList, &inProgress, &bag, &returnAbility);
+        }
+        else if (isWordEqual(cheatCode)){
+            printf("you.. cheater..\n");
+            current_money += 99999; 
+            returnAbility += 99;
         }
         else {
             printf("COMMAND salah. Ketik 'HELP' untuk bantuan atau ketik ulang COMMAND.\n");
