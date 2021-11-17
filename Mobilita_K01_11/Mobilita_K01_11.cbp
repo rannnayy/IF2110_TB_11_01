@@ -31,73 +31,74 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="charmachine.c">
+		<Unit filename="Gadget/gadget.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="charmachine.h" />
-		<Unit filename="gadget.c">
+		<Unit filename="Gadget/gadget.h" />
+		<Unit filename="Item/orderItems.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="gadget.h" />
-		<Unit filename="list_linked.c">
+		<Unit filename="Item/orderItems.h" />
+		<Unit filename="Item/prioqueue.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="list_linked.h" />
-		<Unit filename="listdin.c">
+		<Unit filename="Item/prioqueue.h" />
+		<Unit filename="Item/stack.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="listdin.h" />
-		<Unit filename="listpos.c">
+		<Unit filename="Item/stack.h" />
+		<Unit filename="List/list_linked.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="listpos.h" />
+		<Unit filename="List/list_linked.h" />
+		<Unit filename="List/listdin.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="List/listdin.h" />
+		<Unit filename="List/listpos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="List/listpos.h" />
+		<Unit filename="List/node.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="List/node.h" />
+		<Unit filename="Load/charmachine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Load/charmachine.h" />
+		<Unit filename="Load/start_game.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Load/start_game.h" />
+		<Unit filename="Load/wordmachine.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Load/wordmachine.h" />
+		<Unit filename="Map/map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Map/map.h" />
+		<Unit filename="Map/matrix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Map/matrix.h" />
+		<Unit filename="Map/move.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Map/move.h" />
+		<Unit filename="Map/pcolor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Map/pcolor.h" />
+		<Unit filename="Map/point.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Map/point.h" />
+		<Unit filename="boolean.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="map.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="map.h" />
-		<Unit filename="matrix.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="matrix.h" />
-		<Unit filename="move.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="move.h" />
-		<Unit filename="node.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="node.h" />
-		<Unit filename="orderItems.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="orderItems.h" />
-		<Unit filename="pcolor.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="pcolor.h" />
-		<Unit filename="point.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="point.h" />
-		<Unit filename="prioqueue.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="prioqueue.h" />
-		<Unit filename="stack.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="stack.h" />
-		<Unit filename="start_game.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="start_game.h" />
-		<Unit filename="wordmachine.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="wordmachine.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

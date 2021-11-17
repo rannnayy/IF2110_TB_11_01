@@ -407,17 +407,17 @@
 	"node.h"
 	<stdlib.h>
 
-1637176557 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\charmachine.c
+1637177894 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\charmachine.c
 	"charmachine.h"
 	<stdio.h>
 	<stdlib.h>
 
-1637176631 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\start_game.c
+1637178011 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\start_game.c
 	<stdio.h>
 	<stdlib.h>
 	"start_game.h"
 
-1637176668 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\wordmachine.c
+1637177858 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\wordmachine.c
 	<stdio.h>
 	<stdlib.h>
 	"wordmachine.h"
