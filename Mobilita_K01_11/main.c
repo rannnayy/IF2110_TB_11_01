@@ -207,7 +207,7 @@ int main()
         //displayStack(bag);
         if (isWordEqual(moveWord)) {
             int deltaTime = current_time;
-            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress, false, &speedBoost, &boostCount);
+            move(Map, &current_loc, adjMatrix, building, headQuarter, &current_time, inProgress, &speedBoost, &boostCount);
 
             deltaTime = current_time - deltaTime;
             updatePerishable(&inProgress, deltaTime);
@@ -241,7 +241,7 @@ int main()
             }
         }
         else if (isWordEqual(inventoryWord)) {
-            displayInventory(&inventory, &current_bagcapacity, Map, &current_loc, adjMatrix, building, headQuarter, &inProgress, &bag, &current_time, &efekHeavyItem, &speedBoost, &boostCount);
+            displayInventory(&inventory, &current_bagcapacity, &current_loc, building, headQuarter, &inProgress, &bag, &current_time, &efekHeavyItem);
         }
         else if (isWordEqual(bagWord)){
             displayStack(bag);

@@ -21,7 +21,9 @@ int readInt()
     return var;
 }
 
-void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean teleport, boolean* speedBoost, int* boostCount) {
+void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean* speedBoost, int* boostCount) {
+/* Memindahkan Mobita ke lokasi baru yang dapat diakses sesuai adjMatrix.
+   Menambahkan waktu 1 (default) atau sesuai efek gadget/ability/item. */
     /* KAMUS LOKAL */
     int countAccessible, i, newLoc;
     ListDin accessibleBuilding;
@@ -74,10 +76,7 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
         printf("!\n");
 
         /* tambahkan waktu */
-        if (teleport) {
-            *current_time = *current_time;
-        }
-        else if(*speedBoost && *boostCount <= 10){
+        if(*speedBoost && *boostCount <= 10){
             *boostCount += 1;
             if(*boostCount%2 == 0){
                 *current_time += 1;
@@ -91,5 +90,44 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
         else {
             *current_time = *current_time + 1 + countHeavyItem(inProgress);
         }
+    }
+}
+
+void teleport(char* current_loc, ListDin building) {
+/* Memindahkan Mobita ke lokasi apa pun tanpa menambahkan waktu.
+   Implementasi dari gadget Pintu Ke Mana Saja. */
+    /* KAMUS LOKAL */
+    int i, newLoc;
+
+    /* ALGORITMA */
+    printf("Posisi yang dapat dicapai:");
+    printf("\n");
+
+    printf("1. 8\n");
+    for (i = 1; i <= length(building); i++) {
+        printf("%d. ", i+1);
+        printf("%c\n", ELMT_CHAR(building, i-1));
+    }
+
+    printf("\n");
+    printf("Posisi yang dipilih?\n\n");
+    printf("ENTER COMMAND (integer): ");
+    newLoc = readInt();
+    while (newLoc < 1 || newLoc > length(building)+1) {
+        printf("\nPilihanmu tidak tersedia. Posisi yang dipilih?\n\n");
+        printf("ENTER COMMAND (integer): ");
+        newLoc = readInt();
+    }
+
+    if (newLoc != 0) {
+        if (newLoc == 1) {
+            *current_loc = '8';
+        }
+        else {
+            *current_loc = ELMT_CHAR(building, newLoc-2);
+        }
+        printf("\nMobita sekarang berada di titik %c ", *current_loc);
+        TulisPOINT(ELMT_POINT(building, newLoc-2));
+        printf("!\n");
     }
 }

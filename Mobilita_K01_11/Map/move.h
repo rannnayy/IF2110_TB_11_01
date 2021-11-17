@@ -19,6 +19,12 @@
 #include "../Load/wordmachine.h"
 #include "../Load/start_game.h"
 
-void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean teleport, boolean* speedBoost, int* boostCount);
+void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT headQuarter, int* current_time, List inProgress, boolean* speedBoost, int* boostCount);
+/* Memindahkan Mobita ke lokasi baru yang dapat diakses sesuai adjMatrix.
+   Menambahkan waktu 1 (default) atau sesuai efek gadget/ability/item. */
+
+void teleport(char* current_loc, ListDin building);
+/* Memindahkan Mobita ke lokasi apa pun tanpa menambahkan waktu.
+   Implementasi dari gadget Pintu Ke Mana Saja. */
 
 int readInt();
