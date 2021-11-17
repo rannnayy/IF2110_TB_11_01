@@ -27,7 +27,7 @@
 #include "listpos.h"
 #include "gadget.h"
 
-/*
+
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -44,7 +44,7 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
-*/
+
 // Word definition
 Word newGameWord = {"NEW_GAME", 8};
 Word loadGameWord = {"LOAD_GAME", 9};
@@ -67,6 +67,7 @@ Word yWord = {"Y", 1};
 Word YWord = {"y", 1};
 Word nWord = {"n", 1};
 Word NWord = {"N", 1};
+Word cheatCode = {"CHEAT", 5};
 
 // FUNCTIONS AND PROCEDURES
 //void DigitsToInt(Word digits, int* var);
@@ -262,6 +263,11 @@ int main()
         }
         else if (isWordEqual(returnWord)){
             returnToSender(&toDoList, &inProgress, &bag, &returnAbility);
+        }
+        else if (isWordEqual(cheatCode)){
+            printf("you.. cheater..\n");
+            current_money += 99999; 
+            returnAbility += 99;
         }
         else {
             printf("COMMAND salah. Ketik 'HELP' untuk bantuan atau ketik ulang COMMAND.\n");
