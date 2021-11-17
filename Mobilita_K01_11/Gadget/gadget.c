@@ -28,7 +28,7 @@ void delGadget(ListPos *inventory, int idx) {
     ELMT_LISTPOS(*inventory,idx)=VAL_UNDEF_LISTPOS;
 }
 
-void displayInventory(ListPos *inventory, int *current_bagcapacity, char* current_loc, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekHeavyItem) {
+void displayInventory(ListPos *inventory, int *current_bagcapacity, char* current_loc, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekSenterPengecil) {
 // memperlihatkan semua gadget yang ada di dalam inventory dan dapat menggunakannya
 // I.S. inventory terdefinisi
 // F.S. gadget yang ada di dalam inventory diperlihatkan
@@ -79,7 +79,7 @@ void displayInventory(ListPos *inventory, int *current_bagcapacity, char* curren
     if (option!=0) {
         idx=option-1;
         gadget=ELMT_LISTPOS(*inventory,idx);
-        useGadget(inventory, idx, current_bagcapacity, current_loc, building, headQuarter, inProgress, bag, current_time, efekHeavyItem);
+        useGadget(inventory, idx, current_bagcapacity, current_loc, building, headQuarter, inProgress, bag, current_time, efekSenterPengecil);
             switch(gadget){
                 case 1 :
                     printf("Kain Pembungkus Waktu ");
@@ -179,7 +179,7 @@ void buyGadget(ListPos *inventory, int *current_money){
         }
     }
 }
-void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, char* current_loc, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekHeavyItem){
+void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, char* current_loc, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekSenterPengecil){
 // mmenggunakan gadget pada index idx inventory dan mendapatkan kemampuan spesial dari gadget yang digunakan
 // I.S. inventory dan gadget terdefinisi
 // F.S. gadget digunakan kemudian hangus atau di hapus dalam inventory.
@@ -204,8 +204,8 @@ void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, char* curr
             }
             break;
         case 5 :
-            if (*efekHeavyItem) {
-                *efekHeavyItem=false;
+            if (!*efekSenterPengecil) {
+                *efekSenterPengecil=true;
             }
             break;
         default : /* unreachable state */

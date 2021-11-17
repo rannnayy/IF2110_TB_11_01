@@ -89,7 +89,7 @@ int main()
     char current_loc;
     int current_money, current_time, current_bagcapacity, ordersCount;
     int boostCount, returnAbility;
-    boolean efekVIP, efekHeavyItem, speedBoost;
+    boolean efekVIP, efekHeavyItem, speedBoost, efekSenterPengecil;
     Stack bag;
     CreateStack(&bag);
     PrioQueue orderedOrders;
@@ -223,7 +223,7 @@ int main()
             }
         }
         else if (isWordEqual(dropOffWord)) {
-            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &speedBoost, &boostCount, &returnAbility, &ordersCount);
+            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &speedBoost, &boostCount, &returnAbility, &ordersCount, &efekSenterPengecil);
         }
         else if (isWordEqual(buyWord)) {
             if (current_loc =='8') {
@@ -234,7 +234,7 @@ int main()
             }
         }
         else if (isWordEqual(inventoryWord)) {
-            displayInventory(&inventory, &current_bagcapacity, &current_loc, building, headQuarter, &inProgress, &bag, &current_time, &efekHeavyItem);
+            displayInventory(&inventory, &current_bagcapacity, &current_loc, building, headQuarter, &inProgress, &bag, &current_time, &efekSenterPengecil);
         }
         else if (isWordEqual(bagWord)){
             displayStack(bag);

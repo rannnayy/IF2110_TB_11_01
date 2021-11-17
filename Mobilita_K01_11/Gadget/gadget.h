@@ -26,7 +26,7 @@ void delGadget(ListPos *inventory, int idx);
 // I.S. inventory dan gadget terdefinisi
 // F.S. gadget dihapus dari inventory
 
-void displayInventory(ListPos *inventory, int *current_bagcapacity, char* current_loc, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekHeavyItem);
+void displayInventory(ListPos *inventory, int *current_bagcapacity, char* current_loc, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekSenterPengecil);
 // memperlihatkan semua gadget yang ada di dalam inventory
 // I.S. inventory terdefinisi
 // F.S. gadget yang ada di dalam inventory diperlihatkan
@@ -36,7 +36,7 @@ void buyGadget(ListPos *inventory, int *current_money);
 // I.S. inventory dan gadget terdefinisi
 // F.S. lsit gadget diperlihatkan dan gadget dibeli atau tidak jadi dibeli
 
-void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, char* current_loc, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekHeavyItem);
+void useGadget(ListPos *inventory, int idx, int *current_bagcapacity, char* current_loc, ListDin building, POINT headQuarter, List *inProgress, Stack *bag, int* current_time, boolean *efekSenterPengecil);
 // mmenggunakan gadget dan mendapatkan kemampuan spesial dari gadget
 // I.S. gadget terdefinisi
 // F.S. gadget digunakan kemudian hangus atau di hapus dalam inventory.

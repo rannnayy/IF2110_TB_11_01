@@ -178,7 +178,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
     }
 }
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, boolean* speedBoost, int* boostCount, int *returnAbility, int* ordersCount)
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, boolean* speedBoost, int* boostCount, int *returnAbility, int* ordersCount, boolean* efekSenterPengecil)
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
@@ -205,6 +205,7 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
         else if (popped.itemType == 'H') {
             printf("Pesanan Heavy Item berhasil diantarkan.\n");
             printf("Uang yang didapatkan: 400 Yen.\n");
+            *efekSenterPengecil=false;
             *current_money = *current_money + 400;
             if(*speedBoost == true){ // masih ada efek speedBoost, reset
                 *boostCount = 0;
