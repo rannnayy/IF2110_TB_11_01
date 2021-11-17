@@ -6,7 +6,7 @@
 #ifndef CHAR_ENGINE_H
 #define CHAR_ENGINE_H
 
-#include "boolean.h"
+#include "../boolean.h"
 
 #define MARK_EOF EOF
 #define FILE_NAME_CAP 255

@@ -4,17 +4,17 @@
 #ifndef GADGET_H
 #define GADGET_H
 
-#include "listpos.h"
-#include "boolean.h"
-#include "map.h"
-#include "matrix.h"
-#include "listdin.h"
-#include "point.h"
-#include "stack.h"
-#include "wordmachine.h"
-#include "move.h"
-#include "start_game.h"
-#include "orderItems.h"
+#include "../boolean.h"
+#include "../Item/stack.h"
+#include "../Item/orderItems.h"
+#include "../List/listpos.h"
+#include "../List/listdin.h"
+#include "../Load/wordmachine.h"
+#include "../Load/start_game.h"
+#include "../Map/map.h"
+#include "../Map/matrix.h"
+#include "../Map/point.h"
+#include "../Map/move.h"
 
 void addGadget(ListPos *inventory, int gadget);
 // Menambahkan Gadget ke dalam Inventory

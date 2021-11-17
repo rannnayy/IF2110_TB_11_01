@@ -4,10 +4,10 @@
 #ifndef ORDER_H
 #define ORDER_H
 
+#include "../boolean.h"
 #include "prioqueue.h"
-#include "list_linked.h"
 #include "stack.h"
-#include "boolean.h"
+#include "../List/list_linked.h"
 
 void queueOrder(PrioQueue *pq, List *li);
 // queues order from the list of all orders (Linked list "orders") into the queue list (PrioQueue orderedOrders)

@@ -5,7 +5,7 @@
 #ifndef PRIOQUEUE_H
 #define PRIOQUEUE_H
 
-#include "boolean.h"
+#include "../boolean.h"
 #include <stdlib.h>
 
 /* Konstanta */

@@ -9,15 +9,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "wordmachine.h"
-#include "point.h"
-#include "listdin.h"
-#include "matrix.h"
-#include "list_linked.h"
-#include "pcolor.h"
-#include "map.h"
-#include "orderItems.h"
-#include "listpos.h"
-#include "prioqueue.h"
+#include "../Item/prioqueue.h"
+#include "../Item/orderItems.h"
+#include "../List/listdin.h"
+#include "../List/list_linked.h"
+#include "../List/listpos.h"
+#include "../Map/point.h"
+#include "../Map/matrix.h"
+#include "../Map/pcolor.h"
+#include "../Map/map.h"
 
 void DigitsToInt(Word digits, int* var);
 /*  Mengkonversi nilai pada pita kata yang berupa angka menjadi angka, bukan lagi char[]  */

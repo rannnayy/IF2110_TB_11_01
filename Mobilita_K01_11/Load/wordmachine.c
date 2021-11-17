@@ -157,12 +157,12 @@ boolean isWordEqual(Word command){
     }
 }
 
-int readInt()
-{
-    int var = 0;
+// int readInt()
+// {
+//     int var = 0;
 
-    startWordConsole();
-    DigitsToInt(currentWord, &(var));
+//     startWordConsole();
+//     DigitsToInt(currentWord, &(var));
 
-    return var;
-}
+//     return var;
+// }
