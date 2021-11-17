@@ -45,7 +45,7 @@ void gadgetInfo();
 /* I.S. Sembarang */
 /* F.S. Output berupa info dari gadget */
 
-void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility);
+void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility, boolean *efekSenterPengecil);
 // provides the effect "Return to Sender"
 // does not check if the user has the gadget necessary to use it.
 // returnAbility is the amount of return to sender the player has

@@ -257,7 +257,7 @@ int main()
             Help();
         }
         else if (isWordEqual(returnWord)){
-            returnToSender(&toDoList, &inProgress, &bag, &returnAbility);
+            returnToSender(&toDoList, &inProgress, &bag, &returnAbility, &efekSenterPengecil);
         }
         else if (isWordEqual(cheatCode)){
             printf("you.. cheater..\n");

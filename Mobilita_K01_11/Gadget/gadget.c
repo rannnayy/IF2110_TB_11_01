@@ -242,7 +242,7 @@ void gadgetInfo(){
     printf("    gadget ini.\n");
 }
 
-void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility)
+void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbility, boolean *efekSenterPengecil)
 // provides the effect "Return to Sender"
 // does not check if the user has the gadget necessary to use it.
 {
@@ -256,7 +256,7 @@ void returnToSender(List *toDoList, List *inProgress, Stack *bag, int *returnAbi
             insertLinkedListFirst(toDoList, temp);
             switch (temp.itemType){
                 case 'N': printf("Normal"); break;
-                case 'H': printf("Heavy"); break;
+                case 'H': printf("Heavy");efekSenterPengecil=false; break;
                 case 'P': printf("Perishable"); break;
             }
             printf(" item berhasil dikembalikan ke Pick Up Point %c\n", temp.pickUp);
