@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-/*
 #include "Gadget/gadget.h"
 #include "Item/prioqueue.h"
 #include "Item/orderItems.h"
@@ -27,8 +26,8 @@
 #include "Map/pcolor.h"
 #include "Map/map.h"
 #include "Map/move.h"
-*/
 
+/*
 #include "Gadget/gadget.c"
 #include "Item/prioqueue.c"
 #include "Item/orderItems.c"
@@ -45,7 +44,7 @@
 #include "Map/pcolor.c"
 #include "Map/map.c"
 #include "Map/move.c"
-
+*/
 
 // Word definition
 Word newGameWord = {"NEW_GAME", 8};
