@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "gadget.h": "c",
+        "prioqueue.h": "c"
+    }
+}
