@@ -279,5 +279,4 @@ void kainPembungkusWaktu(List *inProgress, Stack *bag){
         temp.perish = TOP(*bag).perish;
         insertLinkedListFirst(inProgress, temp);
     }
-    printf("Kain Pembungkus Waktu berhasil digunakan!\n");
 }

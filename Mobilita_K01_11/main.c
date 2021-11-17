@@ -45,6 +45,7 @@
 #include "Map/map.c"
 #include "Map/move.c"
 */
+
 // Word definition
 Word newGameWord = {"NEW_GAME", 8};
 Word loadGameWord = {"LOAD_GAME", 9};
