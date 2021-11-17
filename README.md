@@ -63,12 +63,12 @@ List the ready features here:
 gcc dibutuhkan untuk melakukan build terhadap program ini.
 
 ## Usage
-Gunakan command prompt/terminal
-Pindahkan direktori ke folder yang terdapat main.c untuk melakukan build
-`run.bat`
-Command ini akan secara otomatis melakukan compile terhadap semua file yang dibutuhkan dan akan secara otomatis menjalankan program
-atu
-`main.exe`
+Gunakan command prompt/terminal\
+Pindahkan direktori ke folder yang terdapat main.c untuk melakukan build\
+`run.bat`\
+Command ini akan secara otomatis melakukan compile terhadap semua file yang dibutuhkan dan akan secara otomatis menjalankan program\
+atu\
+`main.exe`\
 Main program sudah di-_built_ dan bisa langsung dijalankan dengan command tersebut
 
 
