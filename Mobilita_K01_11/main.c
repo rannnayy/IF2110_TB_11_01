@@ -267,7 +267,7 @@ int main()
         }
         else if (isWordEqual(cheatCode)){
             printf("you.. cheater..\n");
-            current_money += 99999; 
+            current_money += 99999;
             returnAbility += 99;
         }
         else {
@@ -312,6 +312,36 @@ int main()
             nToDoList = lengthLinkedList(toDoList);
             nInProgress = lengthLinkedList(inProgress);
             nInventory = length_ListPos(inventory);
+            printf("%d %d\n", N, M);
+            printf("%d\n", nLoc);
+            printf("%d\n", nOrder);
+            TulisPOINT(headQuarter);
+            printf("\n");
+            displayList(building);
+            printf("\n");
+            displayMatrix(adjMatrix);
+            printf("\n");
+            displayLinkedList(orders);
+            printf("\n");
+            //prioqueue orderedorders
+            printf("%c\n", current_loc);
+            printf("%d\n", current_time);
+            printf("%d\n", current_money);
+            printf("%d\n", current_bagcapacity);
+            printf("%d\n", nToDoList);
+            displayLinkedList(toDoList);
+            printf("\n");
+            printf("%d\n", nInProgress);
+            displayLinkedList(inProgress);
+            printf("\n");
+            printf("%d\n", nInventory);
+            displayList_ListPos(inventory);
+            printf("%d\n", boostCount);
+            printf("%c\n", speedBoost);
+            displayStack(bag);
+            printf("%c\n", efekVIP);
+            printf("%c\n", efekHeavyItem);
+
             SaveGame(N, M, nLoc, nOrder, headQuarter, building, adjMatrix, orders, nOrderedOrders, orderedOrders, current_loc, current_time, current_money,
                     current_bagcapacity, nToDoList, toDoList, nInProgress, inProgress, nInventory, inventory,
                     boostCount, speedBoost, bag, efekVIP, efekHeavyItem);

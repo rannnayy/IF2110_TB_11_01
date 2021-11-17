@@ -384,8 +384,10 @@ void LoadGame(int* N, int* M, int* nLoc, int* nOrder, POINT* headQuarter, ListDi
             PERISH(pqEl) = 0;
             DigitsToInt(currentWordFile, &PERISH(pqEl));
         }
-        else
+        else{
+            advWordFile();
             PERISH(pqEl) = -1;
+        }
 
         //printf("%d %c %c %c %d\n", NTIME(pqEl), PICKUP(pqEl), DROPOFF(pqEl), ITEMTYPE(pqEl), PERISH(pqEl));
         // Store Elements in Linked List

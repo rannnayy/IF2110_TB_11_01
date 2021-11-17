@@ -18,42 +18,42 @@
 	"boolean.h"
 	"charmachine.h"
 
-1637164543 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\main.c
+1637173345 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
-	"wordmachine.h"
-	"point.h"
-	"listdin.h"
-	"matrix.h"
-	"list_linked.h"
-	"pcolor.h"
-	"node.h"
-	"charmachine.h"
-	"map.h"
-	"prioqueue.h"
-	"orderItems.h"
-	"stack.h"
-	"start_game.h"
-	"move.h"
-	"listpos.h"
-	"gadget.h"
-	"wordmachine.c"
-	"point.c"
-	"listdin.c"
-	"matrix.c"
-	"list_linked.c"
-	"pcolor.c"
-	"node.c"
-	"charmachine.c"
-	"start_game.c"
-	"map.c"
-	"move.c"
-	"prioqueue.c"
-	"orderItems.c"
-	"stack.c"
-	"listpos.c"
-	"gadget.c"
+	"Gadget/gadget.h"
+	"Item/prioqueue.h"
+	"Item/orderItems.h"
+	"Item/stack.h"
+	"List/listdin.h"
+	"List/list_linked.h"
+	"List/listpos.h"
+	"List/node.h"
+	"Load/wordmachine.h"
+	"Load/charmachine.h"
+	"Load/start_game.h"
+	"Map/point.h"
+	"Map/matrix.h"
+	"Map/pcolor.h"
+	"Map/map.h"
+	"Map/move.h"
+	"Gadget/gadget.c"
+	"Item/prioqueue.c"
+	"Item/orderItems.c"
+	"Item/stack.c"
+	"List/listdin.c"
+	"List/list_linked.c"
+	"List/listpos.c"
+	"List/node.c"
+	"Load/wordmachine.c"
+	"Load/charmachine.c"
+	"Load/start_game.c"
+	"Map/point.c"
+	"Map/matrix.c"
+	"Map/pcolor.c"
+	"Map/map.c"
+	"Map/move.c"
 
 1635272440 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\point.c
 	<stdio.h>
@@ -275,4 +275,243 @@
 1637165007 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\gadget.c
 	<stdio.h>
 	"gadget.h"
+
+1637171793 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\gadget\gadget.c
+	<stdio.h>
+	"gadget.h"
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\gadget\gadget.h
+	"../boolean.h"
+	"../Item/stack.h"
+	"../Item/orderItems.h"
+	"../List/listpos.h"
+	"../List/listdin.h"
+	"../Load/wordmachine.h"
+	"../Load/start_game.h"
+	"../Map/map.h"
+	"../Map/matrix.h"
+	"../Map/point.h"
+	"../Map/move.h"
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\item\stack.h
+	"../boolean.h"
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\item\orderitems.h
+	"../boolean.h"
+	"prioqueue.h"
+	"stack.h"
+	"../List/list_linked.h"
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\item\prioqueue.h
+	"../boolean.h"
+	<stdlib.h>
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\list_linked.h
+	"../boolean.h"
+	"node.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\node.h
+	<stdlib.h>
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\listpos.h
+	"../boolean.h"
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\listdin.h
+	"../boolean.h"
+	"../Map/point.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\point.h
+	"../boolean.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\wordmachine.h
+	"../boolean.h"
+	"charmachine.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\charmachine.h
+	"../boolean.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\start_game.h
+	<stdio.h>
+	<stdlib.h>
+	"wordmachine.h"
+	"../Item/prioqueue.h"
+	"../Item/orderItems.h"
+	"../List/listdin.h"
+	"../List/list_linked.h"
+	"../List/listpos.h"
+	"../Map/point.h"
+	"../Map/matrix.h"
+	"../Map/pcolor.h"
+	"../Map/map.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\matrix.h
+	"../boolean.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\pcolor.h
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\map.h
+	"../boolean.h"
+	"pcolor.h"
+	"matrix.h"
+	"../List/list_linked.h"
+	"../List/listdin.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\move.h
+	<stdio.h>
+	<stdlib.h>
+	"../boolean.h"
+	"pcolor.h"
+	"matrix.h"
+	"map.h"
+	"../Item/orderItems.h"
+	"../List/listdin.h"
+	"../Load/charmachine.h"
+	"../Load/wordmachine.h"
+	"../Load/start_game.h"
+
+1637171793 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\item\orderitems.c
+	<stdio.h>
+	<stdlib.h>
+	"orderItems.h"
+
+1637171793 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\item\prioqueue.c
+	"prioqueue.h"
+	<stdio.h>
+
+1637171793 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\item\stack.c
+	"stack.h"
+	<stdio.h>
+
+1637171793 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\list_linked.c
+	<stdio.h>
+	<stdlib.h>
+	"list_linked.h"
+
+1637171793 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\listdin.c
+	<stdio.h>
+	<stdlib.h>
+	"listdin.h"
+
+1637171793 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\listpos.c
+	"listpos.h"
+	<stdio.h>
+
+1637171793 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\node.c
+	"node.h"
+	<stdlib.h>
+
+1637171794 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\charmachine.c
+	"charmachine.h"
+	<stdio.h>
+	<stdlib.h>
+
+1637171794 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\start_game.c
+	<stdio.h>
+	<stdlib.h>
+	"start_game.h"
+
+1637171794 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\wordmachine.c
+	<stdio.h>
+	<stdlib.h>
+	"wordmachine.h"
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\gadget\gadget.c
+	<stdio.h>
+	"gadget.h"
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\item\prioqueue.c
+	"prioqueue.h"
+	<stdio.h>
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\item\orderitems.c
+	<stdio.h>
+	<stdlib.h>
+	"orderItems.h"
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\item\stack.c
+	"stack.h"
+	<stdio.h>
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\listdin.c
+	<stdio.h>
+	<stdlib.h>
+	"listdin.h"
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\list_linked.c
+	<stdio.h>
+	<stdlib.h>
+	"list_linked.h"
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\listpos.c
+	"listpos.h"
+	<stdio.h>
+
+1637171793 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\list\node.c
+	"node.h"
+	<stdlib.h>
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\wordmachine.c
+	<stdio.h>
+	<stdlib.h>
+	"wordmachine.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\charmachine.c
+	"charmachine.h"
+	<stdio.h>
+	<stdlib.h>
+
+1637173913 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\load\start_game.c
+	<stdio.h>
+	<stdlib.h>
+	"start_game.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\point.c
+	<stdio.h>
+	<math.h>
+	"point.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\matrix.c
+	<stdio.h>
+	<stdlib.h>
+	"matrix.h"
+	<math.h>
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\pcolor.c
+	<stdio.h>
+	"pcolor.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\map.c
+	<stdio.h>
+	<stdlib.h>
+	"map.h"
+
+1637171794 c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\move.c
+	<stdio.h>
+	<stdlib.h>
+	"move.h"
+
+1637171794 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\map.c
+	<stdio.h>
+	<stdlib.h>
+	"map.h"
+
+1637171794 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\matrix.c
+	<stdio.h>
+	<stdlib.h>
+	"matrix.h"
+	<math.h>
+
+1637171794 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\move.c
+	<stdio.h>
+	<stdlib.h>
+	"move.h"
+
+1637171794 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\pcolor.c
+	<stdio.h>
+	"pcolor.h"
+
+1637171794 source:c:\datas\onedrive - institut teknologi bandung\sem3\alstrukdat\tubes\if2110_tb_11_01\mobilita_k01_11\map\point.c
+	<stdio.h>
+	<math.h>
+	"point.h"
 
