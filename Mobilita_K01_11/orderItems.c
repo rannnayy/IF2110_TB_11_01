@@ -149,7 +149,6 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
             }
         }
 
-
         if (!itemExists){
             printf("Pesanan tidak ditemukan!\n");
         }

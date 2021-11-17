@@ -27,7 +27,7 @@
 #include "listpos.h"
 #include "gadget.h"
 
-
+/*
 #include "wordmachine.c"
 #include "point.c"
 #include "listdin.c"
@@ -44,7 +44,7 @@
 #include "stack.c"
 #include "listpos.c"
 #include "gadget.c"
-
+*/
 // Word definition
 Word newGameWord = {"NEW_GAME", 8};
 Word loadGameWord = {"LOAD_GAME", 9};
@@ -153,7 +153,7 @@ int main()
             startWordConsole();
             for(int i = 0; i < currentWord.length; i++)
                 command[i] = currentWord.contents[i];
-            for(int i = currentWord.length; i < FILENAME_MAX; i++)
+            for(int i = currentWord.length; i < 20; i++)
                 command[i] = '\0';
             int lenBefore = currentWord.length;
         }
@@ -269,7 +269,7 @@ int main()
                 command[i] = currentWord.contents[i];
         lenBefore = currentWord.length;
     }
-    
+
     gameSave = false;
     printf("\nApakah game ingin disave (Y atau N)?");
     startWordConsole();

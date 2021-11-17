@@ -82,4 +82,8 @@ void copyWordConsole();
 boolean isWordEqual(Word command);
 /* Return true if currentWord is equal to command */
 
+int readInt();
+
+void readWord(char* kata[], int* lenBefore);
+
 #endif

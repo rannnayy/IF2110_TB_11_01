@@ -50,15 +50,11 @@ void move (MAP Map, char* current_loc, Matrix adjMatrix, ListDin building, POINT
 
     printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n\n");
     printf("ENTER COMMAND (integer): ");
-    newLoc = 0;
-    startWordConsole();
-    DigitsToInt(currentWord, &(newLoc));
+    newLoc = readInt();
     while (newLoc < 0 || newLoc > length(accessibleBuilding)) {
         printf("Posisi yang dipilih? (ketik 0 jika ingin kembali)\n\n");
         printf("ENTER COMMAND (integer): ");
-        startWordConsole();
-        newLoc = 0;
-        DigitsToInt(currentWord, &(newLoc));
+        newLoc = readInt();
     }
 
     if (newLoc != 0) {

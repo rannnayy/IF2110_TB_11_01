@@ -156,3 +156,34 @@ boolean isWordEqual(Word command){
         return equal;
     }
 }
+
+int readInt()
+{
+    int var = 0;
+
+    startWordConsole();
+    DigitsToInt(currentWord, &(var));
+
+    return var;
+}
+
+void readWord(char* kata[], int* lenBefore)
+{
+    startWordConsole();
+    if(*lenBefore > currentWord.length){
+        for(int i = 0; i < *lenBefore; i++){
+            if(i < currentWord.length){
+                *kata[i] = currentWord.contents[i];
+            }
+            else {
+                *kata[i] = '\0';
+            }
+        }
+    }
+    else {
+        for(int i = 0; i < currentWord.length; i++) {
+            *kata[i] = currentWord.contents[i];
+        }
+    }
+    *lenBefore = currentWord.length;
+}

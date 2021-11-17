@@ -58,9 +58,7 @@ void displayInventory(ListPos *inventory, int *current_bagcapacity, MAP Map, cha
     printf("Gadget mana yang ingin digunakan? (ketik 0 jika ingin kembali)\n");
     boolean exist=false; // exist true jika gadget yang dipilih ada pada inventory atau tidak jadi menggunakan gadget
     do {
-        option=0;
-        startWordConsole();
-        DigitsToInt(currentWord, &option);
+        option = readInt();
         if (option>=0 && option<=5) {
             if (option==0) {
                 exist=true;
@@ -121,11 +119,8 @@ void buyGadget(ListPos *inventory, int *current_money){
     printf("5. Senter Pengecil (800 Yen)\n");
     printf("Gadget mana yang ingin kau beli? (ketik 0 jika ingin kembali)\n");
     printf("Enter Command: ");
-    scanf("%d", &option);
     do {
-        option=0;
-        startWordConsole();
-        DigitsToInt(currentWord, &option);
+        option = readInt();
         if (option<0 || option>5) {
             printf("Masukkan anda salah, masukkan angka yang tertera pada list\n");
         }
