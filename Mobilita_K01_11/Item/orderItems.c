@@ -178,7 +178,7 @@ void pickUp(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, int 
     }
 }
 
-void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, boolean* speedBoost, int* boostCount, int *returnAbility)
+void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boolean *efekVIP, boolean *efekHeavyItem, int* current_money, int* current_bagcapacity, boolean* speedBoost, int* boostCount, int *returnAbility, int* ordersCount)
 // drops off an item from the top of the stack if the location of the player is the destination of the item
 // I.S. bebas
 // F.S top of the bag stack might be removed, as well as the item in inProgress list.
@@ -230,6 +230,7 @@ void dropOff(List *toDoList, List *inProgress, Stack *bag, char *currentLoc, boo
             /* apply return to sender */
             *returnAbility = *returnAbility + 1;
         }
+        *ordersCount += 1;
     }
     else { /* current loc isn't drop-off location */
         printf("Tidak ada pesanan yang dapat diantarkan.\n");

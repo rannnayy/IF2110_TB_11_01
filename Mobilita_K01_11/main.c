@@ -27,7 +27,7 @@
 #include "Map/map.h"
 #include "Map/move.h"
 
-/*
+
 #include "Gadget/gadget.c"
 #include "Item/prioqueue.c"
 #include "Item/orderItems.c"
@@ -44,7 +44,7 @@
 #include "Map/pcolor.c"
 #include "Map/map.c"
 #include "Map/move.c"
-*/
+
 
 // Word definition
 Word newGameWord = {"NEW_GAME", 8};
@@ -87,7 +87,7 @@ int main()
     CreateList(&toDoList); CreateList(&inProgress);
     MAP Map;
     char current_loc;
-    int current_money, current_time, current_bagcapacity;
+    int current_money, current_time, current_bagcapacity, ordersCount;
     int boostCount, returnAbility;
     boolean efekVIP, efekHeavyItem, speedBoost;
     Stack bag;
@@ -110,6 +110,7 @@ int main()
     speedBoost = false;
     efekVIP = false;
     lenBefore = 0;
+    ordersCount = 0;
 
     printf("\n");
     printf("\t\t _|      _|    _|_|    _|_|_|    _|_|_|  _|        _|_|_|  _|_|_|_|_|    _|_|    \n");
@@ -177,7 +178,8 @@ int main()
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
 
     /* cek identitas Mobita */
-    printf("\nWaktu: %d\n", current_time);
+    printf("\nJumlah order yang harus dikerjakan: %d\n", pqLength(orderedOrders));
+    printf("Waktu: %d\n", current_time);
 
     /* attempt of making insert command, use strcmp for now */
     printf("\nENTER COMMAND: ");
@@ -195,15 +197,6 @@ int main()
 
     while (!isWordEqual(exitWord)) {
         updateToDoList(&toDoList, &orderedOrders, current_time, &efekVIP);
-        gameOn = endGame(current_loc, current_time, toDoList, inProgress, bag, orderedOrders);
-
-        // buat tes gadget
-        // current_money += 1000;
-
-        if (!gameOn){
-            printf("Selamat anda telah menyelesaikan permainan mobita dalam %d satuan waktu!\n\n", current_time);
-            break;
-        }
         //displayStack(bag);
         if (isWordEqual(moveWord)) {
             int deltaTime = current_time;
@@ -230,7 +223,7 @@ int main()
             }
         }
         else if (isWordEqual(dropOffWord)) {
-            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &speedBoost, &boostCount, &returnAbility);
+            dropOff(&toDoList, &inProgress, &bag, &current_loc, &efekVIP, &efekHeavyItem, &current_money, &current_bagcapacity, &speedBoost, &boostCount, &returnAbility, &ordersCount);
         }
         else if (isWordEqual(buyWord)) {
             if (current_loc =='8') {
@@ -274,6 +267,13 @@ int main()
             printf("COMMAND salah. Ketik 'HELP' untuk bantuan atau ketik ulang COMMAND.\n");
         }
 
+        gameOn = endGame(current_loc, current_time, toDoList, inProgress, bag, orderedOrders);
+
+        if (!gameOn){
+            printf("Selamat anda telah menyelesaikan permainan mobita dengan mengantarkan %d jumlah pesanan dalam %d satuan waktu!\n\n", ordersCount, current_time);
+            break;
+        }
+    
         /* cek identitas Mobita */
         printf("\nWaktu: %d\n", current_time);
 
