@@ -84,6 +84,4 @@ boolean isWordEqual(Word command);
 
 int readInt();
 
-void readWord(char* kata[], int* lenBefore);
-
 #endif

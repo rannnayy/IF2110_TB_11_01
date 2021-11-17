@@ -93,16 +93,21 @@ int main()
     PrioQueue orderedOrders;
     ListPos inventory;
     CreateListPos(&inventory);
-    char command[20];
     boolean gameOn;
     boolean gameStart;
     boolean gameSave;
+    int lenBefore;
+    char command[20];
+    for(int i = 0; i < 20; i++){
+        command[i] = '\0';
+    }
 
     /*Inisialisasi nilai variabel game in general*/
     gameOn = true;
     boostCount = 0;
     speedBoost = false;
     efekVIP = false;
+    lenBefore = 0;
 
     printf("\n");
     printf("\t\t _|      _|    _|_|    _|_|_|    _|_|_|  _|        _|_|_|  _|_|_|_|_|    _|_|    \n");
@@ -117,9 +122,7 @@ int main()
     startWordConsole();
     for(int i = 0; i < currentWord.length; i++)
         command[i] = currentWord.contents[i];
-    for(int i = currentWord.length; i < FILENAME_MAX; i++)
-        command[i] = '\0';
-    int lenBefore = currentWord.length;
+    lenBefore = currentWord.length;
     gameStart = false;
 
     while (!gameStart){
@@ -151,11 +154,22 @@ int main()
             printf("NEW_GAME, LOAD_GAME, dan EXIT \n\n");
             printf("\nENTER COMMAND: ");
             startWordConsole();
-            for(int i = 0; i < currentWord.length; i++)
-                command[i] = currentWord.contents[i];
-            for(int i = currentWord.length; i < 20; i++)
-                command[i] = '\0';
-            int lenBefore = currentWord.length;
+            if(lenBefore > currentWord.length){
+                for(int i = 0; i < lenBefore; i++){
+                    if(i < currentWord.length){
+                        command[i] = currentWord.contents[i];
+                    }
+                    else{
+                        command[i] = '\0';
+                    }
+                }
+            }
+            else {
+                for(int i = 0; i < currentWord.length; i++) {
+                    command[i] = currentWord.contents[i];
+                }
+            }
+            lenBefore = currentWord.length;
         }
     }
     Map = StartMapConfiguration(&N, &M, &headQuarter, &building, &adjMatrix);
