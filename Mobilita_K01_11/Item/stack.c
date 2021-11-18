@@ -55,7 +55,7 @@ void popEl(Stack *s, stackEl val){
     }
 };
 // Menghapus elemen val dalam stack
-// I.S. ada elemen val dalam stack
+// I.S. ada elemen val dalam stack, tidak harus di posisi top
 // F.S. elemen val hilang
 
 void displayStack(Stack s)
@@ -78,3 +78,6 @@ void displayStack(Stack s)
         }
     }
 }
+/* Menampilkan stack */
+/* I.S. sembarang, boleh kosong */
+/* F.S. tampilkan stack */
