@@ -65,6 +65,7 @@ gcc dibutuhkan untuk melakukan build terhadap program ini.
 ## Usage
 Gunakan command prompt/terminal\
 Pindahkan direktori ke folder yang terdapat main.c untuk melakukan build\
+`cd .\src`\
 `run.bat`\
 Command ini akan secara otomatis melakukan compile terhadap semua file yang dibutuhkan dan akan secara otomatis menjalankan program\
 atau\
