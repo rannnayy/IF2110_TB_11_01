@@ -27,7 +27,7 @@ void BacaPOINT (POINT *P){
     // x, y : Float absis dan ordinat suatu POINT
 
     // ALGORITMA
-    float x, y;
+    int x, y;
     scanf("%d %d", &x, &y);
     *P = MakePOINT(x, y);
 }
@@ -132,21 +132,21 @@ POINT MirrorOf (POINT P, boolean SbX){
         return MakePOINT(Absis(P)*(-1), Ordinat(P));
 }
 
-float Jarak0 (POINT P){
-/* Menghitung jarak P ke (0,0) */
-    // KAMUS
-    // ALGORITMA
-    return (float)sqrt(pow(Absis(P), 2) + pow(Ordinat(P), 2));
-}
+// float Jarak0 (POINT P){
+// /* Menghitung jarak P ke (0,0) */
+//     // KAMUS
+//     // ALGORITMA
+//     return (float)sqrt(pow(Absis(P), 2) + pow(Ordinat(P), 2));
+// }
 
-float Panjang (POINT P1, POINT P2){
-/* Menghitung panjang garis yang dibentuk P1 dan P2 */
-/* Perhatikanlah bahwa di sini spec fungsi kurang baik sebab menyangkut ADT Garis. */
-/* Tuliskan spec fungsi yang lebih tepat. */
-    // KAMUS
-    // ALGORITMA
-    return (float)sqrt(pow(Absis(P1)-Absis(P2), 2) + pow(Ordinat(P1)-Ordinat(P2), 2));
-}
+// float Panjang (POINT P1, POINT P2){
+// /* Menghitung panjang garis yang dibentuk P1 dan P2 */
+// /* Perhatikanlah bahwa di sini spec fungsi kurang baik sebab menyangkut ADT Garis. */
+// /* Tuliskan spec fungsi yang lebih tepat. */
+//     // KAMUS
+//     // ALGORITMA
+//     return (float)sqrt(pow(Absis(P1)-Absis(P2), 2) + pow(Ordinat(P1)-Ordinat(P2), 2));
+// }
 
 void Geser (POINT *P, int deltaX, int deltaY){
 /* I.S. P terdefinisi */
@@ -190,16 +190,16 @@ void Mirror (POINT *P, boolean SbX){
         Absis(*P) *= (-1);
 }
 
-void Putar (POINT *P, float Sudut){
-/* I.S. P terdefinisi */
-/* F.S. P digeser sebesar Sudut derajat dengan sumbu titik (0,0) */
-    // KAMUS
-    // ALGORITMA
-    float radSudut = (Sudut * (M_PI / 180.0))*(-1);
+// void Putar (POINT *P, float Sudut){
+// /* I.S. P terdefinisi */
+// /* F.S. P digeser sebesar Sudut derajat dengan sumbu titik (0,0) */
+//     // KAMUS
+//     // ALGORITMA
+//     float radSudut = (Sudut * (M_PI / 180.0))*(-1);
 
-    float abs = Absis(*P);
-    float ord = Ordinat(*P);
+//     float abs = Absis(*P);
+//     float ord = Ordinat(*P);
 
-    Absis(*P) = abs*cos(radSudut) + ord*sin(radSudut);
-    Ordinat(*P) = ord*cos(radSudut) - abs*sin(radSudut);
-}
+//     Absis(*P) = abs*cos(radSudut) + ord*sin(radSudut);
+//     Ordinat(*P) = ord*cos(radSudut) - abs*sin(radSudut);
+// }

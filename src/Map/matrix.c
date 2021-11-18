@@ -419,43 +419,43 @@ void pInverse1(Matrix *m)
             ELMT_MATRIX(*m, i, j) *= (-1);
 }
 
-float determinant(Matrix m)
-/* Prekondisi: isSquare(m) */
-/* Menghitung nilai determinan m */
-{
-    Index i, j, k;
-    float total, sign;
-    Matrix temp;
-    int l, n;
+// float determinant(Matrix m)
+// /* Prekondisi: isSquare(m) */
+// /* Menghitung nilai determinan m */
+// {
+//     Index i, j, k;
+//     float total, sign;
+//     Matrix temp;
+//     int l, n;
 
-    CreateMatrix(getLastIdxRow(m), getLastIdxCol(m), &temp);
+//     CreateMatrix(getLastIdxRow(m), getLastIdxCol(m), &temp);
 
-    total = 0;
-    sign = 1; // sign multiplier
+//     total = 0;
+//     sign = 1; // sign multiplier
 
-    if(countElMatrix(m) == 1)
-        return ELMT_MATRIX(m, 0, 0);
-    else if(countElMatrix(m) == 4)
-        return (ELMT_MATRIX(m, 0, 0)*ELMT_MATRIX(m, 1, 1)) - (ELMT_MATRIX(m, 0, 1)*ELMT_MATRIX(m, 1, 0));
-    else{
-        for(i=0; i<=getLastIdxRow(m); i++){
-            l = 0;
-            n = 0;
-            for(j=1; j<=getLastIdxCol(m); j++)
-                for(k=0; k<=getLastIdxRow(m); k++)
-                    if(k != i){
-                        ELMT_MATRIX(temp, l, n) = ELMT_MATRIX(m, j, k);
-                        n += 1;
-                        if(n == getLastIdxCol(m)){
-                            l += 1;
-                            n = 0;
-                        }
-                    }
-            total += ELMT_MATRIX(m, 0, i)*pow(-1, i)*determinant(temp);
-        }
-        return total;
-    }
-}
+//     if(countElMatrix(m) == 1)
+//         return ELMT_MATRIX(m, 0, 0);
+//     else if(countElMatrix(m) == 4)
+//         return (ELMT_MATRIX(m, 0, 0)*ELMT_MATRIX(m, 1, 1)) - (ELMT_MATRIX(m, 0, 1)*ELMT_MATRIX(m, 1, 0));
+//     else{
+//         for(i=0; i<=getLastIdxRow(m); i++){
+//             l = 0;
+//             n = 0;
+//             for(j=1; j<=getLastIdxCol(m); j++)
+//                 for(k=0; k<=getLastIdxRow(m); k++)
+//                     if(k != i){
+//                         ELMT_MATRIX(temp, l, n) = ELMT_MATRIX(m, j, k);
+//                         n += 1;
+//                         if(n == getLastIdxCol(m)){
+//                             l += 1;
+//                             n = 0;
+//                         }
+//                     }
+//             total += ELMT_MATRIX(m, 0, i)*pow(-1, i)*determinant(temp);
+//         }
+//         return total;
+//     }
+// }
 
 void transpose(Matrix *m)
 /* I.S. m terdefinisi dan isSquare(m) */
